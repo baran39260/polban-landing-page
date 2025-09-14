@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' https://cdnjs.cloudflare.com https://fonts.googleapis.com; font-src 'self' https://cdnjs.cloudflare.com https://fonts.gstatic.com; script-src 'self'; img-src 'self' data:; connect-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com;">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Polban - Multilingual Financial Management App</title>
+    <meta name="description" content="Polban is a powerful financial management application with full RTL support for Persian, Arabic, English, and Turkish. Track transactions, manage multi-currency accounts, generate financial reports, and automate recurring payments.">
+    <meta name="keywords" content="financial management, multilingual, RTL, Persian, Arabic, English, Turkish, Flutter, Supabase, multi-currency, financial tracking, budgeting app">
+    <meta property="og:title" content="Polban - Multilingual Financial Management App">
+    <meta property="og:description" content="Polban is a powerful financial management application with full RTL support for Persian, Arabic, English, and Turkish. Track transactions, manage multi-currency accounts, generate financial reports, and automate recurring payments.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1554224155-6726b3ff858f?q=80&w=2511&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
+    <meta property="og:url" content="https://your-domain.com">
+    <link rel="canonical" href="https://your-domain.com" />
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&family=IRANSansX:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="src/css/styles.css">
+    <link rel="stylesheet" href="src/css/rtl.css" media="screen and (dir: rtl)">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Polban",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Windows, Android, iOS",
+      "description": "Polban is a powerful financial management application designed for multilingual users with full RTL support for Persian and Arabic speakers.",
+      "url": "https://your-domain.com",
+      "logo": "assets/images/logo-light.png",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "Multi-currency support with automatic conversion",
+        "Multilingual interface (Persian, English, Turkish, Arabic)",
+        "RTL layout support for Persian and Arabic",
+        "Financial charts and reporting",
+        "Unlimited accounts and categories",
+        "Transaction tagging",
+        "Scheduled and recurring transactions",
+        "Smart transaction suggestions",
+        "Balance sheets and financial analysis",
+        "Export reports in PDF, Excel, and CSV"
+      ]
+    }
+    </script>
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-XXXXXXXXXX');
+    </script>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <header>
+        <nav class="container" role="navigation" aria-label="Main navigation">
+            <div class="logo-container">
+                <img src="assets/images/logo-light.png" alt="Polban" loading="eager" width="40" height="40" class="logo-light">
+                <img src="assets/images/logo-dark.png" alt="Polban" loading="eager" width="40" height="40" class="logo-dark">
+                <div class="logo-text" aria-label="Polban logo">Polban</div>
+            </div>
+            <ul class="nav-links" id="navLinks" role="menubar">
+                <li role="none"><a href="#features" role="menuitem">Features</a></li>
+                <li role="none"><a href="#about" role="menuitem">About</a></li>
+                <li role="none"><a href="#gallery" role="menuitem">Gallery</a></li>
+                <li role="none"><a href="#faq" role="menuitem">FAQ</a></li>
+                <li role="none"><a href="pages/contact.html" role="menuitem">Contact</a></li>
+                <li role="none"><a href="#download" role="menuitem">Download</a></li>
+                <li role="none"><a href="pages/blog.html" role="menuitem">Blog</a></li>
+            </ul>
+            <div class="header-actions">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme between light and dark mode">
+                    <i class="fas fa-moon" aria-hidden="true"></i>
+                </button>
+                <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navLinks">
+                    <i class="fas fa-bars" aria-hidden="true"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        <section class="hero" aria-labelledby="hero-heading">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 id="hero-heading">
+                        <span class="static-text">Polban - </span>
+                        <span id="typing-text"></span>
+                        <span class="cursor">|</span>
+                    </h1>
+                    <div class="hero-subheading">Your Personal Finance Companion</div>
+                    <p>Transform your financial management with Polban, an advanced personal finance app! Polban offers a comprehensive solution for tracking transactions, managing assets, and generating financial reports. Designed for families, students, freelancers, business owners, travelers, and anyone needing precise personal accounting, Polban helps you manage incomes, expenses, and transfers in a user-friendly environment. Take full control of your finances with financial charts and balance sheets.</p>
+                    <div class="cta-buttons">
+                        <a href="#features" class="btn primary" aria-label="Explore Polban features">Explore Features</a>
+                        <a href="#download" class="btn secondary" aria-label="Download Polban app now">Download Now</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="hero-image-container">
+                        <img src="assets/images/screen.png" alt="Polban App Interface Preview" loading="eager" width="600" height="400">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="features" aria-labelledby="features-heading">
+            <div class="container">
+                <h2 id="features-heading">Key Features of Polban</h2>
+                <div class="feature-grid">
+                    <div class="feature-card primary" tabindex="0" role="region" aria-labelledby="feature-1-heading">
+                        <h3 id="feature-1-heading">Multilingual Support</h3>
+                        <p>Full support for Persian, English, Turkish, and Arabic for a global, user-friendly experience with proper RTL layout.</p>
+                    </div>
+                    <div class="feature-card secondary" tabindex="0" role="region" aria-labelledby="feature-2-heading">
+                        <h3 id="feature-2-heading">Quick Sign-Up</h3>
+                        <p>Easy registration to start financial management instantly.</p>
+                    </div>
+                    <div class="feature-card tertiary" tabindex="0" role="region" aria-labelledby="feature-3-heading">
+                        <h3 id="feature-3-heading">Unlimited Accounts</h3>
+                        <p>Create and group bank accounts, wallets, and credit cards for seamless asset tracking.</p>
+                    </div>
+                    <div class="feature-card primary" tabindex="0" role="region" aria-labelledby="feature-4-heading">
+                        <h3 id="feature-4-heading">Unlimited Categories</h3>
+                        <p>Define and group categories (e.g., salary, travel) for detailed transaction analysis.</p>
+                    </div>
+                    <div class="feature-card secondary" tabindex="0" role="region" aria-labelledby="feature-5-heading">
+                        <h3 id="feature-5-heading">Transaction Tagging</h3>
+                        <p>Add custom tags (e.g., "project" or "trip") for better tracking of expenses and incomes.</p>
+                    </div>
+                    <div class="feature-card tertiary" tabindex="0" role="region" aria-labelledby="feature-6-heading">
+                        <h3 id="feature-6-heading">Persian and Gregorian Calendars</h3>
+                        <p>Record transaction dates in both calendars simultaneously.</p>
+                    </div>
+                    <div class="feature-card primary" tabindex="0" role="region" aria-labelledby="feature-7-heading">
+                        <h3 id="feature-7-heading">Multi-Currency Management</h3>
+                        <p>Track multi-currency transactions (e.g., Euro) with automatic conversion to the base currency (USD) for unified reporting.</p>
+                    </div>
+                    <div class="feature-card secondary" tabindex="0" role="region" aria-labelledby="feature-8-heading">
+                        <h3 id="feature-8-heading">Transaction Types</h3>
+                        <p>Record income (positive), expense (negative), transfer, initial balance, and balance adjustment.</p>
+                    </div>
+                    <div class="feature-card tertiary" tabindex="0" role="region" aria-labelledby="feature-9-heading">
+                        <h3 id="feature-9-heading">Scheduled Transactions</h3>
+                        <p>Add recurring and scheduled transactions with advanced features for automating payments and incomes.</p>
+                    </div>
+                    <div class="feature-card primary" tabindex="0" role="region" aria-labelledby="feature-10-heading">
+                        <h3 id="feature-10-heading">Smart Transaction Suggestions</h3>
+                        <p>Receive personalized suggestions when adding new transactions based on your financial history and patterns.</p>
+                    </div>
+                    <div class="feature-card secondary" tabindex="0" role="region" aria-labelledby="feature-11-heading">
+                        <h3 id="feature-11-heading">Financial Charts</h3>
+                        <p>Display line and bar charts for expenses, incomes, net worth, net income, and liquidity.</p>
+                    </div>
+                    <div class="feature-card tertiary" tabindex="0" role="region" aria-labelledby="feature-12-heading">
+                        <h3 id="feature-12-heading">Pie Charts</h3>
+                        <p>Visualize the distribution of expenses and incomes across categories.</p>
+                    </div>
+                    <div class="feature-card primary" tabindex="0" role="region" aria-labelledby="feature-13-heading">
+                        <h3 id="feature-13-heading">Report Storage</h3>
+                        <p>Save financial charts as images or export as PDF.</p>
+                    </div>
+                    <div class="feature-card secondary" tabindex="0" role="region" aria-labelledby="feature-14-heading">
+                        <h3 id="feature-14-heading">Transaction Filters</h3>
+                        <p>Quick filtering of transactions by date, category, tag, and currency.</p>
+                    </div>
+                    <div class="feature-card tertiary" tabindex="0" role="region" aria-labelledby="feature-15-heading">
+                        <h3 id="feature-15-heading">Balance Sheet</h3>
+                        <p>View assets, liabilities, and net worth at a glance.</p>
+                    </div>
+                    <div class="feature-card primary" tabindex="0" role="region" aria-labelledby="feature-16-heading">
+                        <h3 id="feature-16-heading">Graphical Distribution</h3>
+                        <p>Visualize the distribution of tags and transaction names in expenses and incomes.</p>
+                    </div>
+                    <div class="feature-card secondary" tabindex="0" role="region" aria-labelledby="feature-17-heading">
+                        <h3 id="feature-17-heading">Transaction Name Analysis</h3>
+                        <p>Graphical analysis of transaction names to identify financial patterns.</p>
+                    </div>
+                    <div class="feature-card tertiary" tabindex="0" role="region" aria-labelledby="feature-18-heading">
+                        <h3 id="feature-18-heading">Customization Settings</h3>
+                        <p>Customize base currency, date format, and app appearance.</p>
+                    </div>
+                    <div class="feature-card primary" tabindex="0" role="region" aria-labelledby="feature-19-heading">
+                        <h3 id="feature-19-heading">Advanced Reporting</h3>
+                        <p>Generate comprehensive reports with export options in PDF, Excel, or CSV formats.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section" aria-labelledby="cta-heading">
+            <div class="container">
+                <h2 id="cta-heading">Ready to Take Control of Your Finances?</h2>
+                <p>Join thousands of users who have transformed their financial management with Polban's comprehensive suite of features including multi-currency support, advanced analytics, and smart automation.</p>
+                <a href="#download" class="btn primary" aria-label="Download Polban app now">Get Started Now</a>
+            </div>
+        </section>
+
+        <section id="download" class="download" aria-labelledby="download-heading">
+            <div class="container">
+                <div class="logo-container">
+                    <img src="assets/images/logo-light.png" alt="Polban" loading="eager" class="logo-light">
+                    <img src="assets/images/logo-dark.png" alt="Polban" loading="eager" class="logo-dark">
+                </div>
+                <h2 id="download-heading">Download Polban Now</h2>
+                <p>Get started with Polban today and take control of your finances. Currently available exclusively on Cafe Bazaar for Android devices.</p>
+                <div class="download-buttons">
+                    <a href="https://cafebazaar.ir/app/app.r2devlab.polban" class="btn-download" aria-label="Download Polban from Cafe Bazaar" target="_blank" rel="noopener noreferrer">
+                        <i class="fas fa-shopping-basket" aria-hidden="true"></i>
+                        <span>Download on <br> Cafe Bazaar</span>
+                    </a>
+                    <a href="#" class="btn-download disabled" aria-label="Download Polban from Google Play - Coming Soon">
+                        <i class="fab fa-google-play" aria-hidden="true"></i>
+                        <span>Get it on <br> Google Play <small>(Coming Soon)</small></span>
+                    </a>
+                    <a href="#" class="btn-download disabled" aria-label="Download Polban for Windows - Coming Soon">
+                        <i class="fab fa-windows" aria-hidden="true"></i>
+                        <span>Download for <br> Windows <small>(Coming Soon)</small></span>
+                    </a>
+                    <a href="#" class="btn-download disabled" aria-label="Download Polban from App Store - Coming Soon">
+                        <i class="fab fa-apple" aria-hidden="true"></i>
+                        <span>Download on the <br> App Store <small>(Coming Soon)</small></span>
+                    </a>
+                </div>
+                <p class="platform-notice">Currently available only on Cafe Bazaar for Android. Windows and iOS versions are in development and will be released soon.</p>
+            </div>
+        </section>
+
+        <!-- Replacing Testimonials section with Gallery section -->
+        <section id="gallery" class="gallery" aria-labelledby="gallery-heading">
+            <div class="container">
+                <h2 id="gallery-heading">App Screenshots</h2>
+                <p style="text-align: center; margin-bottom: 3rem; color: var(--secondary-text); max-width: 800px; margin-left: auto; margin-right: auto;">Explore Polban's intuitive interface with these screenshots showcasing key features and functionalities.</p>
+                <div class="gallery-grid">
+                    <!-- Gallery item with professional placeholder -->
+                    <div class="gallery-item">
+                        <div class="gallery-placeholder">
+                            <i class="fas fa-image"></i>
+                        </div>
+                        <img src="assets/images/gallery-1.webp" alt="Polban App Dashboard" data-src="assets/images/gallery-1.webp" class="lazy-load gallery-image" loading="lazy">
+                    </div>
+                    
+                    <!-- Gallery item with professional placeholder -->
+                    <div class="gallery-item">
+                        <div class="gallery-placeholder">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <img src="assets/images/gallery-2.webp" alt="Financial Charts and Analytics" data-src="assets/images/gallery-2.webp" class="lazy-load gallery-image" loading="lazy">
+                    </div>
+                    
+                    <!-- Gallery item with professional placeholder -->
+                    <div class="gallery-item">
+                        <div class="gallery-placeholder">
+                            <i class="fas fa-wallet"></i>
+                        </div>
+                        <img src="assets/images/gallery-3.webp" alt="Multi-Currency Account Management" data-src="assets/images/gallery-3.webp" class="lazy-load gallery-image" loading="lazy">
+                    </div>
+                    
+                    <!-- Gallery item with professional placeholder -->
+                    <div class="gallery-item">
+                        <div class="gallery-placeholder">
+                            <i class="fas fa-exchange-alt"></i>
+                        </div>
+                        <img src="assets/images/gallery-4.webp" alt="Transaction Transfer Interface" data-src="assets/images/gallery-4.webp" class="lazy-load gallery-image" loading="lazy">
+                    </div>
+                    
+                    <!-- Gallery item with professional placeholder -->
+                    <div class="gallery-item">
+                        <div class="gallery-placeholder">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <img src="assets/images/gallery-5.webp" alt="Persian and Gregorian Calendar Support" data-src="assets/images/gallery-5.webp" class="lazy-load gallery-image" loading="lazy">
+                    </div>
+                    
+                    <!-- Gallery item with professional placeholder -->
+                    <div class="gallery-item">
+                        <div class="gallery-placeholder">
+                            <i class="fas fa-file-export"></i>
+                        </div>
+                        <img src="assets/images/gallery-6.webp" alt="PDF Report Export" data-src="assets/images/gallery-6.webp" class="lazy-load gallery-image" loading="lazy">
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 2rem;">
+                    <p style="color: var(--secondary-text);">Click on any screenshot to view it in full size</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="faq" class="faq" aria-labelledby="faq-heading">
+            <div class="container">
+                <h2 id="faq-heading">Frequently Asked Questions</h2>
+                <div class="faq-accordion">
+                    <details>
+                        <summary>Is Polban free to use?</summary>
+                        <p>Polban offers a free tier with all the essential features for managing your finances. We also have a premium subscription with advanced features like unlimited accounts, detailed analytics, and priority support.</p>
+                    </details>
+                    <details>
+                        <summary>How does Polban keep my financial data secure?</summary>
+                        <p>We take security very seriously. Your data is encrypted both in transit and at rest. We use Supabase as our backend provider, which offers robust, enterprise-grade security to ensure your data is always safe.</p>
+                    </details>
+                    <details>
+                        <summary>Can I import my transaction data from another app or my bank?</summary>
+                        <p>Yes, our premium version allows you to import transactions from a CSV file, making it easy to switch to Polban from another app or to import your bank statements.</p>
+                    </details>
+                    <details>
+                        <summary>What languages does Polban support?</summary>
+                        <p>Polban is designed to be multilingual. We currently offer full support for English, Persian (Farsi), Turkish, and Arabic, including proper right-to-left (RTL) layout and typography. We are planning to add more languages in the future.</p>
+                    </details>
+                    <details>
+                        <summary>How does the multi-currency feature work?</summary>
+                        <p>Polban allows you to track transactions in multiple currencies. You can set a base currency, and all transactions will be automatically converted to this currency for unified reporting and analysis. Exchange rates are updated regularly to ensure accuracy.</p>
+                    </details>
+                    <details>
+                        <summary>Can I schedule recurring transactions?</summary>
+                        <p>Yes, Polban has a powerful scheduled transactions feature that allows you to set up recurring payments and incomes. You can customize frequency, start/end dates, and even set up complex patterns for irregular payments.</p>
+                    </details>
+                    <details>
+                        <summary>What types of reports can I generate?</summary>
+                        <p>Polban offers comprehensive reporting capabilities including financial charts, pie charts, balance sheets, and detailed transaction reports. You can export these reports in PDF, Excel, or CSV formats for sharing or further analysis.</p>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about" aria-labelledby="about-heading">
+             <div class="container">
+
+                  <img id="animated-image" src="assets/images/d_2.png" alt="Animated Image">
+                  <h2 id="about-heading">Why Polban?</h2>
+
+                <p>Polban simplifies personal accounting with support for Persian, English, Turkish, and Arabic, multi-currency management, Persian and Gregorian calendars, and advanced financial charts. Incomes are always positive, expenses negative, and reports are unified in your base currency (USD). Automate recurring payments with scheduled transactions and speed up entry with smart suggestions. Use transaction filters for quick searches and balance sheets for liquidity analysis. Share reports easily with PDF exports and saved charts. Polban is your go-to app for smart asset and transaction management!</p>
+                
+                <h3>Designed for Everyone</h3>
+                <p>Whether you're a family managing household expenses, a student tracking budgets, a freelancer monitoring income streams, a business owner overseeing finances, or a traveler handling multi-currency transactions, Polban provides the tools you need for precise personal accounting.</p>
+                
+                <h3>Key Benefits</h3>
+                <div class="benefits-grid">
+                    <div class="benefit-card">
+                        <h4>Global Accessibility</h4>
+                        <p>Full support for Persian, English, Turkish, and Arabic with proper RTL layout ensures everyone can use Polban comfortably.</p>
+                    </div>
+                    <div class="benefit-card">
+                        <h4>Multi-Currency Simplicity</h4>
+                        <p>Track transactions in multiple currencies with automatic conversion to your base currency for unified reporting.</p>
+                    </div>
+                    <div class="benefit-card">
+                        <h4>Smart Automation</h4>
+                        <p>Automate recurring payments with scheduled transactions and speed up data entry with smart suggestions based on your financial patterns.</p>
+                    </div>
+                    <div class="benefit-card">
+                        <h4>Comprehensive Analytics</h4>
+                        <p>Gain deep insights with line and bar charts, pie charts, and detailed reports that can be exported in multiple formats.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="upcoming" class="upcoming" aria-labelledby="upcoming-heading" style="padding: 4rem;">
+            <div class="container">
+                <h2 id="upcoming-heading">Upcoming Releases</h2>
+                <div class="feature-grid">
+                    <div class="feature-card primary" tabindex="0" role="region" aria-labelledby="upcoming-1-heading">
+                        <h3 id="upcoming-1-heading">Windows Version</h3>
+                        <p>The Windows version of Polban will soon be available, enabling financial management on personal computers.</p>
+                    </div>
+                    <div class="feature-card secondary" tabindex="0" role="region" aria-labelledby="upcoming-2-heading">
+                        <h3 id="upcoming-2-heading">iOS Version</h3>
+                        <p>The iOS version is in development and will soon be available for iPhone and iPad users.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <a href="#" class="back-to-top" aria-label="Back to top"><i class="fas fa-arrow-up" aria-hidden="true"></i></a>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Polban. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="pages/privacy.html">Privacy Policy</a>
+                <a href="pages/terms.html">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="src/js/localization.js"></script>
+    <script src="src/js/script.js"></script>
+    
+    <!-- Lightbox for gallery images -->
+    <div id="lightbox" class="lightbox" aria-hidden="true">
+        <div class="lightbox-content">
+            <span class="lightbox-close" aria-label="Close lightbox">&times;</span>
+            <img class="lightbox-image" id="lightbox-img" alt="">
+            <div class="lightbox-caption"></div>
+            <a class="lightbox-prev" aria-label="Previous image">&#10094;</a>
+            <a class="lightbox-next" aria-label="Next image">&#10095;</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Localization Test - Polban</title>
+    <link rel="stylesheet" href="src/css/styles.css">
+    <link rel="stylesheet" href="src/css/rtl.css" media="screen and (dir: rtl)">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&family=IRANSansX:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container" style="padding: 2rem; max-width: 800px; margin: 0 auto;">
+        <h1>Localization Test Page</h1>
+        
+        <div style="margin: 2rem 0; padding: 1rem; background: var(--card-bg); border-radius: 8px;">
+            <h2>Language Switcher Test</h2>
+            <p>Click the language switcher in the header to test the localization system.</p>
+        </div>
+        
+        <div style="margin: 2rem 0; padding: 1rem; background: var(--card-bg); border-radius: 8px;">
+            <h2>RTL Layout Test</h2>
+            <p>When you switch to Persian (فارسی), the layout should change to right-to-left (RTL).</p>
+            <p>This text should align to the right when in RTL mode.</p>
+        </div>
+        
+        <div style="margin: 2rem 0; padding: 1rem; background: var(--card-bg); border-radius: 8px;">
+            <h2>Translation Test</h2>
+            <p>All text content should be translated when switching languages.</p>
+            <ul>
+                <li>Navigation menu items</li>
+                <li>Hero section content</li>
+                <li>Feature descriptions</li>
+                <li>FAQ questions and answers</li>
+                <li>Form validation messages</li>
+            </ul>
+        </div>
+        
+        <div style="margin: 2rem 0; padding: 1rem; background: var(--card-bg); border-radius: 8px;">
+            <h2>Form Test</h2>
+            <form id="testForm">
+                <div class="form-group" style="margin-bottom: 1rem;">
+                    <label for="testName">Name:</label>
+                    <input type="text" id="testName" name="name" required>
+                </div>
+                <div class="form-group" style="margin-bottom: 1rem;">
+                    <label for="testEmail">Email:</label>
+                    <input type="email" id="testEmail" name="email" required>
+                </div>
+                <div class="form-group" style="margin-bottom: 1rem;">
+                    <label for="testMessage">Message:</label>
+                    <textarea id="testMessage" name="message" required></textarea>
+                </div>
+                <button type="submit" class="btn primary">Submit Test Form</button>
+            </form>
+        </div>
+    </div>
+    
+    <script src="src/js/localization.js"></script>
+    <script>
+        // Test form submission
+        document.getElementById('testForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const messages = window.formValidationMessages || {
+                fill_required: 'Please fill in all required fields.',
+                thank_you: 'Thank you for your message!'
+            };
+            
+            const name = document.getElementById('testName').value;
+            const email = document.getElementById('testEmail').value;
+            const message = document.getElementById('testMessage').value;
+            
+            if (!name || !email || !message) {
+                alert(messages.fill_required);
+                return;
+            }
+            
+            alert(messages.thank_you);
+            this.reset();
+        });
+    </script>
+</body>
+</html>

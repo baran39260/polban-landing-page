@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug Localization - Polban</title>
+    <link rel="stylesheet" href="src/css/styles.css">
+    <link rel="stylesheet" href="src/css/rtl.css" media="screen and (dir: rtl)">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&family=IRANSansX:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container" style="padding: 2rem; max-width: 800px; margin: 0 auto;">
+        <h1>Debug Localization</h1>
+        
+        <div id="debug-info" style="margin: 2rem 0; padding: 1rem; background: #f0f0f0; border-radius: 8px;">
+            <h3>Debug Information:</h3>
+            <p id="current-lang">Current Language: Loading...</p>
+            <p id="translations-status">Translations Status: Loading...</p>
+            <p id="rtl-status">RTL Status: Loading...</p>
+        </div>
+        
+        <div style="margin: 2rem 0; padding: 1rem; background: var(--card-bg); border-radius: 8px;">
+            <h2 id="test-title">Test Title</h2>
+            <p id="test-description">Test Description</p>
+            <button id="test-button" class="btn primary">Test Button</button>
+        </div>
+        
+        <div style="margin: 2rem 0; padding: 1rem; background: var(--card-bg); border-radius: 8px;">
+            <h3>Manual Test:</h3>
+            <button onclick="testEnglish()" class="btn secondary">Test English</button>
+            <button onclick="testPersian()" class="btn secondary">Test Persian</button>
+            <button onclick="checkTranslations()" class="btn secondary">Check Translations</button>
+        </div>
+    </div>
+    
+    <script src="src/js/localization.js"></script>
+    <script>
+        function updateDebugInfo() {
+            const currentLang = document.getElementById('current-lang');
+            const translationsStatus = document.getElementById('translations-status');
+            const rtlStatus = document.getElementById('rtl-status');
+            
+            if (window.localizationManager) {
+                currentLang.textContent = `Current Language: ${window.localizationManager.currentLanguage}`;
+                translationsStatus.textContent = `Translations Status: ${Object.keys(window.localizationManager.translations).length > 0 ? 'Loaded' : 'Not Loaded'}`;
+                rtlStatus.textContent = `RTL Status: ${window.localizationManager.isRTL(window.localizationManager.currentLanguage) ? 'Yes' : 'No'}`;
+            } else {
+                currentLang.textContent = 'Current Language: Localization Manager Not Found';
+                translationsStatus.textContent = 'Translations Status: Not Initialized';
+                rtlStatus.textContent = 'RTL Status: Unknown';
+            }
+        }
+        
+        function testEnglish() {
+            if (window.localizationManager) {
+                window.localizationManager.applyLanguage('en');
+                updateDebugInfo();
+            }
+        }
+        
+        function testPersian() {
+            if (window.localizationManager) {
+                window.localizationManager.applyLanguage('fa');
+                updateDebugInfo();
+            }
+        }
+        
+        function checkTranslations() {
+            if (window.localizationManager) {
+                console.log('Current translations:', window.localizationManager.translations);
+                console.log('Current language:', window.localizationManager.currentLanguage);
+                alert('Check console for translation details');
+            } else {
+                alert('Localization manager not found');
+            }
+        }
+        
+        // Update debug info every second
+        setInterval(updateDebugInfo, 1000);
+        
+        // Initial update
+        setTimeout(updateDebugInfo, 1000);
+    </script>
+</body>
+</html>
