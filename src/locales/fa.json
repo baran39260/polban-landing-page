@@ -124,15 +124,71 @@
   "gallery": {
     "title": "تصاویر اپلیکیشن",
     "description": "رابط کاربری شهودی پولبان را با این تصاویر که ویژگی‌ها و عملکردهای کلیدی را نشان می‌دهند، کاوش کنید.",
-    "click_to_view": "روی هر تصویر کلیک کنید تا در اندازه کامل مشاهده کنید",
-    "alt_texts": {
-      "dashboard": "داشبورد اپلیکیشن پولبان",
-      "charts": "نمودارها و تحلیل‌های مالی",
-      "accounts": "مدیریت حساب‌های چند ارزی",
-      "transfers": "رابط انتقال تراکنش",
-      "calendar": "پشتیبانی از تقویم شمسی و میلادی",
-      "reports": "صادرات گزارش PDF"
-    }
+    "view_toggle": {
+      "carousel": "نمای کاروسل",
+      "grid": "نمای شبکه",
+      "switch_to_carousel": "تغییر به نمای کاروسل",
+      "switch_to_grid": "تغییر به نمای شبکه"
+    },
+    "carousel": {
+      "feature_highlight": "ویژگی برجسته",
+      "swipe_hint": "برای جابجایی لمس کنید یا از کلیدهای جهت‌دار استفاده کنید",
+      "slide_counter": "{{current}} از {{total}}",
+      "previous": "تصویر قبلی",
+      "next": "تصویر بعدی",
+      "play_pause": "شروع/توقف نمایش خودکار"
+    },
+    "filters": {
+      "all": "همه ویژگی‌ها",
+      "dashboard": "داشبورد",
+      "analytics": "تحلیل‌ها",
+      "accounts": "حساب‌ها",
+      "transactions": "تراکنش‌ها",
+      "reports": "گزارش‌ها",
+      "settings": "تنظیمات"
+    },
+    "lightbox": {
+      "close": "بستن",
+      "zoom_in": "بزرگنمایی",
+      "zoom_out": "کوچک‌نمایی",
+      "previous": "تصویر قبلی",
+      "next": "تصویر بعدی",
+      "counter": "تصویر {{current}} از {{total}}",
+      "loading": "در حال بارگذاری تصویر..."
+    },
+    "screenshots": {
+      "dashboard": {
+        "title": "نمای کلی داشبورد",
+        "description": "داشبورد تمیز و شهودی که نمای کلی مالی شما را در یک نگاه نشان می‌دهد",
+        "category": "dashboard"
+      },
+      "charts": {
+        "title": "تحلیل‌های مالی",
+        "description": "نمودارها و گرافیک‌های جامع برای تحلیل دقیق مالی",
+        "category": "analytics"
+      },
+      "accounts": {
+        "title": "مدیریت چند ارزی",
+        "description": "مدیریت حساب‌ها و ارزهای متعدد در یک رابط یکپارچه",
+        "category": "accounts"
+      },
+      "transfers": {
+        "title": "مدیریت تراکنش‌ها",
+        "description": "سیستم آسان ورود تراکنش و مدیریت انتقالات",
+        "category": "transactions"
+      },
+      "calendar": {
+        "title": "پشتیبانی تقویم دوگانه",
+        "description": "پشتیبانی از تقویم فارسی و میلادی برای کاربران بین‌المللی",
+        "category": "settings"
+      },
+      "reports": {
+        "title": "صادرات و گزارش‌دهی",
+        "description": "تولید و صادرات گزارش‌های مالی دقیق در فرمت‌های متعدد",
+        "category": "reports"
+      }
+    },
+    "click_to_view": "روی هر تصویر کلیک کنید تا در اندازه کامل مشاهده کنید"
   },
   "faq": {
     "title": "سوالات متداول",

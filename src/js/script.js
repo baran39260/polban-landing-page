@@ -97,6 +97,650 @@ document.addEventListener('DOMContentLoaded', function() {
             loop();
         }, 1000);
     }
+
+    // ==============================================
+    // ENHANCED GALLERY FUNCTIONALITY
+    // ==============================================
+    
+    // Gallery data with screenshot information
+    const galleryData = [
+        {
+            id: 'dashboard',
+            category: 'dashboard',
+            title: 'Dashboard Overview',
+            description: 'Clean, intuitive dashboard showing your financial overview at a glance',
+            images: {
+                thumb: 'assets/images/gallery-1_thumb.webp',
+                thumbJpg: 'assets/images/gallery-1_thumb.jpg',
+                medium: 'assets/images/gallery-1_medium.webp',
+                mediumJpg: 'assets/images/gallery-1_medium.jpg',
+                full: 'assets/images/gallery-1.webp',
+                fullJpg: 'assets/images/gallery-1.jpg'
+            }
+        },
+        {
+            id: 'charts',
+            category: 'analytics',
+            title: 'Financial Analytics',
+            description: 'Comprehensive charts and graphs for detailed financial analysis',
+            images: {
+                thumb: 'assets/images/gallery-2_thumb.webp',
+                thumbJpg: 'assets/images/gallery-2_thumb.jpg',
+                medium: 'assets/images/gallery-2_medium.webp',
+                mediumJpg: 'assets/images/gallery-2_medium.jpg',
+                full: 'assets/images/gallery-2.webp',
+                fullJpg: 'assets/images/gallery-2.jpg'
+            }
+        },
+        {
+            id: 'accounts',
+            category: 'accounts',
+            title: 'Multi-Currency Management',
+            description: 'Manage multiple accounts and currencies in one unified interface',
+            images: {
+                thumb: 'assets/images/gallery-3_thumb.webp',
+                thumbJpg: 'assets/images/gallery-3_thumb.jpg',
+                medium: 'assets/images/gallery-3_medium.webp',
+                mediumJpg: 'assets/images/gallery-3_medium.jpg',
+                full: 'assets/images/gallery-3.webp',
+                fullJpg: 'assets/images/gallery-3.jpg'
+            }
+        },
+        {
+            id: 'transfers',
+            category: 'transactions',
+            title: 'Transaction Management',
+            description: 'Easy transaction entry and transfer management system',
+            images: {
+                thumb: 'assets/images/gallery-4_thumb.webp',
+                thumbJpg: 'assets/images/gallery-4_thumb.jpg',
+                medium: 'assets/images/gallery-4_medium.webp',
+                mediumJpg: 'assets/images/gallery-4_medium.jpg',
+                full: 'assets/images/gallery-4.webp',
+                fullJpg: 'assets/images/gallery-4.jpg'
+            }
+        },
+        {
+            id: 'calendar',
+            category: 'settings',
+            title: 'Dual Calendar Support',
+            description: 'Persian and Gregorian calendar support for international users',
+            images: {
+                thumb: 'assets/images/gallery-5_thumb.webp',
+                thumbJpg: 'assets/images/gallery-5_thumb.jpg',
+                medium: 'assets/images/gallery-5_medium.webp',
+                mediumJpg: 'assets/images/gallery-5_medium.jpg',
+                full: 'assets/images/gallery-5.webp',
+                fullJpg: 'assets/images/gallery-5.jpg'
+            }
+        },
+        {
+            id: 'reports',
+            category: 'reports',
+            title: 'Export & Reporting',
+            description: 'Generate and export detailed financial reports in multiple formats',
+            images: {
+                thumb: 'assets/images/gallery-6_thumb.webp',
+                thumbJpg: 'assets/images/gallery-6_thumb.jpg',
+                medium: 'assets/images/gallery-6_medium.webp',
+                mediumJpg: 'assets/images/gallery-6_medium.jpg',
+                full: 'assets/images/gallery-6.webp',
+                fullJpg: 'assets/images/gallery-6.jpg'
+            }
+        }
+    ];
+
+    // Gallery Elements
+    const gallerySection = document.getElementById('gallery');
+    const viewToggleBtns = document.querySelectorAll('.view-toggle-btn');
+    const carouselView = document.getElementById('carousel-view');
+    const gridView = document.getElementById('grid-view');
+    
+    // Carousel Elements
+    const carouselTrack = document.getElementById('carousel-track');
+    const carouselPrevBtn = document.getElementById('carousel-prev');
+    const carouselNextBtn = document.getElementById('carousel-next');
+    const carouselDots = document.querySelectorAll('.carousel-dot');
+    const featureTitle = document.getElementById('current-feature-title');
+    const featureDescription = document.getElementById('current-feature-description');
+    const currentSlideSpan = document.getElementById('current-slide');
+    const totalSlidesSpan = document.getElementById('total-slides');
+    
+    // Grid Elements
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    
+    // Lightbox Elements
+    const enhancedLightbox = document.getElementById('gallery-lightbox');
+    const lightboxImage = document.getElementById('lightbox-image');
+    const lightboxTitle = document.getElementById('lightbox-title');
+    const lightboxDescription = document.getElementById('lightbox-description');
+    const lightboxCategory = document.getElementById('lightbox-category');
+    const lightboxCurrent = document.getElementById('lightbox-current');
+    const lightboxTotal = document.getElementById('lightbox-total');
+    const enhancedLightboxClose = document.getElementById('lightbox-close');
+    const enhancedLightboxPrev = document.getElementById('lightbox-prev');
+    const enhancedLightboxNext = document.getElementById('lightbox-next');
+    const lightboxZoomIn = document.getElementById('lightbox-zoom-in');
+    const lightboxZoomOut = document.getElementById('lightbox-zoom-out');
+    const lightboxOverlay = enhancedLightbox ? enhancedLightbox.querySelector('.lightbox-overlay') : null;
+    const lightboxLoading = document.getElementById('lightbox-loading');
+    
+    // Gallery State
+    let currentView = 'carousel';
+    let currentCarouselSlide = 0;
+    let currentFilter = 'all';
+    let currentLightboxIndex = 0;
+    let lightboxZoomed = false;
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    // Initialize Gallery
+    function initGallery() {
+        if (!gallerySection) return;
+        
+        // Set total slides
+        if (totalSlidesSpan) {
+            totalSlidesSpan.textContent = galleryData.length;
+        }
+        if (lightboxTotal) {
+            lightboxTotal.textContent = galleryData.length;
+        }
+        
+        // Initialize carousel
+        updateCarouselSlide(0);
+        
+        // Initialize image lazy loading
+        initImageLazyLoading();
+        
+        // Set up event listeners
+        setupGalleryEventListeners();
+        
+        // Update localized text
+        updateGalleryLocalizedText();
+        
+        console.log('Enhanced gallery initialized');
+    }
+
+    // View Toggle Functionality
+    function switchView(view) {
+        if (currentView === view) return;
+        
+        currentView = view;
+        
+        // Update toggle buttons
+        viewToggleBtns.forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.view === view);
+            btn.setAttribute('aria-selected', btn.dataset.view === view);
+        });
+        
+        // Switch views with animation
+        if (view === 'carousel') {
+            gridView.classList.remove('active');
+            setTimeout(() => {
+                carouselView.classList.add('active');
+            }, 200);
+        } else {
+            carouselView.classList.remove('active');
+            setTimeout(() => {
+                gridView.classList.add('active');
+            }, 200);
+        }
+        
+        // Update accessibility
+        carouselView.setAttribute('aria-hidden', view !== 'carousel');
+        gridView.setAttribute('aria-hidden', view !== 'grid');
+    }
+
+    // Carousel Functionality
+    function updateCarouselSlide(index) {
+        if (!carouselTrack || index < 0 || index >= galleryData.length) return;
+        
+        currentCarouselSlide = index;
+        const slideData = galleryData[index];
+        
+        // Update carousel track position
+        const translateX = -index * 100;
+        carouselTrack.style.transform = `translateX(${translateX}%)`;
+        
+        // Update carousel dots
+        carouselDots.forEach((dot, i) => {
+            dot.classList.toggle('active', i === index);
+        });
+        
+        // Update slides
+        const slides = document.querySelectorAll('.carousel-slide');
+        slides.forEach((slide, i) => {
+            slide.classList.toggle('active', i === index);
+        });
+        
+        // Update feature description
+        if (featureTitle && featureDescription) {
+            featureTitle.textContent = slideData.title;
+            featureDescription.textContent = slideData.description;
+        }
+        
+        // Update counter
+        if (currentSlideSpan) {
+            currentSlideSpan.textContent = index + 1;
+        }
+        
+        // Update aria-live region
+        carouselTrack.setAttribute('aria-live', 'polite');
+    }
+
+    function nextCarouselSlide() {
+        const nextIndex = (currentCarouselSlide + 1) % galleryData.length;
+        updateCarouselSlide(nextIndex);
+    }
+
+    function prevCarouselSlide() {
+        const prevIndex = currentCarouselSlide === 0 ? galleryData.length - 1 : currentCarouselSlide - 1;
+        updateCarouselSlide(prevIndex);
+    }
+
+    // Grid Filter Functionality
+    function filterGalleryItems(filter) {
+        currentFilter = filter;
+        
+        // Update filter buttons
+        filterBtns.forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.filter === filter);
+        });
+        
+        // Filter gallery items
+        galleryItems.forEach(item => {
+            const itemCategory = item.dataset.category;
+            const shouldShow = filter === 'all' || itemCategory === filter;
+            
+            if (shouldShow) {
+                item.classList.remove('filtered-out');
+                item.setAttribute('aria-hidden', 'false');
+            } else {
+                item.classList.add('filtered-out');
+                item.setAttribute('aria-hidden', 'true');
+            }
+        });
+    }
+
+    // Lightbox Functionality
+    function openLightbox(index) {
+        if (!enhancedLightbox || index < 0 || index >= galleryData.length) return;
+        
+        currentLightboxIndex = index;
+        const slideData = galleryData[index];
+        
+        // Show lightbox
+        enhancedLightbox.classList.add('active');
+        enhancedLightbox.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        
+        // Update content
+        updateLightboxContent(slideData, index);
+        
+        // Focus management
+        if (enhancedLightboxClose) {
+            enhancedLightboxClose.focus();
+        }
+        
+        // Add keyboard listener
+        document.addEventListener('keydown', handleLightboxKeydown);
+    }
+
+    function closeLightbox() {
+        if (!enhancedLightbox) return;
+        
+        enhancedLightbox.classList.remove('active');
+        enhancedLightbox.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        lightboxZoomed = false;
+        
+        if (lightboxImage) {
+            lightboxImage.classList.remove('zoomed');
+        }
+        
+        // Remove keyboard listener
+        document.removeEventListener('keydown', handleLightboxKeydown);
+    }
+
+    function updateLightboxContent(slideData, index) {
+        if (!lightboxImage || !lightboxTitle || !lightboxDescription) return;
+        
+        // Show loading
+        if (lightboxLoading) {
+            lightboxLoading.classList.remove('hidden');
+        }
+        
+        // Update image with progressive loading
+        const img = new Image();
+        img.onload = function() {
+            lightboxImage.src = this.src;
+            if (lightboxLoading) {
+                lightboxLoading.classList.add('hidden');
+            }
+        };
+        
+        // Try WebP first, fallback to JPG
+        img.onerror = function() {
+            if (this.src.includes('.webp')) {
+                this.src = slideData.images.fullJpg;
+            }
+        };
+        img.src = slideData.images.full;
+        
+        // Update text content
+        lightboxTitle.textContent = slideData.title;
+        lightboxDescription.textContent = slideData.description;
+        if (lightboxCategory) {
+            lightboxCategory.textContent = slideData.category.charAt(0).toUpperCase() + slideData.category.slice(1);
+        }
+        
+        // Update counter
+        if (lightboxCurrent) {
+            lightboxCurrent.textContent = index + 1;
+        }
+        
+        // Update alt text
+        lightboxImage.alt = slideData.title;
+    }
+
+    function nextLightboxImage() {
+        const nextIndex = (currentLightboxIndex + 1) % galleryData.length;
+        currentLightboxIndex = nextIndex;
+        updateLightboxContent(galleryData[nextIndex], nextIndex);
+    }
+
+    function prevLightboxImage() {
+        const prevIndex = currentLightboxIndex === 0 ? galleryData.length - 1 : currentLightboxIndex - 1;
+        currentLightboxIndex = prevIndex;
+        updateLightboxContent(galleryData[prevIndex], prevIndex);
+    }
+
+    function toggleLightboxZoom() {
+        if (!lightboxImage) return;
+        
+        lightboxZoomed = !lightboxZoomed;
+        lightboxImage.classList.toggle('zoomed', lightboxZoomed);
+    }
+
+    // Image Lazy Loading
+    function initImageLazyLoading() {
+        const images = document.querySelectorAll('.gallery-image');
+        
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    
+                    // Load the image
+                    img.onload = function() {
+                        this.classList.add('loaded');
+                    };
+                    
+                    // Progressive enhancement: WebP with JPG fallback
+                    img.onerror = function() {
+                        if (this.src.includes('.webp')) {
+                            this.src = this.src.replace('.webp', '.jpg');
+                        }
+                    };
+                    
+                    // Start loading
+                    if (img.dataset.src) {
+                        img.src = img.dataset.src;
+                    }
+                    
+                    observer.unobserve(img);
+                }
+            });
+        }, {
+            rootMargin: '50px'
+        });
+        
+        images.forEach(img => {
+            imageObserver.observe(img);
+        });
+    }
+
+    // Event Listeners
+    function setupGalleryEventListeners() {
+        // View Toggle
+        viewToggleBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                switchView(btn.dataset.view);
+            });
+        });
+        
+        // Carousel Controls
+        if (carouselPrevBtn) {
+            carouselPrevBtn.addEventListener('click', prevCarouselSlide);
+        }
+        if (carouselNextBtn) {
+            carouselNextBtn.addEventListener('click', nextCarouselSlide);
+        }
+        
+        // Carousel Dots
+        carouselDots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                updateCarouselSlide(index);
+            });
+        });
+        
+        // Grid Filters
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterGalleryItems(btn.dataset.filter);
+            });
+        });
+        
+        // Gallery Items Click
+        galleryItems.forEach((item, index) => {
+            item.addEventListener('click', () => {
+                openLightbox(index);
+            });
+            
+            // Keyboard accessibility
+            item.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    openLightbox(index);
+                }
+            });
+        });
+        
+        // Carousel slides click for lightbox
+        const carouselSlides = document.querySelectorAll('.carousel-slide');
+        carouselSlides.forEach((slide, index) => {
+            slide.addEventListener('click', () => {
+                openLightbox(index);
+            });
+        });
+        
+        // Lightbox Controls
+        if (enhancedLightboxClose) {
+            enhancedLightboxClose.addEventListener('click', closeLightbox);
+        }
+        if (lightboxOverlay) {
+            lightboxOverlay.addEventListener('click', closeLightbox);
+        }
+        if (enhancedLightboxPrev) {
+            enhancedLightboxPrev.addEventListener('click', prevLightboxImage);
+        }
+        if (enhancedLightboxNext) {
+            enhancedLightboxNext.addEventListener('click', nextLightboxImage);
+        }
+        if (lightboxZoomIn) {
+            lightboxZoomIn.addEventListener('click', toggleLightboxZoom);
+        }
+        if (lightboxZoomOut) {
+            lightboxZoomOut.addEventListener('click', toggleLightboxZoom);
+        }
+        
+        // Touch/Swipe Support
+        setupTouchEvents();
+        
+        // Keyboard Navigation
+        setupKeyboardNavigation();
+    }
+
+    // Touch Events for Mobile
+    function setupTouchEvents() {
+        // Carousel swipe
+        if (carouselTrack) {
+            carouselTrack.addEventListener('touchstart', handleTouchStart, { passive: true });
+            carouselTrack.addEventListener('touchend', handleTouchEnd, { passive: true });
+        }
+        
+        // Lightbox swipe
+        if (lightboxImage) {
+            lightboxImage.addEventListener('touchstart', handleTouchStart, { passive: true });
+            lightboxImage.addEventListener('touchend', handleTouchEnd, { passive: true });
+        }
+    }
+
+    function handleTouchStart(e) {
+        touchStartX = e.touches[0].clientX;
+    }
+
+    function handleTouchEnd(e) {
+        touchEndX = e.changedTouches[0].clientX;
+        handleSwipeGesture();
+    }
+
+    function handleSwipeGesture() {
+        const swipeThreshold = 50;
+        const swipeDistance = touchEndX - touchStartX;
+        
+        if (Math.abs(swipeDistance) < swipeThreshold) return;
+        
+        const isRTL = document.documentElement.dir === 'rtl';
+        const swipeLeft = swipeDistance < 0;
+        const swipeRight = swipeDistance > 0;
+        
+        if (enhancedLightbox && enhancedLightbox.classList.contains('active')) {
+            // Lightbox navigation
+            if ((swipeLeft && !isRTL) || (swipeRight && isRTL)) {
+                nextLightboxImage();
+            } else if ((swipeRight && !isRTL) || (swipeLeft && isRTL)) {
+                prevLightboxImage();
+            }
+        } else if (currentView === 'carousel') {
+            // Carousel navigation
+            if ((swipeLeft && !isRTL) || (swipeRight && isRTL)) {
+                nextCarouselSlide();
+            } else if ((swipeRight && !isRTL) || (swipeLeft && isRTL)) {
+                prevCarouselSlide();
+            }
+        }
+    }
+
+    // Keyboard Navigation
+    function setupKeyboardNavigation() {
+        document.addEventListener('keydown', (e) => {
+            // Skip if user is typing in an input
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+            
+            const isRTL = document.documentElement.dir === 'rtl';
+            
+            if (currentView === 'carousel' && carouselView.classList.contains('active')) {
+                if (e.key === 'ArrowLeft') {
+                    e.preventDefault();
+                    isRTL ? nextCarouselSlide() : prevCarouselSlide();
+                } else if (e.key === 'ArrowRight') {
+                    e.preventDefault();
+                    isRTL ? prevCarouselSlide() : nextCarouselSlide();
+                }
+            }
+        });
+    }
+
+    function handleLightboxKeydown(e) {
+        const isRTL = document.documentElement.dir === 'rtl';
+        
+        switch (e.key) {
+            case 'Escape':
+                e.preventDefault();
+                closeLightbox();
+                break;
+            case 'ArrowLeft':
+                e.preventDefault();
+                isRTL ? nextLightboxImage() : prevLightboxImage();
+                break;
+            case 'ArrowRight':
+                e.preventDefault();
+                isRTL ? prevLightboxImage() : nextLightboxImage();
+                break;
+            case '+':
+            case '=':
+                e.preventDefault();
+                if (!lightboxZoomed) toggleLightboxZoom();
+                break;
+            case '-':
+                e.preventDefault();
+                if (lightboxZoomed) toggleLightboxZoom();
+                break;
+        }
+    }
+
+    // Localized Text Updates (called by localization system)
+    function updateGalleryLocalizedText() {
+        // This will be called by the localization system
+        // Update dynamic text elements
+        try {
+            const currentLang = window.LocalizationManager ? window.LocalizationManager.currentLanguage : 'en';
+            const translations = window.LocalizationManager ? window.LocalizationManager.translations[currentLang] : null;
+            
+            if (translations && translations.gallery) {
+                // Update view toggle buttons
+                const carouselBtn = document.querySelector('[data-view="carousel"] span');
+                const gridBtn = document.querySelector('[data-view="grid"] span');
+                
+                if (carouselBtn && translations.gallery.view_toggle) {
+                    carouselBtn.textContent = translations.gallery.view_toggle.carousel;
+                }
+                if (gridBtn && translations.gallery.view_toggle) {
+                    gridBtn.textContent = translations.gallery.view_toggle.grid;
+                }
+                
+                // Update filter buttons
+                filterBtns.forEach(btn => {
+                    const filter = btn.dataset.filter;
+                    if (translations.gallery.filters && translations.gallery.filters[filter]) {
+                        btn.textContent = translations.gallery.filters[filter];
+                    }
+                });
+                
+                // Update carousel hint
+                const carouselHint = document.querySelector('.carousel-hint');
+                if (carouselHint && translations.gallery.carousel) {
+                    carouselHint.textContent = translations.gallery.carousel.swipe_hint;
+                }
+                
+                // Update gallery hint
+                const galleryHint = document.querySelector('#grid-view .gallery-hint');
+                if (galleryHint) {
+                    galleryHint.textContent = translations.gallery.click_to_view;
+                }
+                
+                // Update feature spotlight label
+                const featureLabel = document.querySelector('.feature-label');
+                if (featureLabel && translations.gallery.carousel) {
+                    featureLabel.textContent = translations.gallery.carousel.feature_highlight;
+                }
+            }
+        } catch (error) {
+            console.warn('Error updating gallery localized text:', error);
+        }
+    }
+
+    // Expose gallery functions globally for localization system integration
+    window.updateGalleryLocalizedText = updateGalleryLocalizedText;
+
+    // Initialize gallery when DOM is loaded
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initGallery);
+    } else {
+        initGallery();
+    }
     
     // Lightbox elements
     const lightbox = document.getElementById('lightbox');

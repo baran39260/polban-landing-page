@@ -234,62 +234,286 @@
             </div>
         </section>
 
-        <!-- Replacing Testimonials section with Gallery section -->
+        <!-- Enhanced Gallery Section with Carousel and Grid Views -->
         <section id="gallery" class="gallery" aria-labelledby="gallery-heading">
             <div class="container">
-                <h2 id="gallery-heading">App Screenshots</h2>
-                <p style="text-align: center; margin-bottom: 3rem; color: var(--secondary-text); max-width: 800px; margin-left: auto; margin-right: auto;">Explore Polban's intuitive interface with these screenshots showcasing key features and functionalities.</p>
-                <div class="gallery-grid">
-                    <!-- Gallery item with professional placeholder -->
-                    <div class="gallery-item">
-                        <div class="gallery-placeholder">
-                            <i class="fas fa-image"></i>
-                        </div>
-                        <img src="assets/images/gallery-1.webp" alt="Polban App Dashboard" data-src="assets/images/gallery-1.webp" class="lazy-load gallery-image" loading="lazy">
-                    </div>
+                <!-- Gallery Header -->
+                <div class="gallery-header">
+                    <h2 id="gallery-heading">App Screenshots</h2>
+                    <p class="gallery-description">Explore Polban's intuitive interface with these screenshots showcasing key features and functionalities.</p>
                     
-                    <!-- Gallery item with professional placeholder -->
-                    <div class="gallery-item">
-                        <div class="gallery-placeholder">
-                            <i class="fas fa-chart-line"></i>
+                    <!-- View Toggle Controls -->
+                    <div class="gallery-controls">
+                        <div class="view-toggle" role="tablist" aria-label="Gallery view options">
+                            <button class="view-toggle-btn active" role="tab" id="carousel-tab" aria-controls="carousel-view" aria-selected="true" data-view="carousel">
+                                <i class="fas fa-mobile-alt" aria-hidden="true"></i>
+                                <span>Carousel View</span>
+                            </button>
+                            <button class="view-toggle-btn" role="tab" id="grid-tab" aria-controls="grid-view" aria-selected="false" data-view="grid">
+                                <i class="fas fa-th" aria-hidden="true"></i>
+                                <span>Grid View</span>
+                            </button>
                         </div>
-                        <img src="assets/images/gallery-2.webp" alt="Financial Charts and Analytics" data-src="assets/images/gallery-2.webp" class="lazy-load gallery-image" loading="lazy">
-                    </div>
-                    
-                    <!-- Gallery item with professional placeholder -->
-                    <div class="gallery-item">
-                        <div class="gallery-placeholder">
-                            <i class="fas fa-wallet"></i>
-                        </div>
-                        <img src="assets/images/gallery-3.webp" alt="Multi-Currency Account Management" data-src="assets/images/gallery-3.webp" class="lazy-load gallery-image" loading="lazy">
-                    </div>
-                    
-                    <!-- Gallery item with professional placeholder -->
-                    <div class="gallery-item">
-                        <div class="gallery-placeholder">
-                            <i class="fas fa-exchange-alt"></i>
-                        </div>
-                        <img src="assets/images/gallery-4.webp" alt="Transaction Transfer Interface" data-src="assets/images/gallery-4.webp" class="lazy-load gallery-image" loading="lazy">
-                    </div>
-                    
-                    <!-- Gallery item with professional placeholder -->
-                    <div class="gallery-item">
-                        <div class="gallery-placeholder">
-                            <i class="fas fa-calendar-alt"></i>
-                        </div>
-                        <img src="assets/images/gallery-5.webp" alt="Persian and Gregorian Calendar Support" data-src="assets/images/gallery-5.webp" class="lazy-load gallery-image" loading="lazy">
-                    </div>
-                    
-                    <!-- Gallery item with professional placeholder -->
-                    <div class="gallery-item">
-                        <div class="gallery-placeholder">
-                            <i class="fas fa-file-export"></i>
-                        </div>
-                        <img src="assets/images/gallery-6.webp" alt="PDF Report Export" data-src="assets/images/gallery-6.webp" class="lazy-load gallery-image" loading="lazy">
                     </div>
                 </div>
-                <div style="text-align: center; margin-top: 2rem;">
-                    <p style="color: var(--secondary-text);">Click on any screenshot to view it in full size</p>
+
+                <!-- Carousel View -->
+                <div id="carousel-view" class="gallery-view active" role="tabpanel" aria-labelledby="carousel-tab">
+                    <div class="carousel-container">
+                        <div class="carousel-content">
+                            <!-- Feature Description (Sticky on desktop) -->
+                            <div class="carousel-sidebar">
+                                <div class="feature-spotlight">
+                                    <span class="feature-label">Feature Spotlight</span>
+                                    <h3 class="feature-title" id="current-feature-title">Dashboard Overview</h3>
+                                    <p class="feature-description" id="current-feature-description">Clean, intuitive dashboard showing your financial overview at a glance</p>
+                                    <div class="carousel-counter">
+                                        <span id="current-slide">1</span> of <span id="total-slides">6</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Mobile Carousel -->
+                            <div class="carousel-main">
+                                <div class="phone-mockup">
+                                    <div class="carousel-wrapper">
+                                        <ul class="carousel-track" id="carousel-track" role="list" aria-live="polite">
+                                            <li class="carousel-slide active" data-slide="0" data-category="dashboard" role="listitem">
+                                                <picture>
+                                                    <source srcset="assets/images/gallery-1_thumb.webp" media="(max-width: 768px)">
+                                                    <source srcset="assets/images/gallery-1_medium.webp" media="(max-width: 1024px)">
+                                                    <img src="assets/images/gallery-1.webp" alt="Dashboard Overview" loading="lazy" decoding="async">
+                                                </picture>
+                                            </li>
+                                            <li class="carousel-slide" data-slide="1" data-category="analytics" role="listitem">
+                                                <picture>
+                                                    <source srcset="assets/images/gallery-2_thumb.webp" media="(max-width: 768px)">
+                                                    <source srcset="assets/images/gallery-2_medium.webp" media="(max-width: 1024px)">
+                                                    <img src="assets/images/gallery-2.webp" alt="Financial Analytics" loading="lazy" decoding="async">
+                                                </picture>
+                                            </li>
+                                            <li class="carousel-slide" data-slide="2" data-category="accounts" role="listitem">
+                                                <picture>
+                                                    <source srcset="assets/images/gallery-3_thumb.webp" media="(max-width: 768px)">
+                                                    <source srcset="assets/images/gallery-3_medium.webp" media="(max-width: 1024px)">
+                                                    <img src="assets/images/gallery-3.webp" alt="Multi-Currency Management" loading="lazy" decoding="async">
+                                                </picture>
+                                            </li>
+                                            <li class="carousel-slide" data-slide="3" data-category="transactions" role="listitem">
+                                                <picture>
+                                                    <source srcset="assets/images/gallery-4_thumb.webp" media="(max-width: 768px)">
+                                                    <source srcset="assets/images/gallery-4_medium.webp" media="(max-width: 1024px)">
+                                                    <img src="assets/images/gallery-4.webp" alt="Transaction Management" loading="lazy" decoding="async">
+                                                </picture>
+                                            </li>
+                                            <li class="carousel-slide" data-slide="4" data-category="settings" role="listitem">
+                                                <picture>
+                                                    <source srcset="assets/images/gallery-5_thumb.webp" media="(max-width: 768px)">
+                                                    <source srcset="assets/images/gallery-5_medium.webp" media="(max-width: 1024px)">
+                                                    <img src="assets/images/gallery-5.webp" alt="Dual Calendar Support" loading="lazy" decoding="async">
+                                                </picture>
+                                            </li>
+                                            <li class="carousel-slide" data-slide="5" data-category="reports" role="listitem">
+                                                <picture>
+                                                    <source srcset="assets/images/gallery-6_thumb.webp" media="(max-width: 768px)">
+                                                    <source srcset="assets/images/gallery-6_medium.webp" media="(max-width: 1024px)">
+                                                    <img src="assets/images/gallery-6.webp" alt="Export & Reporting" loading="lazy" decoding="async">
+                                                </picture>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <!-- Carousel Controls -->
+                                    <button class="carousel-btn prev" id="carousel-prev" aria-label="Previous screenshot">
+                                        <i class="fas fa-chevron-left" aria-hidden="true"></i>
+                                    </button>
+                                    <button class="carousel-btn next" id="carousel-next" aria-label="Next screenshot">
+                                        <i class="fas fa-chevron-right" aria-hidden="true"></i>
+                                    </button>
+                                    
+                                    <!-- Carousel Dots -->
+                                    <div class="carousel-dots" role="tablist" aria-label="Screenshot navigation">
+                                        <button class="carousel-dot active" role="tab" data-slide="0" aria-label="Go to slide 1"></button>
+                                        <button class="carousel-dot" role="tab" data-slide="1" aria-label="Go to slide 2"></button>
+                                        <button class="carousel-dot" role="tab" data-slide="2" aria-label="Go to slide 3"></button>
+                                        <button class="carousel-dot" role="tab" data-slide="3" aria-label="Go to slide 4"></button>
+                                        <button class="carousel-dot" role="tab" data-slide="4" aria-label="Go to slide 5"></button>
+                                        <button class="carousel-dot" role="tab" data-slide="5" aria-label="Go to slide 6"></button>
+                                    </div>
+                                </div>
+                                
+                                <p class="carousel-hint">Swipe or use arrow keys to navigate</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Grid View -->
+                <div id="grid-view" class="gallery-view" role="tabpanel" aria-labelledby="grid-tab" aria-hidden="true">
+                    <!-- Filter Controls -->
+                    <div class="grid-filters" role="toolbar" aria-label="Screenshot filters">
+                        <button class="filter-btn active" data-filter="all">All Features</button>
+                        <button class="filter-btn" data-filter="dashboard">Dashboard</button>
+                        <button class="filter-btn" data-filter="analytics">Analytics</button>
+                        <button class="filter-btn" data-filter="accounts">Accounts</button>
+                        <button class="filter-btn" data-filter="transactions">Transactions</button>
+                        <button class="filter-btn" data-filter="reports">Reports</button>
+                        <button class="filter-btn" data-filter="settings">Settings</button>
+                    </div>
+
+                    <!-- Grid Container -->
+                    <div class="gallery-grid" role="list">
+                        <article class="gallery-item" data-category="dashboard" role="listitem" tabindex="0">
+                            <div class="gallery-item-inner">
+                                <div class="gallery-placeholder">
+                                    <i class="fas fa-tachometer-alt" aria-hidden="true"></i>
+                                </div>
+                                <picture>
+                                    <source srcset="assets/images/gallery-1_thumb.webp" type="image/webp">
+                                    <img src="assets/images/gallery-1_thumb.jpg" alt="Dashboard Overview" class="gallery-image" loading="lazy" decoding="async">
+                                </picture>
+                                <div class="gallery-overlay">
+                                    <h4>Dashboard Overview</h4>
+                                    <p>Clean, intuitive dashboard showing your financial overview at a glance</p>
+                                    <span class="gallery-category">Dashboard</span>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="gallery-item" data-category="analytics" role="listitem" tabindex="0">
+                            <div class="gallery-item-inner">
+                                <div class="gallery-placeholder">
+                                    <i class="fas fa-chart-line" aria-hidden="true"></i>
+                                </div>
+                                <picture>
+                                    <source srcset="assets/images/gallery-2_thumb.webp" type="image/webp">
+                                    <img src="assets/images/gallery-2_thumb.jpg" alt="Financial Analytics" class="gallery-image" loading="lazy" decoding="async">
+                                </picture>
+                                <div class="gallery-overlay">
+                                    <h4>Financial Analytics</h4>
+                                    <p>Comprehensive charts and graphs for detailed financial analysis</p>
+                                    <span class="gallery-category">Analytics</span>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="gallery-item" data-category="accounts" role="listitem" tabindex="0">
+                            <div class="gallery-item-inner">
+                                <div class="gallery-placeholder">
+                                    <i class="fas fa-wallet" aria-hidden="true"></i>
+                                </div>
+                                <picture>
+                                    <source srcset="assets/images/gallery-3_thumb.webp" type="image/webp">
+                                    <img src="assets/images/gallery-3_thumb.jpg" alt="Multi-Currency Management" class="gallery-image" loading="lazy" decoding="async">
+                                </picture>
+                                <div class="gallery-overlay">
+                                    <h4>Multi-Currency Management</h4>
+                                    <p>Manage multiple accounts and currencies in one unified interface</p>
+                                    <span class="gallery-category">Accounts</span>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="gallery-item" data-category="transactions" role="listitem" tabindex="0">
+                            <div class="gallery-item-inner">
+                                <div class="gallery-placeholder">
+                                    <i class="fas fa-exchange-alt" aria-hidden="true"></i>
+                                </div>
+                                <picture>
+                                    <source srcset="assets/images/gallery-4_thumb.webp" type="image/webp">
+                                    <img src="assets/images/gallery-4_thumb.jpg" alt="Transaction Management" class="gallery-image" loading="lazy" decoding="async">
+                                </picture>
+                                <div class="gallery-overlay">
+                                    <h4>Transaction Management</h4>
+                                    <p>Easy transaction entry and transfer management system</p>
+                                    <span class="gallery-category">Transactions</span>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="gallery-item" data-category="settings" role="listitem" tabindex="0">
+                            <div class="gallery-item-inner">
+                                <div class="gallery-placeholder">
+                                    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+                                </div>
+                                <picture>
+                                    <source srcset="assets/images/gallery-5_thumb.webp" type="image/webp">
+                                    <img src="assets/images/gallery-5_thumb.jpg" alt="Dual Calendar Support" class="gallery-image" loading="lazy" decoding="async">
+                                </picture>
+                                <div class="gallery-overlay">
+                                    <h4>Dual Calendar Support</h4>
+                                    <p>Persian and Gregorian calendar support for international users</p>
+                                    <span class="gallery-category">Settings</span>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="gallery-item" data-category="reports" role="listitem" tabindex="0">
+                            <div class="gallery-item-inner">
+                                <div class="gallery-placeholder">
+                                    <i class="fas fa-file-export" aria-hidden="true"></i>
+                                </div>
+                                <picture>
+                                    <source srcset="assets/images/gallery-6_thumb.webp" type="image/webp">
+                                    <img src="assets/images/gallery-6_thumb.jpg" alt="Export & Reporting" class="gallery-image" loading="lazy" decoding="async">
+                                </picture>
+                                <div class="gallery-overlay">
+                                    <h4>Export & Reporting</h4>
+                                    <p>Generate and export detailed financial reports in multiple formats</p>
+                                    <span class="gallery-category">Reports</span>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                    
+                    <p class="gallery-hint">Click on any screenshot to view it in full size</p>
+                </div>
+            </div>
+
+            <!-- Enhanced Lightbox -->
+            <div id="gallery-lightbox" class="lightbox" role="dialog" aria-modal="true" aria-labelledby="lightbox-title" aria-hidden="true">
+                <div class="lightbox-overlay" aria-label="Close lightbox"></div>
+                <div class="lightbox-container">
+                    <div class="lightbox-header">
+                        <h3 id="lightbox-title" class="lightbox-title">Image Title</h3>
+                        <div class="lightbox-counter">
+                            <span id="lightbox-current">1</span> of <span id="lightbox-total">6</span>
+                        </div>
+                        <div class="lightbox-controls">
+                            <button class="lightbox-btn zoom-out" id="lightbox-zoom-out" aria-label="Zoom out">
+                                <i class="fas fa-search-minus" aria-hidden="true"></i>
+                            </button>
+                            <button class="lightbox-btn zoom-in" id="lightbox-zoom-in" aria-label="Zoom in">
+                                <i class="fas fa-search-plus" aria-hidden="true"></i>
+                            </button>
+                            <button class="lightbox-btn close" id="lightbox-close" aria-label="Close lightbox">
+                                <i class="fas fa-times" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="lightbox-content">
+                        <button class="lightbox-nav prev" id="lightbox-prev" aria-label="Previous image">
+                            <i class="fas fa-chevron-left" aria-hidden="true"></i>
+                        </button>
+                        
+                        <div class="lightbox-image-container">
+                            <div class="lightbox-loading" id="lightbox-loading">
+                                <i class="fas fa-spinner fa-spin" aria-hidden="true"></i>
+                                <span>Loading image...</span>
+                            </div>
+                            <img id="lightbox-image" class="lightbox-image" alt="" loading="lazy" decoding="async">
+                        </div>
+                        
+                        <button class="lightbox-nav next" id="lightbox-next" aria-label="Next image">
+                            <i class="fas fa-chevron-right" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="lightbox-footer">
+                        <p id="lightbox-description" class="lightbox-description">Image description</p>
+                        <span id="lightbox-category" class="lightbox-category">Category</span>
+                    </div>
                 </div>
             </div>
         </section>

@@ -124,15 +124,71 @@
   "gallery": {
     "title": "App Screenshots",
     "description": "Explore Polban's intuitive interface with these screenshots showcasing key features and functionalities.",
-    "click_to_view": "Click on any screenshot to view it in full size",
-    "alt_texts": {
-      "dashboard": "Polban App Dashboard",
-      "charts": "Financial Charts and Analytics",
-      "accounts": "Multi-Currency Account Management",
-      "transfers": "Transaction Transfer Interface",
-      "calendar": "Persian and Gregorian Calendar Support",
-      "reports": "PDF Report Export"
-    }
+    "view_toggle": {
+      "carousel": "Carousel View",
+      "grid": "Grid View",
+      "switch_to_carousel": "Switch to carousel view",
+      "switch_to_grid": "Switch to grid view"
+    },
+    "carousel": {
+      "feature_highlight": "Feature Spotlight",
+      "swipe_hint": "Swipe or use arrow keys to navigate",
+      "slide_counter": "{{current}} of {{total}}",
+      "previous": "Previous screenshot",
+      "next": "Next screenshot",
+      "play_pause": "Play/pause slideshow"
+    },
+    "filters": {
+      "all": "All Features",
+      "dashboard": "Dashboard",
+      "analytics": "Analytics",
+      "accounts": "Accounts",
+      "transactions": "Transactions",
+      "reports": "Reports",
+      "settings": "Settings"
+    },
+    "lightbox": {
+      "close": "Close lightbox",
+      "zoom_in": "Zoom in",
+      "zoom_out": "Zoom out",
+      "previous": "Previous image",
+      "next": "Next image",
+      "counter": "Image {{current}} of {{total}}",
+      "loading": "Loading image..."
+    },
+    "screenshots": {
+      "dashboard": {
+        "title": "Dashboard Overview",
+        "description": "Clean, intuitive dashboard showing your financial overview at a glance",
+        "category": "dashboard"
+      },
+      "charts": {
+        "title": "Financial Analytics",
+        "description": "Comprehensive charts and graphs for detailed financial analysis",
+        "category": "analytics"
+      },
+      "accounts": {
+        "title": "Multi-Currency Management",
+        "description": "Manage multiple accounts and currencies in one unified interface",
+        "category": "accounts"
+      },
+      "transfers": {
+        "title": "Transaction Management",
+        "description": "Easy transaction entry and transfer management system",
+        "category": "transactions"
+      },
+      "calendar": {
+        "title": "Dual Calendar Support",
+        "description": "Persian and Gregorian calendar support for international users",
+        "category": "settings"
+      },
+      "reports": {
+        "title": "Export & Reporting",
+        "description": "Generate and export detailed financial reports in multiple formats",
+        "category": "reports"
+      }
+    },
+    "click_to_view": "Click on any screenshot to view it in full size"
   },
   "faq": {
     "title": "Frequently Asked Questions",
