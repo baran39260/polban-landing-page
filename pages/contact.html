@@ -25,7 +25,7 @@
     </script>
 </head>
 <body>
-    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <a href="#main-content" class="skip-link" data-translate="common.skip_to_content">Skip to main content</a>
     <header>
         <nav class="container" role="navigation" aria-label="Main navigation">
             <div class="logo-container">
@@ -34,13 +34,13 @@
                 <div class="logo-text" aria-label="Polban logo">Polban</div>
             </div>
             <ul class="nav-links" id="navLinks" role="menubar">
-                <li role="none"><a href="../index.html#features" role="menuitem">Features</a></li>
-                <li role="none"><a href="../index.html#about" role="menuitem">About</a></li>
-                <li role="none"><a href="../index.html#gallery" role="menuitem">Gallery</a></li>
-                <li role="none"><a href="../index.html#faq" role="menuitem">FAQ</a></li>
-                <li role="none"><a href="contact.html" class="active" role="menuitem">Contact</a></li>
-                <li role="none"><a href="../index.html#download" role="menuitem">Download</a></li>
-                <li role="none"><a href="blog.html" role="menuitem">Blog</a></li>
+                <li role="none"><a href="../index.html#features" role="menuitem" data-translate="navigation.features">Features</a></li>
+                <li role="none"><a href="../index.html#about" role="menuitem" data-translate="navigation.about">About</a></li>
+                <li role="none"><a href="../index.html#gallery" role="menuitem" data-translate="navigation.gallery">Gallery</a></li>
+                <li role="none"><a href="../index.html#faq" role="menuitem" data-translate="navigation.faq">FAQ</a></li>
+                <li role="none"><a href="contact.html" class="active" role="menuitem" data-translate="navigation.contact">Contact</a></li>
+                <li role="none"><a href="../index.html#download" role="menuitem" data-translate="navigation.download">Download</a></li>
+                <li role="none"><a href="blog.html" role="menuitem" data-translate="navigation.blog">Blog</a></li>
             </ul>
             <div class="header-actions">
                 <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme between light and dark mode">
@@ -56,8 +56,8 @@
     <main id="main-content">
         <section class="contact-hero" aria-labelledby="contact-hero-heading">
             <div class="container">
-                <h1 id="contact-hero-heading">Contact Us</h1>
-                <p>We'd love to hear from you! Whether you have a question about our features, need help with the app, or want to share feedback, our team is ready to assist you.</p>
+                <h1 id="contact-hero-heading" data-translate="contact.hero.title">Contact Us</h1>
+                <p data-translate="contact.hero.subtitle">We'd love to hear from you! Whether you have a question about our features, need help with the app, or want to share feedback, our team is ready to assist you.</p>
             </div>
         </section>
 
@@ -65,52 +65,52 @@
             <div class="container">
                 <div class="contact-grid">
                     <div class="contact-form-section">
-                        <h2 id="contact-content-heading">Send us a Message</h2>
+                        <h2 id="contact-content-heading" data-translate="contact.form.heading">Send us a Message</h2>
                         <form id="contactForm" aria-label="Contact form">
                             <div class="form-group">
-                                <label for="name">Name <span class="required">*</span></label>
-                                <input type="text" id="name" name="name" required aria-required="true" placeholder="Your name">
+                                <label for="name"><span data-translate="contact.form.name_label">Name</span> <span class="required">*</span></label>
+                                <input type="text" id="name" name="name" required aria-required="true" data-translate="contact.form.name_placeholder" data-translate-attr="placeholder" placeholder="Your name">
                             </div>
                             <div class="form-group">
-                                <label for="email">Email <span class="required">*</span></label>
-                                <input type="email" id="email" name="email" required aria-required="true" placeholder="your.email@example.com">
+                                <label for="email"><span data-translate="contact.form.email_label">Email</span> <span class="required">*</span></label>
+                                <input type="email" id="email" name="email" required aria-required="true" data-translate="contact.form.email_placeholder" data-translate-attr="placeholder" placeholder="your.email@example.com">
                             </div>
                             <div class="form-group">
-                                <label for="subject">Subject</label>
-                                <input type="text" id="subject" name="subject" placeholder="What is this regarding?">
+                                <label for="subject" data-translate="contact.form.subject_label">Subject</label>
+                                <input type="text" id="subject" name="subject" data-translate="contact.form.subject_placeholder" data-translate-attr="placeholder" placeholder="What is this regarding?">
                             </div>
                             <div class="form-group">
-                                <label for="message">Message <span class="required">*</span></label>
-                                <textarea id="message" name="message" rows="6" required aria-required="true" placeholder="How can we help you?"></textarea>
+                                <label for="message"><span data-translate="contact.form.message_label">Message</span> <span class="required">*</span></label>
+                                <textarea id="message" name="message" rows="6" required aria-required="true" data-translate="contact.form.message_placeholder" data-translate-attr="placeholder" placeholder="How can we help you?"></textarea>
                             </div>
-                            <button type="submit" class="btn primary">Send Message</button>
+                            <button type="submit" class="btn primary" data-translate="contact.form.submit_button">Send Message</button>
                         </form>
                     </div>
                     
                     <div class="contact-info-section">
-                        <h2>Other Ways to Reach Us</h2>
-                        
+                        <h2 data-translate="contact.other_methods.heading">Other Ways to Reach Us</h2>
+
                         <div class="contact-method">
-                            <h3><i class="fas fa-paper-plane" aria-hidden="true"></i> Telegram</h3>
-                            <p>For quick responses and support, you can reach us on Telegram:</p>
+                            <h3><i class="fas fa-paper-plane" aria-hidden="true"></i> <span data-translate="contact.other_methods.telegram.title">Telegram</span></h3>
+                            <p data-translate="contact.other_methods.telegram.description">For quick responses and support, you can reach us on Telegram:</p>
                             <div class="telegram-contact">
                                 <a href="https://t.me/your_polban_support" target="_blank" rel="noopener noreferrer" class="btn secondary telegram-btn">
-                                    <i class="fab fa-telegram" aria-hidden="true"></i> Contact on Telegram
+                                    <i class="fab fa-telegram" aria-hidden="true"></i> <span data-translate="contact.other_methods.telegram.button_text">Contact on Telegram</span>
                                 </a>
-                                <p class="small">Username: @your_polban_support</p>
+                                <p class="small">Username: <span data-translate="contact.other_methods.telegram.username">@polban_support</span></p>
                             </div>
                         </div>
-                        
+
                         <div class="contact-method">
-                            <h3><i class="fas fa-envelope" aria-hidden="true"></i> Email</h3>
-                            <p>For general inquiries, you can email us at:</p>
-                            <p><a href="mailto:support@polban.com">support@polban.com</a></p>
+                            <h3><i class="fas fa-envelope" aria-hidden="true"></i> <span data-translate="contact.other_methods.email.title">Email</span></h3>
+                            <p data-translate="contact.other_methods.email.description">For general inquiries, you can email us at:</p>
+                            <p><a href="mailto:support@polban.app" data-translate="contact.other_methods.email.address">support@polban.app</a></p>
                         </div>
-                        
+
                         <div class="contact-method">
-                            <h3><i class="fas fa-comment-dots" aria-hidden="true"></i> In-App Support</h3>
-                            <p>You can also reach our support team directly from within the Polban app:</p>
-                            <ol>
+                            <h3><i class="fas fa-comment-dots" aria-hidden="true"></i> <span data-translate="contact.other_methods.in_app.title">In-App Support</span></h3>
+                            <p data-translate="contact.other_methods.in_app.description">You can also reach our support team directly from within the Polban app:</p>
+                            <ol id="in-app-steps">
                                 <li>Open the Polban app</li>
                                 <li>Go to Settings</li>
                                 <li>Select "Help & Support"</li>
@@ -124,9 +124,9 @@
         
         <section class="faq-cta" aria-labelledby="faq-cta-heading">
             <div class="container">
-                <h2 id="faq-cta-heading">Frequently Asked Questions</h2>
-                <p>Before contacting us, you might find the answer to your question in our FAQ section.</p>
-                <a href="../index.html#faq" class="btn primary">View FAQ</a>
+                <h2 id="faq-cta-heading" data-translate="contact.faq_cta.heading">Frequently Asked Questions</h2>
+                <p data-translate="contact.faq_cta.description">Before contacting us, you might find the answer to your question in our FAQ section.</p>
+                <a href="../index.html#faq" class="btn primary" data-translate="contact.faq_cta.button_text">View FAQ</a>
             </div>
         </section>
     </main>
@@ -135,10 +135,10 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 Polban. All rights reserved.</p>
+            <p data-translate="footer.copyright">&copy; 2025 Polban. All rights reserved.</p>
             <div class="footer-links">
-                <a href="privacy.html">Privacy Policy</a>
-                <a href="terms.html">Terms of Service</a>
+                <a href="privacy.html" data-translate="footer.privacy">Privacy Policy</a>
+                <a href="terms.html" data-translate="footer.terms">Terms of Service</a>
             </div>
         </div>
     </footer>
@@ -152,11 +152,22 @@
                 basePath: '../src/locales/',
                 autoCreateSwitcher: true
             });
+
+            // Handle in-app steps translation
+            document.addEventListener('languageChanged', function(e) {
+                const stepsContainer = document.getElementById('in-app-steps');
+                if (stepsContainer && window.localizationManager) {
+                    const steps = window.localizationManager.getTranslation('contact.other_methods.in_app.steps');
+                    if (steps && Array.isArray(steps)) {
+                        stepsContainer.innerHTML = steps.map(step => `<li>${step}</li>`).join('');
+                    }
+                }
+            });
         } catch (error) {
             console.error('Failed to initialize localization:', error);
         }
     }
-    
+
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', initLocalizationForPage);
     } else {

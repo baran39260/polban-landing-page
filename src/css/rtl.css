@@ -202,6 +202,8 @@
 
 [dir="rtl"] .benefit-card {
     text-align: right;
+    border-left: none;
+    border-right: 4px solid var(--primary);
 }
 
 [dir="rtl"] .benefit-card h4 {

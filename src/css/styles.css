@@ -367,7 +367,9 @@ nav {
     width: 25%; /* Adjust the width as needed */
     display: block;
     margin: 0 auto; /* Center the image */
-    animation: fadeIn 2s ease-in-out infinite; /* Apply the animation */
+    animation: dragonFlight 4s ease-in-out infinite, dragonGlow 2s ease-in-out infinite alternate;
+    filter: drop-shadow(0 0 20px rgba(219, 39, 119, 0.3));
+    transform-origin: center center;
 }
 
 
@@ -2168,26 +2170,86 @@ footer {
   box-shadow: var(--box-shadow);
   margin-bottom: 3rem;
   overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.post-card img {
+.post-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.post-card .post-image {
+  overflow: hidden;
+}
+
+.post-card .post-image img {
   width: 100%;
   height: 250px;
   object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.post-card:hover .post-image img {
+  transform: scale(1.05);
+}
+
+.post-card .post-content {
+  padding: 1.5rem;
 }
 
 .post-card h2 {
-  font-size: 2rem;
-  margin: 1.5rem;
+  font-size: 1.8rem;
+  margin: 0 0 1rem 0;
+}
+
+.post-card h2 a {
+  color: var(--primary-text);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.post-card h2 a:hover {
+  color: var(--primary);
+}
+
+.post-card .post-meta {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  color: var(--secondary-text);
+  flex-wrap: wrap;
+}
+
+.post-card .post-meta span {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.post-card .post-meta i {
+  color: var(--primary);
 }
 
 .post-card p {
   color: var(--secondary-text);
-  margin: 0 1.5rem 1.5rem;
+  margin: 0 0 1.5rem 0;
+  line-height: 1.6;
 }
 
 .post-card .btn {
-  margin: 0 1.5rem 1.5rem;
+  margin: 0;
+}
+
+.no-posts {
+  text-align: center;
+  padding: 3rem;
+  color: var(--secondary-text);
+}
+
+.no-posts p {
+  font-size: 1.2rem;
+  margin: 1rem 0;
 }
 
 .post-content {
@@ -2570,6 +2632,38 @@ footer {
   }
   to {
     opacity: 1;
+  }
+}
+
+/* Dragon Flight Animation */
+@keyframes dragonFlight {
+  0% {
+    transform: translateY(0) translateX(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-15px) translateX(-10px) rotate(-3deg);
+  }
+  50% {
+    transform: translateY(0) translateX(0) rotate(0deg);
+  }
+  75% {
+    transform: translateY(-15px) translateX(10px) rotate(3deg);
+  }
+  100% {
+    transform: translateY(0) translateX(0) rotate(0deg);
+  }
+}
+
+/* Dragon Fire Glow Effect */
+@keyframes dragonGlow {
+  0% {
+    filter: drop-shadow(0 0 20px rgba(219, 39, 119, 0.3))
+            drop-shadow(0 10px 30px rgba(236, 72, 153, 0.2));
+  }
+  100% {
+    filter: drop-shadow(0 0 40px rgba(219, 39, 119, 0.6))
+            drop-shadow(0 10px 50px rgba(236, 72, 153, 0.4))
+            drop-shadow(0 20px 60px rgba(251, 146, 60, 0.3));
   }
 }
 

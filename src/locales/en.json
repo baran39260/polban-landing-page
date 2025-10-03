@@ -341,10 +341,32 @@
       "posted_on": "Posted on",
       "by_author": "By"
     },
-    "sample_post": {
-      "title": "5 Essential Tips for Better Budgeting",
-      "description": "Learn how to create and maintain an effective budget that works for your lifestyle and financial goals."
-    },
+    "posts": [
+      {
+        "title": "5 Essential Tips for Better Budgeting",
+        "description": "Learn how to create and maintain an effective budget that works for your lifestyle and financial goals.",
+        "date": "January 5, 2025",
+        "author": "Polban Team"
+      },
+      {
+        "title": "How to Manage Your Expenses While Traveling",
+        "description": "A comprehensive guide to tracking travel expenses and managing multiple currencies when traveling abroad.",
+        "date": "December 29, 2024",
+        "author": "Polban Team"
+      },
+      {
+        "title": "Understanding Polban's Multi-Currency Features",
+        "description": "An in-depth guide on how to use Polban's multi-currency capabilities to manage international assets.",
+        "date": "December 22, 2024",
+        "author": "Polban Team"
+      },
+      {
+        "title": "Best Practices for Categorizing Financial Transactions",
+        "description": "Learn how to organize your categories and tags for better financial insights and reporting.",
+        "date": "December 15, 2024",
+        "author": "Polban Team"
+      }
+    ],
     "no_posts": "No blog posts available at the moment.",
     "coming_soon": "More articles coming soon!"
   },

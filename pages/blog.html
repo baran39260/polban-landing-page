@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl" data-theme="light">
+<html lang="en" dir="ltr" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog - Polban</title>
+    <title data-translate="blog.page_title">Blog - Polban</title>
     <link rel="stylesheet" href="../src/css/styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,14 +29,13 @@
                 <div class="logo-text" aria-label="Polban logo">Polban</div>
             </div>
             <ul class="nav-links" id="navLinks">
-                <li><a href="../index.html">Home</a></li>
-                <li><a href="../index.html#features">Features</a></li>
-                <li><a href="../index.html#about">About</a></li>
-                <li><a href="../index.html#gallery">Gallery</a></li>
-                <li><a href="../index.html#faq">FAQ</a></li>
-                <li><a href="contact.html">Contact</a></li>
-                <li><a href="../index.html#download">Download</a></li>
-                <li><a href="blog.html" class="active">Blog</a></li>
+                <li><a href="../index.html#features" data-translate="navigation.features">Features</a></li>
+                <li><a href="../index.html#about" data-translate="navigation.about">About</a></li>
+                <li><a href="../index.html#gallery" data-translate="navigation.gallery">Gallery</a></li>
+                <li><a href="../index.html#faq" data-translate="navigation.faq">FAQ</a></li>
+                <li><a href="contact.html" data-translate="navigation.contact">Contact</a></li>
+                <li><a href="../index.html#download" data-translate="navigation.download">Download</a></li>
+                <li><a href="blog.html" class="active" data-translate="navigation.blog">Blog</a></li>
             </ul>
             <div class="header-actions">
                 <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
@@ -51,27 +50,21 @@
 
     <main id="main-content">
         <section class="blog-header container">
-            <h1>Polban Blog</h1>
-            <p>Tips, articles, and updates on financial management.</p>
+            <h1 data-translate="blog.header.title">Polban Blog</h1>
+            <p data-translate="blog.header.subtitle">Tips, articles, and updates on financial management.</p>
         </section>
 
-        <section class="blog-posts container">
-            <div class="post-card">
-                <img src="../assets/images/hero-image.jpg" alt="Blog Post Image">
-                <h2><a href="post1.html">5 Tips for Better Budgeting</a></h2>
-                <p>Learn how to take control of your finances with these five simple budgeting tips that you can start using today.</p>
-                <a href="post1.html" class="btn primary">Read More</a>
-            </div>
-            <!-- More blog posts can be added here -->
+        <section class="blog-posts container" id="blog-posts-container">
+            <!-- Blog posts will be dynamically loaded here -->
         </section>
     </main>
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 Polban. All rights reserved.</p>
+            <p data-translate="footer.copyright">&copy; 2025 Polban. All rights reserved.</p>
             <div class="footer-links">
-                <a href="privacy.html">Privacy Policy</a>
-                <a href="terms.html">Terms of Service</a>
+                <a href="privacy.html" data-translate="footer.privacy">Privacy Policy</a>
+                <a href="terms.html" data-translate="footer.terms">Terms of Service</a>
             </div>
         </div>
     </footer>
@@ -85,11 +78,57 @@
                 basePath: '../src/locales/',
                 autoCreateSwitcher: true
             });
+
+            // Render blog posts
+            renderBlogPosts();
+
+            // Re-render blog posts when language changes
+            document.addEventListener('languageChanged', function(e) {
+                renderBlogPosts();
+            });
         } catch (error) {
             console.error('Failed to initialize localization:', error);
         }
     }
-    
+
+    function renderBlogPosts() {
+        const container = document.getElementById('blog-posts-container');
+        if (!container || !window.localizationManager) return;
+
+        const posts = window.localizationManager.getTranslation('blog.posts');
+        const readMoreText = window.localizationManager.getTranslation('blog.post_card.read_more');
+        const postedOnText = window.localizationManager.getTranslation('blog.post_card.posted_on');
+        const byAuthorText = window.localizationManager.getTranslation('blog.post_card.by_author');
+
+        if (posts && Array.isArray(posts) && posts.length > 0) {
+            container.innerHTML = posts.map((post, index) => `
+                <article class="post-card">
+                    <div class="post-image">
+                        <img src="../assets/images/gallery-${(index % 6) + 1}.webp" alt="${post.title}" loading="lazy">
+                    </div>
+                    <div class="post-content">
+                        <h2><a href="post${index + 1}.html">${post.title}</a></h2>
+                        <div class="post-meta">
+                            <span class="post-date"><i class="fas fa-calendar-alt"></i> ${postedOnText} ${post.date}</span>
+                            <span class="post-author"><i class="fas fa-user"></i> ${byAuthorText} ${post.author}</span>
+                        </div>
+                        <p>${post.description}</p>
+                        <a href="post${index + 1}.html" class="btn primary">${readMoreText}</a>
+                    </div>
+                </article>
+            `).join('');
+        } else {
+            const noPosts = window.localizationManager.getTranslation('blog.no_posts');
+            const comingSoon = window.localizationManager.getTranslation('blog.coming_soon');
+            container.innerHTML = `
+                <div class="no-posts">
+                    <p>${noPosts}</p>
+                    <p>${comingSoon}</p>
+                </div>
+            `;
+        }
+    }
+
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', initLocalizationForPage);
     } else {
