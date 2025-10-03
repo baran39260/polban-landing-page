@@ -7,7 +7,10 @@
       "Bash(npm install)",
       "Bash(start http://localhost:8080)",
       "Bash(powershell:*)",
-      "Bash(node:*)"
+      "Bash(node:*)",
+      "Bash(for file in contact.html post1.html privacy.html terms.html)",
+      "Bash(do sed -i 's/<div class=\"\"logo-container\"\">/<a href=\"\"..\\/index.html\"\" class=\"\"logo-container\"\">/g' \"$file\")",
+      "Bash(done)"
     ],
     "deny": [],
     "ask": []

@@ -749,41 +749,104 @@ nav {
 
 .feature-card {
   background-color: var(--primary-background);
-  padding: 2rem;
-  border-radius: var(--border-radius);
+  padding: 2.5rem;
+  border-radius: 12px;
   box-shadow: var(--box-shadow);
-  transition: transform var(--transition-speed), box-shadow var(--transition-speed);
-  border-left: 4px solid transparent;
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  transition: all var(--transition-speed) ease;
+  border: 2px solid transparent;
   opacity: 0;
   transform: translateY(20px);
-  text-align: center; /* Center content in feature cards */
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary), var(--tertiary));
+  transform: scaleX(0);
+  transition: transform var(--transition-speed) ease;
+}
+
+.feature-card:hover::before {
+  transform: scaleX(1);
 }
 
 .feature-card:hover, .feature-card:focus {
-  transform: translateY(-10px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-  outline: 2px solid var(--primary);
-  outline-offset: 2px;
+  transform: translateY(-8px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+  border-color: var(--primary);
 }
 
-.feature-card.primary { border-color: var(--primary); }
-.feature-card.secondary { border-color: var(--secondary); }
-.feature-card.tertiary { border-color: var(--tertiary); }
+.feature-card.primary {
+  background: linear-gradient(135deg, var(--primary-background) 0%, color-mix(in srgb, var(--primary) 5%, var(--primary-background)) 100%);
+}
+.feature-card.secondary {
+  background: linear-gradient(135deg, var(--primary-background) 0%, color-mix(in srgb, var(--secondary) 5%, var(--primary-background)) 100%);
+}
+.feature-card.tertiary {
+  background: linear-gradient(135deg, var(--primary-background) 0%, color-mix(in srgb, var(--tertiary) 5%, var(--primary-background)) 100%);
+}
+
+.feature-icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--tertiary));
+  box-shadow: 0 8px 16px rgba(126, 75, 184, 0.2);
+  transition: all var(--transition-speed) ease;
+}
+
+.feature-card.primary .feature-icon {
+  background: linear-gradient(135deg, var(--primary), var(--accent1));
+}
+
+.feature-card.secondary .feature-icon {
+  background: linear-gradient(135deg, var(--secondary), var(--accent3));
+}
+
+.feature-card.tertiary .feature-icon {
+  background: linear-gradient(135deg, var(--tertiary), var(--accent2));
+}
+
+.feature-icon i {
+  font-size: 2.5rem;
+  color: white;
+  transition: transform var(--transition-speed) ease;
+}
+
+.feature-card:hover .feature-icon {
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 12px 24px rgba(126, 75, 184, 0.3);
+}
+
+.feature-card:hover .feature-icon i {
+  transform: scale(1.1);
+}
 
 .feature-card h3 {
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   margin-bottom: 1rem;
   color: var(--primary-text);
-  text-align: center; /* Ensure headings are centered */
+  text-align: center;
+  font-weight: 600;
 }
 
 .feature-card p {
   color: var(--secondary-text);
   margin-bottom: 0;
-  font-size: 0.95rem;
-  line-height: 1.6;
-  text-align: center; /* Ensure paragraphs are centered */
+  font-size: 1rem;
+  line-height: 1.7;
+  text-align: center;
 }
 
 /* 8. Download Section
@@ -2151,7 +2214,7 @@ footer {
 -------------------------------------------------- */
 .blog-header {
   text-align: center;
-  padding: 5rem 1rem;
+  padding: 5rem 1rem 2rem;
   background-color: var(--secondary-background);
 }
 
@@ -2160,8 +2223,113 @@ footer {
   margin-bottom: 1rem;
 }
 
+/* Blog View Controls */
+.blog-view-controls {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  padding: 2rem 1rem 1rem;
+}
+
+.view-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: var(--primary-background);
+  border: 2px solid transparent;
+  border-radius: var(--border-radius);
+  color: var(--secondary-text);
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all var(--transition-speed) ease;
+}
+
+.view-btn i {
+  font-size: 1.2rem;
+}
+
+.view-btn:hover {
+  background: var(--secondary-background);
+  border-color: var(--primary);
+  color: var(--primary-text);
+  transform: translateY(-2px);
+}
+
+.view-btn.active {
+  background: var(--primary);
+  color: var(--on-primary);
+  border-color: var(--primary);
+}
+
+.view-btn.active:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(126, 75, 184, 0.3);
+}
+
 .blog-posts {
-  padding: 5rem 1rem;
+  padding: 1rem 1rem 5rem;
+}
+
+/* Grid View Layout */
+.blog-posts.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 2rem;
+}
+
+.blog-grid .post-card {
+  margin-bottom: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.blog-grid .post-card .post-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.blog-grid .post-card p {
+  flex: 1;
+}
+
+/* List View Layout */
+.blog-posts.blog-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.blog-list .post-card {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0;
+}
+
+.blog-list .post-card .post-image img {
+  height: 250px;
+  width: 100%;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .blog-view-controls {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .view-btn {
+    flex: 1;
+    min-width: 140px;
+    justify-content: center;
+  }
+
+  .blog-posts.blog-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .post-card {

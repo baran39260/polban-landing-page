@@ -23,11 +23,11 @@
 <body>
     <header>
         <nav class="container">
-            <div class="logo-container">
+            <a href="../index.html" class="logo-container">
                 <img src="../assets/images/logo-light.png" alt="Polban" loading="eager" width="40" height="40" class="logo-light">
                 <img src="../assets/images/logo-dark.png" alt="Polban" loading="eager" width="40" height="40" class="logo-dark">
                 <div class="logo-text" aria-label="Polban logo">Polban</div>
-            </div>
+            </a>
             <ul class="nav-links" id="navLinks">
                 <li><a href="../index.html#features" data-translate="navigation.features">Features</a></li>
                 <li><a href="../index.html#about" data-translate="navigation.about">About</a></li>
@@ -54,9 +54,23 @@
             <p data-translate="blog.header.subtitle">Tips, articles, and updates on financial management.</p>
         </section>
 
-        <section class="blog-posts container" id="blog-posts-container">
-            <!-- Blog posts will be dynamically loaded here -->
-        </section>
+        <div class="container">
+            <!-- View Toggle Controls -->
+            <div class="blog-view-controls">
+                <button class="view-btn active" id="gridViewBtn" data-view="grid" aria-label="Grid view">
+                    <i class="fas fa-th" aria-hidden="true"></i>
+                    <span data-translate="blog.view_toggle.grid">Grid View</span>
+                </button>
+                <button class="view-btn" id="listViewBtn" data-view="list" aria-label="List view">
+                    <i class="fas fa-list" aria-hidden="true"></i>
+                    <span data-translate="blog.view_toggle.list">List View</span>
+                </button>
+            </div>
+
+            <section class="blog-posts blog-grid" id="blog-posts-container">
+                <!-- Blog posts will be dynamically loaded here -->
+            </section>
+        </div>
     </main>
 
     <footer>
@@ -72,14 +86,14 @@
     <script src="../src/js/localization.js"></script>
     <script>
     // Initialize localization system for blog page
-    function initLocalizationForPage() {
+    async function initLocalizationForPage() {
         try {
-            initPolbanLocalization({
+            await initPolbanLocalization({
                 basePath: '../src/locales/',
                 autoCreateSwitcher: true
             });
 
-            // Render blog posts
+            // Render blog posts after localization is ready
             renderBlogPosts();
 
             // Re-render blog posts when language changes
@@ -100,6 +114,14 @@
         const postedOnText = window.localizationManager.getTranslation('blog.post_card.posted_on');
         const byAuthorText = window.localizationManager.getTranslation('blog.post_card.by_author');
 
+        // Map post indices to their actual blog URLs
+        const postUrls = [
+            'blog/budgeting-tips.html',
+            'blog/travel-expenses.html',
+            'blog/multi-currency-guide.html',
+            'blog/categorization-best-practices.html'
+        ];
+
         if (posts && Array.isArray(posts) && posts.length > 0) {
             container.innerHTML = posts.map((post, index) => `
                 <article class="post-card">
@@ -107,13 +129,13 @@
                         <img src="../assets/images/gallery-${(index % 6) + 1}.webp" alt="${post.title}" loading="lazy">
                     </div>
                     <div class="post-content">
-                        <h2><a href="post${index + 1}.html">${post.title}</a></h2>
+                        <h2><a href="${postUrls[index]}">${post.title}</a></h2>
                         <div class="post-meta">
                             <span class="post-date"><i class="fas fa-calendar-alt"></i> ${postedOnText} ${post.date}</span>
                             <span class="post-author"><i class="fas fa-user"></i> ${byAuthorText} ${post.author}</span>
                         </div>
                         <p>${post.description}</p>
-                        <a href="post${index + 1}.html" class="btn primary">${readMoreText}</a>
+                        <a href="${postUrls[index]}" class="btn primary">${readMoreText}</a>
                     </div>
                 </article>
             `).join('');
@@ -133,6 +155,51 @@
         document.addEventListener('DOMContentLoaded', initLocalizationForPage);
     } else {
         initLocalizationForPage();
+    }
+
+    // Blog view switching functionality
+    function initBlogViewToggle() {
+        const gridViewBtn = document.getElementById('gridViewBtn');
+        const listViewBtn = document.getElementById('listViewBtn');
+        const blogContainer = document.getElementById('blog-posts-container');
+
+        if (!gridViewBtn || !listViewBtn || !blogContainer) return;
+
+        // Load saved view preference from localStorage
+        const savedView = localStorage.getItem('blogView') || 'grid';
+        applyView(savedView);
+
+        // Add click handlers
+        gridViewBtn.addEventListener('click', function() {
+            applyView('grid');
+            localStorage.setItem('blogView', 'grid');
+        });
+
+        listViewBtn.addEventListener('click', function() {
+            applyView('list');
+            localStorage.setItem('blogView', 'list');
+        });
+
+        function applyView(view) {
+            if (view === 'grid') {
+                blogContainer.classList.remove('blog-list');
+                blogContainer.classList.add('blog-grid');
+                gridViewBtn.classList.add('active');
+                listViewBtn.classList.remove('active');
+            } else {
+                blogContainer.classList.remove('blog-grid');
+                blogContainer.classList.add('blog-list');
+                listViewBtn.classList.add('active');
+                gridViewBtn.classList.remove('active');
+            }
+        }
+    }
+
+    // Initialize view toggle after DOM is loaded
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initBlogViewToggle);
+    } else {
+        initBlogViewToggle();
     }
     </script>
     <script src="../src/js/script.js"></script>

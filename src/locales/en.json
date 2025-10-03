@@ -31,79 +31,39 @@
     "title": "Key Features of Polban",
     "multilingual": {
       "title": "Multilingual Support",
-      "description": "Full support for Persian, English, Turkish, and Arabic for a global, user-friendly experience with proper RTL layout."
-    },
-    "quick_signup": {
-      "title": "Quick Sign-Up",
-      "description": "Easy registration to start financial management instantly."
-    },
-    "unlimited_accounts": {
-      "title": "Unlimited Accounts",
-      "description": "Create and group bank accounts, wallets, and credit cards for seamless asset tracking."
-    },
-    "unlimited_categories": {
-      "title": "Unlimited Categories",
-      "description": "Define and group categories (e.g., salary, travel) for detailed transaction analysis."
-    },
-    "transaction_tagging": {
-      "title": "Transaction Tagging",
-      "description": "Add custom tags (e.g., \"project\" or \"trip\") for better tracking of expenses and incomes."
-    },
-    "dual_calendars": {
-      "title": "Persian and Gregorian Calendars",
-      "description": "Record transaction dates in both calendars simultaneously."
+      "description": "Full support for Persian, English, Turkish, and Arabic with proper RTL layout for a truly global experience."
     },
     "multi_currency": {
       "title": "Multi-Currency Management",
-      "description": "Track multi-currency transactions (e.g., Euro) with automatic conversion to the base currency (USD) for unified reporting."
+      "description": "Track transactions in multiple currencies with automatic conversion to your base currency for unified reporting."
     },
-    "transaction_types": {
-      "title": "Transaction Types",
-      "description": "Record income (positive), expense (negative), transfer, initial balance, and balance adjustment."
+    "financial_analytics": {
+      "title": "Financial Analytics",
+      "description": "Visualize your finances with advanced charts, pie graphs, and balance sheets for deep insights."
     },
-    "scheduled_transactions": {
-      "title": "Scheduled Transactions",
-      "description": "Add recurring and scheduled transactions with advanced features for automating payments and incomes."
+    "smart_automation": {
+      "title": "Smart Automation",
+      "description": "Automate recurring transactions and get intelligent suggestions based on your financial patterns."
     },
-    "smart_suggestions": {
-      "title": "Smart Transaction Suggestions",
-      "description": "Receive personalized suggestions when adding new transactions based on your financial history and patterns."
-    },
-    "financial_charts": {
-      "title": "Financial Charts",
-      "description": "Display line and bar charts for expenses, incomes, net worth, net income, and liquidity."
-    },
-    "pie_charts": {
-      "title": "Pie Charts",
-      "description": "Visualize the distribution of expenses and incomes across categories."
-    },
-    "report_storage": {
-      "title": "Report Storage",
-      "description": "Save financial charts as images or export as PDF."
-    },
-    "transaction_filters": {
-      "title": "Transaction Filters",
-      "description": "Quick filtering of transactions by date, category, tag, and currency."
-    },
-    "balance_sheet": {
-      "title": "Balance Sheet",
-      "description": "View assets, liabilities, and net worth at a glance."
-    },
-    "graphical_distribution": {
-      "title": "Graphical Distribution",
-      "description": "Visualize the distribution of tags and transaction names in expenses and incomes."
-    },
-    "transaction_analysis": {
-      "title": "Transaction Name Analysis",
-      "description": "Graphical analysis of transaction names to identify financial patterns."
-    },
-    "customization": {
-      "title": "Customization Settings",
-      "description": "Customize base currency, date format, and app appearance."
+    "unlimited_accounts": {
+      "title": "Unlimited Accounts",
+      "description": "Create unlimited bank accounts, wallets, credit cards, and categories for complete financial tracking."
     },
     "advanced_reporting": {
       "title": "Advanced Reporting",
-      "description": "Generate comprehensive reports with export options in PDF, Excel, or CSV formats."
+      "description": "Export comprehensive financial reports in PDF, Excel, or CSV formats for analysis and sharing."
+    },
+    "dual_calendars": {
+      "title": "Dual Calendar System",
+      "description": "Support for both Persian and Gregorian calendars to track transactions in your preferred date system."
+    },
+    "smart_categorization": {
+      "title": "Smart Categorization",
+      "description": "Organize transactions with unlimited custom categories and tags for detailed financial insights."
+    },
+    "secure_cloud": {
+      "title": "Secure Cloud Sync",
+      "description": "Your financial data is encrypted and safely synced across all your devices with enterprise-grade security."
     }
   },
   "cta": {
@@ -335,6 +295,10 @@
     "header": {
       "title": "Polban Blog",
       "subtitle": "Tips, articles, and updates about financial management and personal finance."
+    },
+    "view_toggle": {
+      "grid": "Grid View",
+      "list": "List View"
     },
     "post_card": {
       "read_more": "Read More",
