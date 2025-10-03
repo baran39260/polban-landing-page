@@ -78,6 +78,10 @@
                 <li role="none"><a href="pages/blog.html" role="menuitem" data-translate="navigation.blog">Blog</a></li>
             </ul>
             <div class="header-actions">
+                <button class="language-switcher" id="languageSwitcher" aria-label="Switch language">
+                    <i class="fas fa-globe" aria-hidden="true"></i>
+                    <span>EN</span>
+                </button>
                 <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme between light and dark mode">
                     <i class="fas fa-moon" aria-hidden="true"></i>
                 </button>
@@ -618,25 +622,7 @@
     </footer>
 
     <script src="src/js/localization.js"></script>
-    <script>
-    // Initialize localization system for main page
-    function initLocalizationForPage() {
-        try {
-            initPolbanLocalization({
-                basePath: './src/locales/',
-                autoCreateSwitcher: true
-            });
-        } catch (error) {
-            console.error('Failed to initialize localization:', error);
-        }
-    }
-    
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initLocalizationForPage);
-    } else {
-        initLocalizationForPage();
-    }
-    </script>
+    <script src="src/js/init-localization.js"></script>
     <script src="src/js/script.js"></script>
     
     <!-- Lightbox for gallery images -->

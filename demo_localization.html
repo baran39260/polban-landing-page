@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Polban Localization Demo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="src/css/styles.css">
+    <link rel="stylesheet" href="src/css/rtl.css">
+</head>
+<body>
+    <header>
+        <nav class="container" role="navigation" aria-label="Main navigation">
+            <div class="logo-container">
+                <div class="logo-text">Polban Demo</div>
+            </div>
+            <ul class="nav-links" id="navLinks" role="menubar">
+                <li role="none"><a href="#" role="menuitem" data-translate="navigation.features">Features</a></li>
+                <li role="none"><a href="#" role="menuitem" data-translate="navigation.about">About</a></li>
+                <li role="none"><a href="#" role="menuitem" data-translate="navigation.contact">Contact</a></li>
+            </ul>
+            <div class="header-actions">
+                <!-- Language switcher will be inserted here automatically -->
+            </div>
+        </nav>
+    </header>
+
+    <main style="padding: 3rem 0;">
+        <div class="container" style="max-width: 800px; margin: 0 auto;">
+            <h1 data-translate="hero.title">Polban - </h1>
+            <h2 data-translate="hero.subtitle">Your Personal Finance Companion</h2>
+            <p data-translate="hero.description">Transform your financial management with Polban...</p>
+
+            <div style="margin-top: 2rem; padding: 1.5rem; background: #f0f0f0; border-radius: 8px;">
+                <h3>Language Switcher Status:</h3>
+                <p id="status">Checking...</p>
+                <button onclick="checkStatus()" style="margin-top: 1rem; padding: 0.5rem 1rem; cursor: pointer;">
+                    Refresh Status
+                </button>
+            </div>
+
+            <div style="margin-top: 2rem; padding: 1.5rem; background: #e8f4f8; border-radius: 8px;">
+                <h3>Sample Translations:</h3>
+                <ul>
+                    <li><strong>Navigation Features:</strong> <span data-translate="navigation.features">Features</span></li>
+                    <li><strong>Hero Title:</strong> <span data-translate="hero.title">Polban - </span></li>
+                    <li><strong>Footer Copyright:</strong> <span data-translate="footer.copyright">© 2025 Polban</span></li>
+                </ul>
+            </div>
+
+            <div style="margin-top: 2rem; padding: 1.5rem; background: #fff3cd; border-radius: 8px;">
+                <h3>Instructions:</h3>
+                <ol>
+                    <li>Look for the language switcher button in the header (should show globe icon with "EN" or "FA")</li>
+                    <li>Click the language switcher to toggle between English and Persian</li>
+                    <li>Observe that all text with data-translate attributes changes</li>
+                    <li>Notice the page direction changes to RTL for Persian</li>
+                </ol>
+            </div>
+        </div>
+    </main>
+
+    <script src="src/js/localization.js"></script>
+    <script>
+        // Initialize localization system
+        async function initDemo() {
+            try {
+                const manager = await initPolbanLocalization({
+                    basePath: './src/locales/',
+                    autoCreateSwitcher: true
+                });
+
+                checkStatus();
+
+                // Listen for language changes
+                document.addEventListener('languageChanged', (e) => {
+                    console.log('Language changed to:', e.detail.language);
+                    checkStatus();
+                });
+            } catch (error) {
+                console.error('Initialization error:', error);
+                document.getElementById('status').innerHTML = `
+                    <span style="color: red;">❌ Error: ${error.message}</span>
+                `;
+            }
+        }
+
+        function checkStatus() {
+            const switcher = document.querySelector('.language-switcher');
+            const statusDiv = document.getElementById('status');
+
+            if (switcher) {
+                const currentLang = window.localizationManager?.getCurrentLanguage() || 'unknown';
+                const isRTL = window.localizationManager?.isCurrentRTL() || false;
+                statusDiv.innerHTML = `
+                    <span style="color: green;">✅ Language switcher is visible!</span><br>
+                    <strong>Current Language:</strong> ${currentLang.toUpperCase()}<br>
+                    <strong>Direction:</strong> ${isRTL ? 'RTL (Right-to-Left)' : 'LTR (Left-to-Right)'}<br>
+                    <strong>HTML dir attribute:</strong> ${document.documentElement.dir}<br>
+                    <strong>Elements with data-translate:</strong> ${document.querySelectorAll('[data-translate]').length}
+                `;
+            } else {
+                statusDiv.innerHTML = `
+                    <span style="color: red;">❌ Language switcher NOT found!</span><br>
+                    <em>Check browser console for errors</em>
+                `;
+            }
+        }
+
+        // Initialize when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initDemo);
+        } else {
+            initDemo();
+        }
+    </script>
+</body>
+</html>

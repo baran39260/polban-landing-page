@@ -169,7 +169,6 @@
 
 html {
   scroll-behavior: smooth;
-  direction: ltr; /* Changed to LTR for English version */
 }
 
 body {

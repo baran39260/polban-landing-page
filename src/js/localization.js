@@ -314,40 +314,55 @@ class LocalizationManager {
     }
 
     createLanguageSwitcher() {
-        console.log('🎨 Creating language switcher...');
+        console.log('🎨 Setting up language switcher...');
 
-        // Create language switcher button
-        const headerActions = document.querySelector('.header-actions');
-        if (!headerActions) {
-            console.error('❌ Header actions not found');
-            return;
+        // Find existing language switcher button
+        let languageSwitcher = document.querySelector('.language-switcher');
+
+        if (!languageSwitcher) {
+            // Create language switcher button if it doesn't exist
+            const headerActions = document.querySelector('.header-actions');
+            if (!headerActions) {
+                console.error('❌ Header actions not found');
+                return;
+            }
+
+            languageSwitcher = document.createElement('button');
+            languageSwitcher.className = 'language-switcher';
+            languageSwitcher.setAttribute('aria-label', 'Switch language');
+            languageSwitcher.innerHTML = `
+                <i class="fas fa-globe" aria-hidden="true"></i>
+                <span>${this.currentLanguage.toUpperCase()}</span>
+            `;
+
+            // Insert before theme toggle
+            headerActions.insertBefore(languageSwitcher, headerActions.firstChild);
+
+            // Add click handler only for newly created button
+            languageSwitcher.addEventListener('click', () => {
+                const newLang = this.currentLanguage === 'en' ? 'fa' : 'en';
+                console.log(`🔄 Switching language from ${this.currentLanguage} to ${newLang}`);
+                this.applyLanguage(newLang);
+            });
+        } else {
+            // Update existing button
+            const langSpan = languageSwitcher.querySelector('span');
+            if (langSpan) {
+                langSpan.textContent = this.currentLanguage.toUpperCase();
+            }
+
+            // Ensure click handler exists (add if not already present)
+            if (!languageSwitcher.hasAttribute('data-listener-attached')) {
+                languageSwitcher.setAttribute('data-listener-attached', 'true');
+                languageSwitcher.addEventListener('click', () => {
+                    const newLang = this.currentLanguage === 'en' ? 'fa' : 'en';
+                    console.log(`🔄 Switching language from ${this.currentLanguage} to ${newLang}`);
+                    this.applyLanguage(newLang);
+                });
+            }
         }
 
-        // Remove existing language switcher if any
-        const existingSwitcher = document.querySelector('.language-switcher');
-        if (existingSwitcher) {
-            existingSwitcher.remove();
-        }
-
-        const languageSwitcher = document.createElement('button');
-        languageSwitcher.className = 'language-switcher';
-        languageSwitcher.setAttribute('aria-label', 'Switch language');
-        languageSwitcher.innerHTML = `
-            <i class="fas fa-globe" aria-hidden="true"></i>
-            <span>${this.currentLanguage.toUpperCase()}</span>
-        `;
-
-        // Add click handler
-        languageSwitcher.addEventListener('click', () => {
-            const newLang = this.currentLanguage === 'en' ? 'fa' : 'en';
-            console.log(`🔄 Switching language from ${this.currentLanguage} to ${newLang}`);
-            this.applyLanguage(newLang);
-        });
-
-        // Insert before theme toggle
-        headerActions.insertBefore(languageSwitcher, headerActions.firstChild);
-
-        console.log('✅ Language switcher created');
+        console.log('✅ Language switcher ready');
     }
 
     updateLanguageSwitcher() {
