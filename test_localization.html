@@ -1,83 +1,321 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr" data-theme="light">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Localization Test - Polban</title>
-    <link rel="stylesheet" href="src/css/styles.css">
-    <link rel="stylesheet" href="src/css/rtl.css" media="screen and (dir: rtl)">
-    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&family=IRANSansX:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Polban Localization Test Suite</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&family=IRANSansX:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {margin: 0; padding: 0; box-sizing: border-box;}
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            padding: 2rem;
+            background: #f5f5f5;
+        }
+        [dir="rtl"] body {
+            font-family: 'Vazirmatn', 'IRANSansX', -apple-system, sans-serif;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {color: #7E4BB8; margin-bottom: 1rem;}
+        h2 {color: #4A5A6A; margin: 2rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid #7E4BB8;}
+        .test-controls {background: #e8f4f8; padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem;}
+        .btn {
+            background: #7E4BB8;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin: 0.5rem 0.5rem 0.5rem 0;
+            transition: all 0.3s ease;
+        }
+        .btn:hover {background: #6a3fa0; transform: translateY(-2px); box-shadow: 0 4px 8px rgba(126, 75, 184, 0.3);}
+        .btn-secondary {background: #4A5A6A;}
+        .btn-secondary:hover {background: #3a4a5a;}
+        .test-section {
+            background: #f9f9f9;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+            border-left: 4px solid #7E4BB8;
+        }
+        [dir="rtl"] .test-section {border-left: none; border-right: 4px solid #7E4BB8;}
+        .test-result {
+            font-family: 'Courier New', monospace;
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 1rem;
+            border-radius: 6px;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+        .test-result.success {border-left: 4px solid #249689;}
+        .test-result.error {border-left: 4px solid #D32F2F;}
+        [dir="rtl"] .test-result.success {border-left: none; border-right: 4px solid #249689;}
+        [dir="rtl"] .test-result.error {border-left: none; border-right: 4px solid #D32F2F;}
+        .status-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+        [dir="rtl"] .status-badge {margin-left: 0; margin-right: 0.5rem;}
+        .status-pass {background: #e6f4f1; color: #249689;}
+        .status-fail {background: #fdecea; color: #D32F2F;}
+        .status-pending {background: #fff8e1; color: #f57c00;}
+        .sample-text {padding: 1rem; margin: 0.5rem 0; background: white; border: 1px solid #ddd; border-radius: 4px;}
+        .grid {display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin: 1rem 0;}
+        .card {background: white; padding: 1rem; border-radius: 6px; border: 1px solid #e0e0e0;}
+        .card h4 {color: #7E4BB8; margin-bottom: 0.5rem;}
+        .language-indicator {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #7E4BB8;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+        [dir="rtl"] .language-indicator {right: auto; left: 20px;}
+    </style>
 </head>
 <body>
-    <div class="container" style="padding: 2rem; max-width: 800px; margin: 0 auto;">
-        <h1>Localization Test Page</h1>
-        
-        <div style="margin: 2rem 0; padding: 1rem; background: var(--card-bg); border-radius: 8px;">
-            <h2>Language Switcher Test</h2>
-            <p>Click the language switcher in the header to test the localization system.</p>
+    <div class="language-indicator" id="langIndicator">EN</div>
+
+    <div class="container">
+        <h1>🧪 Polban Localization Test Suite</h1>
+        <p>Comprehensive testing tool for the Polban localization system</p>
+
+        <div class="test-controls">
+            <h2>🎮 Test Controls</h2>
+            <button class="btn" onclick="switchLanguage('en')">
+                <i class="fas fa-flag-usa"></i> Switch to English
+            </button>
+            <button class="btn" onclick="switchLanguage('fa')">
+                <i class="fas fa-flag"></i> Switch to Persian (فارسی)
+            </button>
+            <button class="btn btn-secondary" onclick="runAllTests()">
+                <i class="fas fa-vial"></i> Run All Tests
+            </button>
+            <button class="btn btn-secondary" onclick="clearResults()">
+                <i class="fas fa-trash"></i> Clear Results
+            </button>
         </div>
-        
-        <div style="margin: 2rem 0; padding: 1rem; background: var(--card-bg); border-radius: 8px;">
-            <h2>RTL Layout Test</h2>
-            <p>When you switch to Persian (فارسی), the layout should change to right-to-left (RTL).</p>
-            <p>This text should align to the right when in RTL mode.</p>
+
+        <h2>📋 Test Sections</h2>
+
+        <!-- Test 1: Language Detection -->
+        <div class="test-section">
+            <h3>1. Language Detection Test <span class="status-badge status-pending" id="status-1">Pending</span></h3>
+            <p>Tests if the localization system correctly detects and applies language settings.</p>
+            <button class="btn btn-secondary" onclick="testLanguageDetection()">Run Test</button>
+            <div id="result-1"></div>
         </div>
-        
-        <div style="margin: 2rem 0; padding: 1rem; background: var(--card-bg); border-radius: 8px;">
-            <h2>Translation Test</h2>
-            <p>All text content should be translated when switching languages.</p>
-            <ul>
-                <li>Navigation menu items</li>
-                <li>Hero section content</li>
-                <li>Feature descriptions</li>
-                <li>FAQ questions and answers</li>
-                <li>Form validation messages</li>
-            </ul>
+
+        <!-- Test 2: Translation Keys -->
+        <div class="test-section">
+            <h3>2. Translation Keys Test <span class="status-badge status-pending" id="status-2">Pending</span></h3>
+            <p>Verifies that all translation keys are properly loaded and accessible.</p>
+            <button class="btn btn-secondary" onclick="testTranslationKeys()">Run Test</button>
+            <div id="result-2"></div>
         </div>
-        
-        <div style="margin: 2rem 0; padding: 1rem; background: var(--card-bg); border-radius: 8px;">
-            <h2>Form Test</h2>
-            <form id="testForm">
-                <div class="form-group" style="margin-bottom: 1rem;">
-                    <label for="testName">Name:</label>
-                    <input type="text" id="testName" name="name" required>
+
+        <!-- Test 3: Data-Translate Attributes -->
+        <div class="test-section">
+            <h3>3. Data-Translate Attributes Test <span class="status-badge status-pending" id="status-3">Pending</span></h3>
+            <p>Checks if data-translate attributes are being applied to DOM elements.</p>
+            <div class="grid">
+                <div class="card">
+                    <h4 data-translate="navigation.features">Features</h4>
+                    <p data-translate="navigation.about">About</p>
                 </div>
-                <div class="form-group" style="margin-bottom: 1rem;">
-                    <label for="testEmail">Email:</label>
-                    <input type="email" id="testEmail" name="email" required>
+                <div class="card">
+                    <h4 data-translate="hero.title">Polban - </h4>
+                    <p data-translate="hero.subtitle">Your Personal Finance Companion</p>
                 </div>
-                <div class="form-group" style="margin-bottom: 1rem;">
-                    <label for="testMessage">Message:</label>
-                    <textarea id="testMessage" name="message" required></textarea>
-                </div>
-                <button type="submit" class="btn primary">Submit Test Form</button>
-            </form>
+            </div>
+            <button class="btn btn-secondary" onclick="testDataTranslateAttributes()">Run Test</button>
+            <div id="result-3"></div>
+        </div>
+
+        <!-- Test 4: RTL Support -->
+        <div class="test-section">
+            <h3>4. RTL Support Test <span class="status-badge status-pending" id="status-4">Pending</span></h3>
+            <p>Tests if the page correctly switches to RTL mode for Persian language.</p>
+            <div class="sample-text" data-translate="about.description">
+                Sample text that should align based on language direction.
+            </div>
+            <button class="btn btn-secondary" onclick="testRTLSupport()">Run Test</button>
+            <div id="result-4"></div>
+        </div>
+
+        <!-- Test 5: Performance -->
+        <div class="test-section">
+            <h3>5. Performance Test <span class="status-badge status-pending" id="status-5">Pending</span></h3>
+            <p>Measures the time taken to switch languages (should be < 300ms).</p>
+            <button class="btn btn-secondary" onclick="testPerformance()">Run Test</button>
+            <div id="result-5"></div>
+        </div>
+
+        <!-- Test 6: LocalStorage -->
+        <div class="test-section">
+            <h3>6. LocalStorage Persistence Test <span class="status-badge status-pending" id="status-6">Pending</span></h3>
+            <p>Verifies that language preference is saved and retrieved from localStorage.</p>
+            <button class="btn btn-secondary" onclick="testLocalStorage()">Run Test</button>
+            <div id="result-6"></div>
         </div>
     </div>
-    
+
     <script src="src/js/localization.js"></script>
     <script>
-        // Test form submission
-        document.getElementById('testForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const messages = window.formValidationMessages || {
-                fill_required: 'Please fill in all required fields.',
-                thank_you: 'Thank you for your message!'
-            };
-            
-            const name = document.getElementById('testName').value;
-            const email = document.getElementById('testEmail').value;
-            const message = document.getElementById('testMessage').value;
-            
-            if (!name || !email || !message) {
-                alert(messages.fill_required);
-                return;
+        let manager;
+
+        async function initializeTests() {
+            try {
+                manager = await initPolbanLocalization({basePath: './src/locales/', autoCreateSwitcher: false});
+                updateLanguageIndicator();
+            } catch (error) {
+                console.error('Failed to initialize:', error);
             }
-            
-            alert(messages.thank_you);
-            this.reset();
-        });
+        }
+
+        function switchLanguage(lang) {
+            if (!manager) return;
+            manager.applyLanguage(lang);
+            updateLanguageIndicator();
+        }
+
+        function updateLanguageIndicator() {
+            if (!manager) return;
+            const indicator = document.getElementById('langIndicator');
+            const lang = manager.getCurrentLanguage();
+            indicator.textContent = lang.toUpperCase();
+            indicator.style.background = lang === 'fa' ? '#4A5A6A' : '#7E4BB8';
+        }
+
+        function setTestStatus(testId, status) {
+            const badge = document.getElementById(`status-${testId}`);
+            badge.className = `status-badge status-${status}`;
+            badge.textContent = status === 'pass' ? 'Passed' : status === 'fail' ? 'Failed' : 'Pending';
+        }
+
+        function showResult(testId, html, type = 'success') {
+            document.getElementById(`result-${testId}`).innerHTML = `<div class="test-result ${type}">${html}</div>`;
+        }
+
+        function testLanguageDetection() {
+            if (!manager) return;
+            const currentLang = manager.getCurrentLanguage();
+            const supported = manager.isLanguageSupported(currentLang);
+            const isRTL = manager.isCurrentRTL();
+            const htmlDir = document.documentElement.dir;
+            const htmlLang = document.documentElement.lang;
+            const pass = supported && htmlLang === currentLang && ((isRTL && htmlDir === 'rtl') || (!isRTL && htmlDir === 'ltr'));
+            setTestStatus(1, pass ? 'pass' : 'fail');
+            showResult(1, `<strong>Language Detection Results:</strong><br>• Current Language: ${currentLang}<br>• Is Supported: ${supported ? '✅' : '❌'}<br>• Is RTL: ${isRTL ? '✅' : '❌'}<br>• HTML lang: ${htmlLang}<br>• HTML dir: ${htmlDir}<br>• Test: ${pass ? '✅ PASSED' : '❌ FAILED'}`, pass ? 'success' : 'error');
+        }
+
+        function testTranslationKeys() {
+            if (!manager) return;
+            const testKeys = ['navigation.features', 'hero.title', 'features.multilingual.title', 'faq.title', 'footer.copyright'];
+            let results = '<strong>Translation Keys Test:</strong><br>';
+            let allPass = true;
+            testKeys.forEach(key => {
+                const translation = manager.getTranslation(key);
+                const pass = translation !== null;
+                allPass = allPass && pass;
+                results += `• ${key}: ${pass ? '✅' : '❌'} (${translation || 'NOT FOUND'})<br>`;
+            });
+            setTestStatus(2, allPass ? 'pass' : 'fail');
+            showResult(2, results + `<br>Test: ${allPass ? '✅ PASSED' : '❌ FAILED'}`, allPass ? 'success' : 'error');
+        }
+
+        function testDataTranslateAttributes() {
+            const elements = document.querySelectorAll('[data-translate]');
+            const pass = elements.length > 0;
+            let results = `<strong>Data-Translate Test:</strong><br>• Elements: ${elements.length}<br>• Sample:<br>`;
+            elements.forEach((el, i) => {
+                if (i < 5) results += `  - ${el.getAttribute('data-translate')}: "${el.textContent.substring(0, 30)}..."<br>`;
+            });
+            setTestStatus(3, pass ? 'pass' : 'fail');
+            showResult(3, results + `<br>Test: ${pass ? '✅ PASSED' : '❌ FAILED'}`, pass ? 'success' : 'error');
+        }
+
+        function testRTLSupport() {
+            if (!manager) return;
+            manager.applyLanguage('fa');
+            const faPass = manager.isCurrentRTL() && document.documentElement.dir === 'rtl';
+            manager.applyLanguage('en');
+            const enPass = !manager.isCurrentRTL() && document.documentElement.dir === 'ltr';
+            const pass = faPass && enPass;
+            setTestStatus(4, pass ? 'pass' : 'fail');
+            showResult(4, `<strong>RTL Support:</strong><br>• Persian (RTL): ${faPass ? '✅ PASSED' : '❌ FAILED'}<br>• English (LTR): ${enPass ? '✅ PASSED' : '❌ FAILED'}<br>• Test: ${pass ? '✅ PASSED' : '❌ FAILED'}`, pass ? 'success' : 'error');
+            updateLanguageIndicator();
+        }
+
+        function testPerformance() {
+            if (!manager) return;
+            let totalTime = 0;
+            for (let i = 0; i < 10; i++) {
+                const start = performance.now();
+                manager.applyLanguage(i % 2 === 0 ? 'en' : 'fa');
+                totalTime += (performance.now() - start);
+            }
+            const avgTime = totalTime / 10;
+            const pass = avgTime < 300;
+            setTestStatus(5, pass ? 'pass' : 'fail');
+            showResult(5, `<strong>Performance:</strong><br>• Average: ${avgTime.toFixed(2)}ms<br>• Threshold: 300ms<br>• Test: ${pass ? '✅ PASSED' : '❌ FAILED'}`, pass ? 'success' : 'error');
+            updateLanguageIndicator();
+        }
+
+        function testLocalStorage() {
+            if (!manager) return;
+            manager.applyLanguage('fa');
+            const savePass = localStorage.getItem('polban-language') === 'fa';
+            manager.applyLanguage('en');
+            const loadPass = manager.getCurrentLanguage() === 'en';
+            const pass = savePass && loadPass;
+            setTestStatus(6, pass ? 'pass' : 'fail');
+            showResult(6, `<strong>LocalStorage:</strong><br>• Save: ${savePass ? '✅ PASSED' : '❌ FAILED'}<br>• Load: ${loadPass ? '✅ PASSED' : '❌ FAILED'}<br>• Test: ${pass ? '✅ PASSED' : '❌ FAILED'}`, pass ? 'success' : 'error');
+            updateLanguageIndicator();
+        }
+
+        function runAllTests() {
+            setTimeout(() => testLanguageDetection(), 100);
+            setTimeout(() => testTranslationKeys(), 300);
+            setTimeout(() => testDataTranslateAttributes(), 500);
+            setTimeout(() => testRTLSupport(), 700);
+            setTimeout(() => testPerformance(), 900);
+            setTimeout(() => testLocalStorage(), 1100);
+        }
+
+        function clearResults() {
+            for (let i = 1; i <= 6; i++) {
+                document.getElementById(`result-${i}`).innerHTML = '';
+                setTestStatus(i, 'pending');
+            }
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeTests);
+        } else {
+            initializeTests();
+        }
     </script>
 </body>
 </html>

@@ -40,7 +40,38 @@ Polban is a powerful financial management application with full RTL support for 
 
 ## Development
 
-To run the project locally, simply open `index.html` in a web browser.
+To run the project locally, use a local web server to serve the files. Opening `index.html` directly in a browser won't work properly due to CORS restrictions when loading translation files.
+
+### Using the included HTTP server
+
+The project includes `http-server` as a dependency. Run:
+
+```bash
+npm install
+npm start
+```
+
+This will start a local server at `http://localhost:8080`.
+
+### Alternative: Using Python's built-in server
+
+If you have Python installed:
+
+```bash
+# Python 3
+python -m http.server 8080
+
+# Python 2
+python -m SimpleHTTPServer 8080
+```
+
+Then open `http://localhost:8080` in your browser.
+
+### Alternative: Using Node.js http-server globally
+
+```bash
+npx http-server
+```
 
 For image optimization, run:
 ```bash

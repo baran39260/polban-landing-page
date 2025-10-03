@@ -4,7 +4,8 @@
   "description": "Convert images to WebP format for Polban landing page",
   "main": "convert_to_webp.js",
   "scripts": {
-    "convert": "node convert_to_webp.js"
+    "convert": "node convert_to_webp.js",
+    "start": "http-server"
   },
   "dependencies": {
     "http-server": "^14.1.1",

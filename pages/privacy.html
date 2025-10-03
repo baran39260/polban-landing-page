@@ -1,10 +1,15 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="fa" dir="rtl" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Privacy Policy - Polban</title>
     <link rel="stylesheet" href="../src/css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&family=IRANSansX:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../src/css/rtl.css" media="screen and (dir: rtl)">
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
     <script>
@@ -82,6 +87,26 @@
         </div>
     </footer>
 
+    <script src="../src/js/localization.js"></script>
+    <script>
+    // Initialize localization system for privacy page
+    function initLocalizationForPage() {
+        try {
+            initPolbanLocalization({
+                basePath: '../src/locales/',
+                autoCreateSwitcher: true
+            });
+        } catch (error) {
+            console.error('Failed to initialize localization:', error);
+        }
+    }
+    
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initLocalizationForPage);
+    } else {
+        initLocalizationForPage();
+    }
+    </script>
     <script src="../src/js/script.js"></script>
 </body>
 </html>

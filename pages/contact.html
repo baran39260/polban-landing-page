@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en" dir="ltr" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,6 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&family=IRANSansX:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../src/css/styles.css">
+    <link rel="stylesheet" href="../src/css/rtl.css" media="screen and (dir: rtl)">
     
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
@@ -142,6 +143,26 @@
         </div>
     </footer>
 
+    <script src="../src/js/localization.js"></script>
+    <script>
+    // Initialize localization system for contact page
+    function initLocalizationForPage() {
+        try {
+            initPolbanLocalization({
+                basePath: '../src/locales/',
+                autoCreateSwitcher: true
+            });
+        } catch (error) {
+            console.error('Failed to initialize localization:', error);
+        }
+    }
+    
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initLocalizationForPage);
+    } else {
+        initLocalizationForPage();
+    }
+    </script>
     <script src="../src/js/script.js"></script>
     <script>
         // Form submission handling
