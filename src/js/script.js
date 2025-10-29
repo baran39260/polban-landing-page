@@ -250,6 +250,10 @@ document.addEventListener('DOMContentLoaded', function() {
         // Initialize carousel
         updateCarouselSlide(0);
         
+        // Initialize grid filter with default 'all' state
+        // This sets initial aria-pressed attributes
+        filterGalleryItems('all');
+        
         // Initialize image lazy loading
         initImageLazyLoading();
         
@@ -265,15 +269,23 @@ document.addEventListener('DOMContentLoaded', function() {
     // View Toggle Functionality
     function switchView(view) {
         if (currentView === view) return;
-        
+
         currentView = view;
-        
+
         // Update toggle buttons
         viewToggleBtns.forEach(btn => {
-            btn.classList.toggle('active', btn.dataset.view === view);
-            btn.setAttribute('aria-selected', btn.dataset.view === view);
+            const isActive = btn.dataset.view === view;
+            btn.classList.toggle('active', isActive);
+            btn.setAttribute('aria-selected', isActive);
+
+            // Update aria-label for better context
+            if (isActive) {
+                btn.setAttribute('aria-label', `${btn.textContent.trim()} view - Currently active`);
+            } else {
+                btn.setAttribute('aria-label', `Switch to ${btn.textContent.trim()} view`);
+            }
         });
-        
+
         // Switch views with animation
         if (view === 'carousel') {
             gridView.classList.remove('active');
@@ -286,7 +298,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 gridView.classList.add('active');
             }, 200);
         }
-        
+
         // Update accessibility
         carouselView.setAttribute('aria-hidden', view !== 'carousel');
         gridView.setAttribute('aria-hidden', view !== 'grid');
@@ -295,36 +307,44 @@ document.addEventListener('DOMContentLoaded', function() {
     // Carousel Functionality
     function updateCarouselSlide(index) {
         if (!carouselTrack || index < 0 || index >= galleryData.length) return;
-        
+
         currentCarouselSlide = index;
         const slideData = galleryData[index];
-        
+
         // Update carousel track position
         const translateX = -index * 100;
         carouselTrack.style.transform = `translateX(${translateX}%)`;
-        
+
         // Update carousel dots
         carouselDots.forEach((dot, i) => {
-            dot.classList.toggle('active', i === index);
+            const isActive = i === index;
+            dot.classList.toggle('active', isActive);
+
+            // Update ARIA selected state
+            dot.setAttribute('aria-selected', isActive ? 'true' : 'false');
+
+            // Update ARIA label with slide title
+            const slideTitle = galleryData[i]?.title || `Slide ${i + 1}`;
+            dot.setAttribute('aria-label', `${slideTitle} - Slide ${i + 1} of ${galleryData.length}`);
         });
-        
+
         // Update slides
         const slides = document.querySelectorAll('.carousel-slide');
         slides.forEach((slide, i) => {
             slide.classList.toggle('active', i === index);
         });
-        
+
         // Update feature description
         if (featureTitle && featureDescription) {
             featureTitle.textContent = slideData.title;
             featureDescription.textContent = slideData.description;
         }
-        
+
         // Update counter
         if (currentSlideSpan) {
             currentSlideSpan.textContent = index + 1;
         }
-        
+
         // Update aria-live region
         carouselTrack.setAttribute('aria-live', 'polite');
     }
@@ -342,17 +362,21 @@ document.addEventListener('DOMContentLoaded', function() {
     // Grid Filter Functionality
     function filterGalleryItems(filter) {
         currentFilter = filter;
-        
+
         // Update filter buttons
         filterBtns.forEach(btn => {
-            btn.classList.toggle('active', btn.dataset.filter === filter);
+            const isActive = btn.dataset.filter === filter;
+            btn.classList.toggle('active', isActive);
+
+            // Update ARIA pressed state
+            btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
         });
-        
+
         // Filter gallery items
         galleryItems.forEach(item => {
             const itemCategory = item.dataset.category;
             const shouldShow = filter === 'all' || itemCategory === filter;
-            
+
             if (shouldShow) {
                 item.classList.remove('filtered-out');
                 item.setAttribute('aria-hidden', 'false');
@@ -366,41 +390,99 @@ document.addEventListener('DOMContentLoaded', function() {
     // Lightbox Functionality
     function openLightbox(index) {
         if (!enhancedLightbox || index < 0 || index >= galleryData.length) return;
-        
+
         currentLightboxIndex = index;
         const slideData = galleryData[index];
-        
+
+        // Store currently focused element
+        lastFocusedElement = document.activeElement;
+
         // Show lightbox
         enhancedLightbox.classList.add('active');
         enhancedLightbox.setAttribute('aria-hidden', 'false');
         document.body.style.overflow = 'hidden';
-        
+
         // Update content
         updateLightboxContent(slideData, index);
-        
-        // Focus management
-        if (enhancedLightboxClose) {
-            enhancedLightboxClose.focus();
-        }
-        
+
         // Add keyboard listener
         document.addEventListener('keydown', handleLightboxKeydown);
+
+        // Initialize focus trap
+        addLightboxFocusTrap();
+        
+        // Focus management - move focus to first focusable element
+        // Use setTimeout to ensure DOM is updated and focus trap is initialized
+        setTimeout(() => {
+            if (lightboxFocusableElements && lightboxFocusableElements.length > 0) {
+                lightboxFocusableElements[0].focus();
+            } else if (enhancedLightboxClose) {
+                // Fallback to close button if no other focusable elements found
+                enhancedLightboxClose.focus();
+            }
+        }, 0);
     }
 
     function closeLightbox() {
         if (!enhancedLightbox) return;
-        
+
         enhancedLightbox.classList.remove('active');
         enhancedLightbox.setAttribute('aria-hidden', 'true');
         document.body.style.overflow = '';
         lightboxZoomed = false;
-        
+
         if (lightboxImage) {
             lightboxImage.classList.remove('zoomed');
         }
-        
+
         // Remove keyboard listener
         document.removeEventListener('keydown', handleLightboxKeydown);
+
+        // Return focus to last focused element
+        if (lastFocusedElement && lastFocusedElement.focus) {
+            lastFocusedElement.focus();
+            lastFocusedElement = null;
+        }
+
+        removeLightboxFocusTrap();
+    }
+
+    // Lightbox Focus Trap
+    let lightboxFocusableElements = [];
+    let lastFocusedElement = null;
+    const lightboxFocusTrapHandler = (e) => {
+        if (e.key === 'Tab') {
+            const firstElement = lightboxFocusableElements[0];
+            const lastElement = lightboxFocusableElements[lightboxFocusableElements.length - 1];
+
+            if (e.shiftKey && document.activeElement === firstElement) {
+                e.preventDefault();
+                lastElement.focus();
+            } else if (!e.shiftKey && document.activeElement === lastElement) {
+                e.preventDefault();
+                firstElement.focus();
+            }
+        }
+    };
+
+    function addLightboxFocusTrap() {
+        if (!enhancedLightbox) return;
+
+        lightboxFocusableElements = Array.from(
+            enhancedLightbox.querySelectorAll(
+                'button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+            )
+        );
+
+        if (lightboxFocusableElements.length > 0) {
+            enhancedLightbox.addEventListener('keydown', lightboxFocusTrapHandler);
+        }
+    }
+
+    function removeLightboxFocusTrap() {
+        if (enhancedLightbox) {
+            enhancedLightbox.removeEventListener('keydown', lightboxFocusTrapHandler);
+        }
     }
 
     function updateLightboxContent(slideData, index) {
@@ -523,12 +605,28 @@ document.addEventListener('DOMContentLoaded', function() {
             dot.addEventListener('click', () => {
                 updateCarouselSlide(index);
             });
+
+            // Add keyboard support
+            dot.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    updateCarouselSlide(index);
+                }
+            });
         });
         
         // Grid Filters
         filterBtns.forEach(btn => {
             btn.addEventListener('click', () => {
                 filterGalleryItems(btn.dataset.filter);
+            });
+
+            // Add keyboard support
+            btn.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    filterGalleryItems(btn.dataset.filter);
+                }
             });
         });
         
@@ -561,6 +659,14 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         if (lightboxOverlay) {
             lightboxOverlay.addEventListener('click', closeLightbox);
+            
+            // Add keyboard activation for overlay
+            lightboxOverlay.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    closeLightbox();
+                }
+            });
         }
         if (enhancedLightboxPrev) {
             enhancedLightboxPrev.addEventListener('click', prevLightboxImage);
@@ -840,9 +946,13 @@ document.addEventListener('DOMContentLoaded', function() {
         if (theme === 'dark') {
             themeIcon.classList.remove('fa-moon');
             themeIcon.classList.add('fa-sun');
+            themeToggle.setAttribute('aria-label', 'Switch to light mode. Current theme: dark mode');
+            themeToggle.setAttribute('aria-pressed', 'true');
         } else {
             themeIcon.classList.remove('fa-sun');
             themeIcon.classList.add('fa-moon');
+            themeToggle.setAttribute('aria-label', 'Switch to dark mode. Current theme: light mode');
+            themeToggle.setAttribute('aria-pressed', 'false');
         }
     };
 
@@ -864,15 +974,42 @@ document.addEventListener('DOMContentLoaded', function() {
         localStorage.setItem('theme', newTheme);
     });
 
+    // Update language switcher ARIA
+    function updateLanguageSwitcherARIA(currentLang) {
+        const languageSwitcher = document.getElementById('languageSwitcher');
+        if (!languageSwitcher) return;
+
+        const langNames = {
+            'en': 'English',
+            'fa': 'Persian (فارسی)'
+        };
+
+        const currentLangName = langNames[currentLang] || currentLang.toUpperCase();
+        const nextLang = currentLang === 'en' ? 'fa' : 'en';
+        const nextLangName = langNames[nextLang];
+
+        languageSwitcher.setAttribute(
+            'aria-label',
+            `Switch language to ${nextLangName}. Current language: ${currentLangName}`
+        );
+    }
+
     // Hamburger menu event listener with enhanced animation
     hamburger.addEventListener('click', () => {
         // Toggle aria-expanded for accessibility
         const isExpanded = hamburger.getAttribute('aria-expanded') === 'true';
         hamburger.setAttribute('aria-expanded', !isExpanded);
-        
+
+        // Update aria-label
+        if (!isExpanded) {
+            hamburger.setAttribute('aria-label', 'Close navigation menu');
+        } else {
+            hamburger.setAttribute('aria-label', 'Open navigation menu');
+        }
+
         // Add animation classes
         navLinks.classList.toggle('active');
-        
+
         if (navLinks.classList.contains('active')) {
             // When opening
             navLinks.style.display = 'flex';
@@ -891,11 +1028,29 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }, 300);
             removeFocusTrap();
+            hamburger.focus(); // Return focus to hamburger
         }
     });
 
     let focusableElements = [];
     const focusTrapHandler = (e) => {
+        if (e.key === 'Escape') {
+            // Close mobile menu
+            navLinks.classList.remove('active');
+            navLinks.style.transform = 'translateY(-10px)';
+            navLinks.style.opacity = '0';
+            setTimeout(() => {
+                if (!navLinks.classList.contains('active')) {
+                    navLinks.style.display = 'none';
+                }
+            }, 300);
+            hamburger.setAttribute('aria-expanded', 'false');
+            hamburger.setAttribute('aria-label', 'Open navigation menu');
+            removeFocusTrap();
+            hamburger.focus(); // Return focus to hamburger
+            return;
+        }
+
         if (e.key === 'Tab') {
             const firstElement = focusableElements[0];
             const lastElement = focusableElements[focusableElements.length - 1];
@@ -1090,13 +1245,23 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function showError(input, message) {
         input.classList.add('error');
+
+        // Generate unique ID for error message
+        const errorId = `${input.id}-error`;
+
         const error = document.createElement('div');
         error.className = 'error-message';
+        error.id = errorId;
+        error.setAttribute('role', 'alert'); // Announce to screen readers
         error.style.color = 'var(--error)';
         error.style.fontSize = '0.875rem';
         error.style.marginTop = '0.25rem';
         error.textContent = message;
         input.parentNode.insertBefore(error, input.nextSibling);
+
+        // Link error message to input
+        input.setAttribute('aria-describedby', errorId);
+        input.setAttribute('aria-invalid', 'true');
     }
 
     // Lazy load images

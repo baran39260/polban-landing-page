@@ -13,7 +13,7 @@
   --secondary: #4A5A6A; /* Increased contrast from #50606F */
   --tertiary: #255A7D; /* Increased contrast from #29638A */
   --primary-text: #000000;
-  --secondary-text: #4A5A6A; /* Increased contrast from #57636C */
+  --secondary-text: #3D4A59; /* Darker for better contrast */
   --primary-background: #F1F4F8;
   --secondary-background: #ededed;
   --accent1: #4B39EF;
@@ -119,9 +119,10 @@
 /* Mobile Language Switcher */
 @media (max-width: 768px) {
     .language-switcher {
-        padding: 0.4rem 0.8rem;
+        padding: 0.5rem 0.8rem;
         font-size: 0.8rem;
         margin-right: 0.5rem;
+        min-height: 32px;
     }
 
     [dir="rtl"] .language-switcher {
@@ -223,8 +224,13 @@ a {
 
 a:hover, a:focus {
   color: var(--tertiary);
-  outline: 2px solid var(--primary);
-  outline-offset: 2px;
+}
+
+a:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 4px;
+  box-shadow: 0 0 0 1px white,
+              0 0 0 6px color-mix(in srgb, var(--primary) 30%, transparent);
 }
 
 ul {
@@ -318,15 +324,23 @@ nav {
   transition: background-color var(--transition-speed);
 }
 
-.nav-links a:hover, .nav-links a:focus, .nav-links a.active {
+.nav-links a:hover {
   background-color: rgba(151, 89, 196, 0.1);
   color: var(--primary);
-  outline: 2px solid var(--primary);
-  outline-offset: -2px;
+}
+
+.nav-links a:focus-visible {
+  background-color: rgba(151, 89, 196, 0.1);
+  color: var(--primary);
+  outline: 3px solid var(--primary);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 1px var(--primary-background),
+              0 0 0 5px color-mix(in srgb, var(--primary) 30%, transparent);
 }
 
 .nav-links a.active {
   font-weight: 700;
+  background-color: rgba(151, 89, 196, 0.15);
 }
 
 .header-actions {
@@ -344,17 +358,23 @@ nav {
   padding: 0.5rem;
   border-radius: var(--border-radius);
   transition: background-color var(--transition-speed);
-  width: 40px;
-  height: 40px;
-  display: flex;
+  min-width: 40px;
+  min-height: 40px;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
 }
 
 .theme-toggle:hover, .theme-toggle:focus, .hamburger:hover, .hamburger:focus {
   background-color: rgba(151, 89, 196, 0.1);
-  outline: 2px solid var(--primary);
-  outline-offset: -2px;
+}
+
+/* Keyboard-only focus indicators for header controls */
+.theme-toggle:focus-visible, .hamburger:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 4px;
+  box-shadow: 0 0 0 1px white,
+              0 0 0 6px color-mix(in srgb, var(--primary) 30%, transparent);
 }
 
 /* Hamburger menu for mobile */
@@ -375,7 +395,7 @@ nav {
 
 @media (max-width: 768px) {
   .hamburger {
-    display: flex;
+    display: inline-flex;
   }
   
   .nav-links {
@@ -512,10 +532,6 @@ nav {
 @media (max-width: 768px) {
   .static-text {
     display: none;
-  }
-  
-  #hero-heading {
-    font-size: 2.5rem;
   }
   
   /* Adjust font size for typing text on mobile */
@@ -722,6 +738,36 @@ nav {
   box-shadow: 0 6px 12px rgba(37, 90, 125, 0.3);
   outline: 2px solid var(--tertiary);
   outline-offset: 2px;
+}
+
+/* Enhanced focus for buttons */
+.btn:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 4px;
+  box-shadow: 0 0 0 1px white,
+              0 0 0 6px color-mix(in srgb, var(--primary) 40%, transparent),
+              0 6px 12px rgba(126, 75, 184, 0.3); /* Keep existing shadow */
+}
+
+.btn.primary:focus-visible {
+  outline-color: var(--primary);
+  box-shadow: 0 0 0 1px white,
+              0 0 0 6px color-mix(in srgb, var(--primary) 40%, transparent),
+              0 6px 12px rgba(126, 75, 184, 0.3);
+}
+
+.btn.secondary:focus-visible {
+  outline-color: var(--secondary);
+  box-shadow: 0 0 0 1px white,
+              0 0 0 6px color-mix(in srgb, var(--secondary) 40%, transparent),
+              0 6px 12px rgba(74, 90, 106, 0.3);
+}
+
+.btn.tertiary:focus-visible {
+  outline-color: var(--tertiary);
+  box-shadow: 0 0 0 1px white,
+              0 0 0 6px color-mix(in srgb, var(--tertiary) 40%, transparent),
+              0 6px 12px rgba(37, 90, 125, 0.3);
 }
 
 /* 7. Features Section
@@ -982,6 +1028,7 @@ nav {
     text-decoration: none; /* Ensure links are styled as buttons */
     animation: fadeInUp 1s ease-out forwards;
     animation-delay: calc(var(--delay, 0) * 0.2s);
+    position: relative;
 }
 
 .btn-download:hover, .btn-download:focus {
@@ -992,15 +1039,70 @@ nav {
     outline-offset: 2px;
 }
 
+/* Enhanced focus for download buttons */
+.btn-download:focus-visible {
+    outline: 3px solid var(--primary);
+    outline-offset: 4px;
+    box-shadow: 0 0 0 1px white,
+                0 0 0 6px color-mix(in srgb, var(--primary) 40%, transparent),
+                0 8px 20px rgba(0, 0, 0, 0.12); /* Keep existing shadow */
+    transform: translateY(-5px);
+}
+
 .btn-download.disabled {
-    opacity: 0.6;
     cursor: not-allowed;
-    pointer-events: none;
+    background-color: var(--secondary-background);
+    color: var(--secondary-text);
+    border-color: rgba(0, 0, 0, 0.2);
+    opacity: 0.6;
+    filter: grayscale(30%);
+}
+
+/* Disabled state for [disabled] attribute (allows tooltips) */
+.btn-download[disabled] {
+    cursor: not-allowed;
+    background-color: var(--secondary-background);
+    color: var(--secondary-text);
+    border-color: rgba(0, 0, 0, 0.2);
+    opacity: 0.6;
+    filter: grayscale(30%);
 }
 
 .btn-download.disabled:hover {
     transform: translateY(0);
     box-shadow: var(--box-shadow);
+}
+
+/* Override generic hover/focus styles for class-based disabled buttons */
+.btn-download.disabled:hover, 
+.btn-download.disabled:focus, 
+.btn-download.disabled:focus-visible {
+    transform: translateY(0);
+    box-shadow: var(--box-shadow);
+    outline: none;
+    border-color: var(--border-color, rgba(0,0,0,0.1));
+}
+
+.btn-download[disabled]:hover {
+    transform: translateY(0);
+    box-shadow: var(--box-shadow);
+}
+
+/* Override generic hover/focus styles for disabled buttons */
+.btn-download[disabled]:hover, 
+.btn-download[disabled]:focus, 
+.btn-download[disabled]:focus-visible {
+    transform: translateY(0);
+    box-shadow: var(--box-shadow);
+    outline: none;
+    border-color: var(--border-color, rgba(0,0,0,0.1));
+}
+
+.btn-download.disabled:hover .tooltip,
+.btn-download[disabled]:hover .tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(-4px);
 }
 
 .btn-download i {
@@ -1009,6 +1111,10 @@ nav {
 }
 
 .btn-download.disabled i {
+    color: var(--secondary-text);
+}
+
+.btn-download[disabled] i {
     color: var(--secondary-text);
 }
 
@@ -1025,11 +1131,62 @@ nav {
     margin-top: 0.25rem;
 }
 
+.badge.coming-soon {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-left: 0.5rem;
+    vertical-align: middle;
+    background-color: rgba(255, 193, 7, 0.2);
+    color: #F57C00;
+    border: 1px solid rgba(255, 193, 7, 0.4);
+    animation: badgePulse 2s ease-in-out infinite;
+}
+
+.tooltip {
+    position: absolute;
+    bottom: calc(100% + 12px);
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
+    pointer-events: none;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: rgba(0, 0, 0, 0.9);
+}
+
+.btn-download:hover .tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(-4px);
+}
+
 /* 8. About Section
 -------------------------------------------------- */
 .about {
   padding: 6rem 1rem;
-  background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%239C92AC' fill-opacity='0.1' fill-rule='evenodd'%3E%3Cpath d='M3 0h1v20H3V0zm14 0h1v20h-1V0zM0 3h20v1H0V3zm0 14h20v1H0v-1z'/%3E%3C/g%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%239C92AC' fill-opacity='0.1' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
   margin: 0;
 }
 
@@ -1125,7 +1282,7 @@ form {
 .form-group textarea {
   width: 100%;
   padding: 0.8rem;
-  border: 1px solid var(--secondary-text);
+  border: 2px solid var(--secondary-text);
   border-radius: var(--border-radius);
   font-size: 1rem;
   background-color: var(--primary-background);
@@ -1135,9 +1292,11 @@ form {
 
 .form-group input:focus,
 .form-group textarea:focus {
-  outline: none;
+  outline: 3px solid var(--primary);
+  outline-offset: 2px;
   border-color: var(--primary);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 25%, transparent);
+  box-shadow: 0 0 0 1px var(--primary-background),
+              0 0 0 4px color-mix(in srgb, var(--primary) 25%, transparent);
 }
 
 .form-group input.error,
@@ -1263,27 +1422,6 @@ form {
     color: var(--secondary-text);
 }
 
-.faq-cta {
-    padding: 5rem 1rem;
-    text-align: center;
-    background-color: var(--secondary-background);
-    margin-top: 3rem;
-    border-radius: var(--border-radius);
-}
-
-.faq-cta h2 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-    color: var(--primary);
-}
-
-.faq-cta p {
-    font-size: 1.1rem;
-    max-width: 600px;
-    margin: 0 auto 2rem;
-    color: var(--secondary-text);
-}
-
 .required {
     color: var(--error);
 }
@@ -1335,6 +1473,15 @@ footer {
   background-color: #6A3D9A;
   outline: 2px solid var(--primary);
   outline-offset: 2px;
+}
+
+/* Enhanced focus for back-to-top button */
+.back-to-top:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 4px;
+  box-shadow: 0 0 0 1px white,
+              0 0 0 6px color-mix(in srgb, var(--primary) 40%, transparent);
+  background-color: #6A3D9A;
 }
 
 /* 12. Enhanced Gallery Section with Carousel and Grid Views
@@ -1398,6 +1545,8 @@ footer {
   font-weight: 500;
   position: relative;
   overflow: hidden;
+  min-height: 40px;
+  min-width: 100px;
 }
 
 .view-toggle-btn.active {
@@ -1409,6 +1558,20 @@ footer {
 .view-toggle-btn:not(.active):hover {
   background: rgba(151, 89, 196, 0.1);
   color: var(--primary);
+}
+
+.view-toggle-btn:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 1px var(--primary-background),
+              0 0 0 5px color-mix(in srgb, var(--primary) 30%, transparent);
+}
+
+.view-toggle-btn.active:focus-visible {
+  outline-color: white;
+  box-shadow: 0 0 0 1px var(--primary),
+              0 0 0 5px rgba(255, 255, 255, 0.4),
+              0 4px 12px rgba(151, 89, 196, 0.3);
 }
 
 .view-toggle-btn i {
@@ -1577,6 +1740,14 @@ footer {
   box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
 }
 
+.carousel-btn:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 1px white,
+              0 0 0 6px color-mix(in srgb, var(--primary) 40%, transparent),
+              0 6px 25px rgba(0, 0, 0, 0.3);
+}
+
 .carousel-btn.prev {
   left: -25px;
 }
@@ -1594,23 +1765,33 @@ footer {
 }
 
 .carousel-dot {
-  width: 12px;
-  height: 12px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
   border: none;
   background: rgba(151, 89, 196, 0.3);
   cursor: pointer;
   transition: all var(--transition-speed);
+  padding: 0;
+  min-width: 24px;
+  min-height: 24px;
 }
 
 .carousel-dot.active {
   background: var(--primary);
-  transform: scale(1.2);
+  transform: scale(1.15);
 }
 
 .carousel-dot:not(.active):hover {
   background: rgba(151, 89, 196, 0.6);
   transform: scale(1.1);
+}
+
+.carousel-dot:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 1px var(--primary-background),
+              0 0 0 5px color-mix(in srgb, var(--primary) 30%, transparent);
 }
 
 .carousel-hint {
@@ -1644,6 +1825,8 @@ footer {
   font-weight: 500;
   position: relative;
   overflow: hidden;
+  min-height: 40px;
+  min-width: 80px;
 }
 
 .filter-btn.active {
@@ -1657,6 +1840,20 @@ footer {
   background: rgba(151, 89, 196, 0.1);
   color: var(--primary);
   border-color: var(--primary);
+}
+
+.filter-btn:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 1px var(--primary-background),
+              0 0 0 5px color-mix(in srgb, var(--primary) 30%, transparent);
+}
+
+.filter-btn.active:focus-visible {
+  outline-color: white;
+  box-shadow: 0 0 0 1px var(--primary),
+              0 0 0 5px rgba(255, 255, 255, 0.4),
+              0 4px 15px rgba(151, 89, 196, 0.3);
 }
 
 /* Gallery Grid */
@@ -1683,6 +1880,15 @@ footer {
 .gallery-item:hover {
   transform: translateY(-8px) scale(1.02);
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+.gallery-item:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 4px;
+  box-shadow: 0 0 0 1px var(--primary-background),
+              0 0 0 6px color-mix(in srgb, var(--primary) 30%, transparent),
+              0 15px 35px rgba(0, 0, 0, 0.15);
+  transform: translateY(-8px) scale(1.02);
 }
 
 .gallery-item.filtered-out {
@@ -1883,6 +2089,15 @@ footer {
   color: var(--primary);
 }
 
+.lightbox-btn:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 1px var(--primary-background),
+              0 0 0 5px color-mix(in srgb, var(--primary) 30%, transparent);
+  background: rgba(151, 89, 196, 0.1);
+  color: var(--primary);
+}
+
 .lightbox-content {
   position: relative;
   display: flex;
@@ -1908,6 +2123,15 @@ footer {
 }
 
 .lightbox-nav:hover {
+  background: rgba(0, 0, 0, 0.8);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.lightbox-nav:focus-visible {
+  outline: 3px solid white;
+  outline-offset: 3px;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.8),
+              0 0 0 6px rgba(255, 255, 255, 0.4);
   background: rgba(0, 0, 0, 0.8);
   transform: translateY(-50%) scale(1.1);
 }
@@ -2049,6 +2273,7 @@ footer {
   .filter-btn {
     padding: 0.6rem 1.2rem;
     font-size: 0.9rem;
+    min-height: 36px;
   }
   
   .gallery-grid {
@@ -2139,7 +2364,8 @@ footer {
   .carousel-track,
   .gallery-item,
   .lightbox-container,
-  .gallery-placeholder::before {
+  .gallery-placeholder::before,
+  .badge.coming-soon {
     transition: none !important;
     animation: none !important;
   }
@@ -2149,7 +2375,7 @@ footer {
 -------------------------------------------------- */
 .faq {
   padding: 6rem 1rem;
-  background: linear-gradient(180deg, var(--primary-background) 0%, color-mix(in srgb, var(--primary-background) 95%, white) 100%);
+  background: linear-gradient(180deg, var(--secondary-background) 0%, color-mix(in srgb, var(--secondary-background) 95%, white) 100%);
   opacity: 0;
   transform: translateY(30px);
   margin: 0;
@@ -2193,6 +2419,15 @@ footer {
   border-radius: var(--border-radius);
   outline: 2px solid var(--primary);
   outline-offset: -2px;
+}
+
+.faq-accordion summary:focus-visible {
+  background-color: rgba(151, 89, 196, 0.1);
+  border-radius: var(--border-radius);
+  outline: 3px solid var(--primary);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 1px var(--primary-background),
+              0 0 0 5px color-mix(in srgb, var(--primary) 30%, transparent);
 }
 
 .faq-accordion summary::after {
@@ -2538,21 +2773,8 @@ footer {
         font-size: 1.1rem;
     }
 
-    .hamburger {
-        display: flex;
-    }
-    
-    .header-actions {
-        gap: 0.5rem;
-    }
-    
-    .logo-text {
-        font-size: 1.5rem;
-    }
-    
-    .logo-svg {
-        width: 32px;
-        height: 32px;
+    .nav-links a:hover, .nav-links a:focus {
+        border-radius: var(--border-radius);
     }
 }
 
@@ -2648,11 +2870,11 @@ footer {
   }
 
   .feature-grid {
-    grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
   
   .testimonial-grid {
-    grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
   
   .btn {
@@ -2671,7 +2893,21 @@ footer {
     flex-direction: column;
     align-items: center;
   }
-  
+
+  .badge.coming-soon {
+    font-size: 0.65rem;
+    padding: 0.2rem 0.6rem;
+    margin-left: 0.3rem;
+  }
+
+  .btn-download .tooltip {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.8rem;
+    max-width: 200px;
+    white-space: normal;
+    text-align: center;
+  }
+
   .faq-accordion {
     padding: 0 1rem;
   }
@@ -2682,15 +2918,15 @@ footer {
   .hero {
     padding-top: 4rem;
   }
-  
+
   .hero .container {
     padding: 0 0.5rem;
   }
-  
+
   .hero-content h1 {
     font-size: 2rem;
   }
-  
+
   .hero-subheading {
     font-size: 1rem;
   }
@@ -2704,20 +2940,29 @@ footer {
     width: 100%;
     max-width: 320px;
   }
-  
+
   .btn-download {
     width: 100%;
     max-width: 320px;
   }
-  
+
+  .btn-download .tooltip {
+    bottom: calc(100% + 8px);
+  }
+
+  .tooltip::after {
+    border: 5px solid transparent;
+    border-top-color: rgba(0, 0, 0, 0.9);
+  }
+
   h1 {
     font-size: 2rem;
   }
-  
+
   h2 {
     font-size: 1.75rem;
   }
-  
+
   .features, .cta-section, .download, .testimonials, .faq, .about, .contact {
     padding: 4rem 1rem;
   }
@@ -2727,17 +2972,30 @@ footer {
 -------------------------------------------------- */
 /* Add a visible focus style for keyboard users */
 :focus {
-  outline: 2px solid var(--primary);
-  outline-offset: 2px;
+  outline: 3px solid var(--primary);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 1px var(--primary-background),
+              0 0 0 5px color-mix(in srgb, var(--primary) 30%, transparent);
 }
 
-:focus:not(:focus-visible) {
-  outline: none;
-}
-
+/* Enhanced focus-visible for keyboard navigation with animation */
 :focus-visible {
-  outline: 2px solid var(--primary);
-  outline-offset: 2px;
+  outline: 3px solid var(--primary);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 1px var(--primary-background),
+              0 0 0 5px color-mix(in srgb, var(--primary) 30%, transparent);
+  animation: focusPulse 0.3s ease-out;
+}
+
+@keyframes focusPulse {
+  0% {
+    box-shadow: 0 0 0 1px var(--primary-background),
+                0 0 0 3px color-mix(in srgb, var(--primary) 30%, transparent);
+  }
+  100% {
+    box-shadow: 0 0 0 1px var(--primary-background),
+                0 0 0 5px color-mix(in srgb, var(--primary) 30%, transparent);
+  }
 }
 
 /* Skip to content link */
@@ -2880,6 +3138,17 @@ footer {
   }
 }
 
+@keyframes badgePulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
 /* Lightbox Styles */
 .lightbox {
   display: none;
@@ -3004,5 +3273,52 @@ footer {
     width: 40px;
     height: 40px;
   }
-  
+}
+
+/* Dark theme focus overrides */
+[data-theme="dark"] :focus-visible {
+  outline-color: #D4B0F0;
+  box-shadow: 0 0 0 1px #1A1F24,
+              0 0 0 5px rgba(212, 176, 240, 0.4);
+}
+
+[data-theme="dark"] .btn:focus-visible,
+[data-theme="dark"] .view-toggle-btn:focus-visible,
+[data-theme="dark"] .filter-btn:focus-visible,
+[data-theme="dark"] .back-to-top:focus-visible {
+  outline-color: #D4B0F0;
+  box-shadow: 0 0 0 1px #1A1F24,
+              0 0 0 6px rgba(212, 176, 240, 0.4);
+}
+
+/* Preserve transform and shadow for download buttons in dark theme */
+[data-theme="dark"] .btn-download:focus-visible {
+  outline-color: #D4B0F0;
+  box-shadow: 0 0 0 1px #1A1F24,
+              0 0 0 6px rgba(212, 176, 240, 0.4),
+              0 8px 20px rgba(0, 0, 0, 0.12);
+  transform: translateY(-5px);
+}
+
+/* Override disabled button hover/focus in dark theme */
+[data-theme="dark"] .btn-download.disabled:hover,
+[data-theme="dark"] .btn-download.disabled:focus,
+[data-theme="dark"] .btn-download.disabled:focus-visible,
+[data-theme="dark"] .btn-download[disabled]:hover,
+[data-theme="dark"] .btn-download[disabled]:focus,
+[data-theme="dark"] .btn-download[disabled]:focus-visible {
+  transform: translateY(0);
+  box-shadow: var(--box-shadow);
+  outline: none;
+  border-color: var(--border-color, rgba(255,255,255,0.1));
+}
+
+[data-theme="dark"] a {
+  color: #D4B0F0;
+}
+
+[data-theme="dark"] .badge.coming-soon {
+  background-color: rgba(255, 193, 7, 0.15);
+  color: #FFB74D;
+  border-color: rgba(255, 193, 7, 0.3);
 }

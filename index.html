@@ -2,22 +2,24 @@
 <html lang="en" dir="ltr" data-theme="light">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' https://cdnjs.cloudflare.com https://fonts.googleapis.com; font-src 'self' https://cdnjs.cloudflare.com https://fonts.gstatic.com; script-src 'self'; img-src 'self' data:; connect-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' https://cdnjs.cloudflare.com https://fonts.googleapis.com; font-src 'self' https://cdnjs.cloudflare.com https://fonts.gstatic.com; script-src 'self' https://www.googletagmanager.com; img-src 'self' data: https://www.google-analytics.com; connect-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com https://www.google-analytics.com;">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Polban - Multilingual Financial Management App</title>
     <meta name="description" content="Polban is a powerful financial management application with full RTL support for Persian, Arabic, English, and Turkish. Track transactions, manage multi-currency accounts, generate financial reports, and automate recurring payments.">
     <meta name="keywords" content="financial management, multilingual, RTL, Persian, Arabic, English, Turkish, Flutter, Supabase, multi-currency, financial tracking, budgeting app">
     <meta property="og:title" content="Polban - Multilingual Financial Management App">
     <meta property="og:description" content="Polban is a powerful financial management application with full RTL support for Persian, Arabic, English, and Turkish. Track transactions, manage multi-currency accounts, generate financial reports, and automate recurring payments.">
-    <meta property="og:image" content="https://images.unsplash.com/photo-1554224155-6726b3ff858f?q=80&w=2511&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
-    <meta property="og:url" content="https://your-domain.com">
-    <link rel="canonical" href="https://your-domain.com" />
+    <meta property="og:image" content="https://polban.app/assets/images/screen.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:url" content="https://polban.app">
+    <link rel="canonical" href="https://polban.app" />
     <meta name="twitter:card" content="summary_large_image">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&family=IRANSansX:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
     <link rel="stylesheet" href="src/css/styles.css">
     <link rel="stylesheet" href="src/css/rtl.css" media="screen and (dir: rtl)">
     <script type="application/ld+json">
@@ -28,7 +30,7 @@
       "applicationCategory": "FinanceApplication",
       "operatingSystem": "Windows, Android, iOS",
       "description": "Polban is a powerful financial management application designed for multilingual users with full RTL support for Persian and Arabic speakers.",
-      "url": "https://your-domain.com",
+      "url": "https://polban.app",
       "logo": "assets/images/logo-light.png",
       "offers": {
         "@type": "Offer",
@@ -49,23 +51,26 @@
       ]
     }
     </script>
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-XXXXXXXXXX');
-    </script>
 </head>
 <body>
     <a href="#main-content" class="skip-link" data-translate="common.skip_to_content">Skip to main content</a>
     <header>
         <nav class="container" role="navigation" aria-label="Main navigation">
             <div class="logo-container">
-                <img src="assets/images/logo-light.png" alt="Polban" loading="eager" width="40" height="40" class="logo-light">
-                <img src="assets/images/logo-dark.png" alt="Polban" loading="eager" width="40" height="40" class="logo-dark">
+                <img src="assets/images/logo-light.png" 
+     alt="Polban" 
+     loading="eager" 
+     decoding="async"
+     width="200" 
+     height="60"
+     class="logo-light">
+                <img src="assets/images/logo-dark.png" 
+     alt="Polban" 
+     loading="eager" 
+     decoding="async"
+     width="200" 
+     height="60"
+     class="logo-dark">
                 <div class="logo-text" aria-label="Polban logo">Polban</div>
             </div>
             <ul class="nav-links" id="navLinks" role="menubar">
@@ -78,14 +83,18 @@
                 <li role="none"><a href="pages/blog.html" role="menuitem" data-translate="navigation.blog">Blog</a></li>
             </ul>
             <div class="header-actions">
-                <button class="language-switcher" id="languageSwitcher" aria-label="Switch language">
+                <button class="language-switcher" 
+                        id="languageSwitcher" 
+                        aria-label="Switch language between English and Persian. Current language: English">
                     <i class="fas fa-globe" aria-hidden="true"></i>
                     <span>EN</span>
                 </button>
-                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme between light and dark mode">
+                <button class="theme-toggle" id="themeToggle" aria-label="Switch to dark mode. Current theme: light mode"
+                        aria-pressed="false">
                     <i class="fas fa-moon" aria-hidden="true"></i>
                 </button>
-                <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navLinks">
+                <button class="hamburger" id="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="navLinks"
+                        aria-haspopup="true">
                     <i class="fas fa-bars" aria-hidden="true"></i>
                 </button>
             </div>
@@ -110,7 +119,13 @@
                 </div>
                 <div class="hero-image">
                     <div class="hero-image-container">
-                        <img src="assets/images/screen.png" alt="Polban App Interface Preview" loading="eager" width="600" height="400">
+                        <img src="assets/images/screen.png" 
+     alt="Polban App Interface Preview" 
+     loading="eager" 
+     fetchpriority="high"
+     decoding="async"
+     width="1200" 
+     height="800">
                     </div>
                 </div>
             </div>
@@ -120,68 +135,104 @@
             <div class="container">
                 <h2 id="features-heading" data-translate="features.title">Key Features of Polban</h2>
                 <div class="feature-grid">
-                    <div class="feature-card primary" tabindex="0" role="region" aria-labelledby="feature-1-heading">
-                        <div class="feature-icon">
-                            <i class="fas fa-globe" aria-hidden="true"></i>
+                    <div class="feature-card primary" 
+                         tabindex="0" 
+                         role="article" 
+                         aria-labelledby="feature-1-heading"
+                         aria-describedby="feature-1-description">
+                        <div class="feature-icon" aria-hidden="true">
+                            <i class="fas fa-globe"></i>
                         </div>
                         <h3 id="feature-1-heading" data-translate="features.multilingual.title">Multilingual Support</h3>
-                        <p data-translate="features.multilingual.description">Full support for Persian, English, Turkish, and Arabic with proper RTL layout for a truly global experience.</p>
+                        <p id="feature-1-description" data-translate="features.multilingual.description">Full support for Persian, English, Turkish, and Arabic with proper RTL layout for a truly global experience.</p>
                     </div>
-                    <div class="feature-card secondary" tabindex="0" role="region" aria-labelledby="feature-2-heading">
-                        <div class="feature-icon">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
+                    <div class="feature-card secondary" 
+                         tabindex="0" 
+                         role="article" 
+                         aria-labelledby="feature-2-heading"
+                         aria-describedby="feature-2-description">
+                        <div class="feature-icon" aria-hidden="true">
+                            <i class="fas fa-coins"></i>
                         </div>
                         <h3 id="feature-2-heading" data-translate="features.multi_currency.title">Multi-Currency Management</h3>
-                        <p data-translate="features.multi_currency.description">Track transactions in multiple currencies with automatic conversion to your base currency for unified reporting.</p>
+                        <p id="feature-2-description" data-translate="features.multi_currency.description">Track transactions in multiple currencies with automatic conversion to your base currency for unified reporting.</p>
                     </div>
-                    <div class="feature-card tertiary" tabindex="0" role="region" aria-labelledby="feature-3-heading">
-                        <div class="feature-icon">
-                            <i class="fas fa-chart-line" aria-hidden="true"></i>
+                    <div class="feature-card tertiary" 
+                         tabindex="0" 
+                         role="article" 
+                         aria-labelledby="feature-3-heading"
+                         aria-describedby="feature-3-description">
+                        <div class="feature-icon" aria-hidden="true">
+                            <i class="fas fa-chart-line"></i>
                         </div>
                         <h3 id="feature-3-heading" data-translate="features.financial_analytics.title">Financial Analytics</h3>
-                        <p data-translate="features.financial_analytics.description">Visualize your finances with advanced charts, pie graphs, and balance sheets for deep insights.</p>
+                        <p id="feature-3-description" data-translate="features.financial_analytics.description">Visualize your finances with advanced charts, pie graphs, and balance sheets for deep insights.</p>
                     </div>
-                    <div class="feature-card primary" tabindex="0" role="region" aria-labelledby="feature-4-heading">
-                        <div class="feature-icon">
-                            <i class="fas fa-clock" aria-hidden="true"></i>
+                    <div class="feature-card primary" 
+                         tabindex="0" 
+                         role="article" 
+                         aria-labelledby="feature-4-heading"
+                         aria-describedby="feature-4-description">
+                        <div class="feature-icon" aria-hidden="true">
+                            <i class="fas fa-clock"></i>
                         </div>
                         <h3 id="feature-4-heading" data-translate="features.smart_automation.title">Smart Automation</h3>
-                        <p data-translate="features.smart_automation.description">Automate recurring transactions and get intelligent suggestions based on your financial patterns.</p>
+                        <p id="feature-4-description" data-translate="features.smart_automation.description">Automate recurring transactions and get intelligent suggestions based on your financial patterns.</p>
                     </div>
-                    <div class="feature-card secondary" tabindex="0" role="region" aria-labelledby="feature-5-heading">
-                        <div class="feature-icon">
-                            <i class="fas fa-wallet" aria-hidden="true"></i>
+                    <div class="feature-card secondary" 
+                         tabindex="0" 
+                         role="article" 
+                         aria-labelledby="feature-5-heading"
+                         aria-describedby="feature-5-description">
+                        <div class="feature-icon" aria-hidden="true">
+                            <i class="fas fa-wallet"></i>
                         </div>
                         <h3 id="feature-5-heading" data-translate="features.unlimited_accounts.title">Unlimited Accounts</h3>
-                        <p data-translate="features.unlimited_accounts.description">Create unlimited bank accounts, wallets, credit cards, and categories for complete financial tracking.</p>
+                        <p id="feature-5-description" data-translate="features.unlimited_accounts.description">Create unlimited bank accounts, wallets, credit cards, and categories for complete financial tracking.</p>
                     </div>
-                    <div class="feature-card tertiary" tabindex="0" role="region" aria-labelledby="feature-6-heading">
-                        <div class="feature-icon">
-                            <i class="fas fa-file-export" aria-hidden="true"></i>
+                    <div class="feature-card tertiary" 
+                         tabindex="0" 
+                         role="article" 
+                         aria-labelledby="feature-6-heading"
+                         aria-describedby="feature-6-description">
+                        <div class="feature-icon" aria-hidden="true">
+                            <i class="fas fa-file-export"></i>
                         </div>
                         <h3 id="feature-6-heading" data-translate="features.advanced_reporting.title">Advanced Reporting</h3>
-                        <p data-translate="features.advanced_reporting.description">Export comprehensive financial reports in PDF, Excel, or CSV formats for analysis and sharing.</p>
+                        <p id="feature-6-description" data-translate="features.advanced_reporting.description">Export comprehensive financial reports in PDF, Excel, or CSV formats for analysis and sharing.</p>
                     </div>
-                    <div class="feature-card primary" tabindex="0" role="region" aria-labelledby="feature-7-heading">
-                        <div class="feature-icon">
-                            <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+                    <div class="feature-card primary" 
+                         tabindex="0" 
+                         role="article" 
+                         aria-labelledby="feature-7-heading"
+                         aria-describedby="feature-7-description">
+                        <div class="feature-icon" aria-hidden="true">
+                            <i class="fas fa-calendar-alt"></i>
                         </div>
                         <h3 id="feature-7-heading" data-translate="features.dual_calendars.title">Dual Calendar System</h3>
-                        <p data-translate="features.dual_calendars.description">Support for both Persian and Gregorian calendars to track transactions in your preferred date system.</p>
+                        <p id="feature-7-description" data-translate="features.dual_calendars.description">Support for both Persian and Gregorian calendars to track transactions in your preferred date system.</p>
                     </div>
-                    <div class="feature-card secondary" tabindex="0" role="region" aria-labelledby="feature-8-heading">
-                        <div class="feature-icon">
-                            <i class="fas fa-tags" aria-hidden="true"></i>
+                    <div class="feature-card secondary" 
+                         tabindex="0" 
+                         role="article" 
+                         aria-labelledby="feature-8-heading"
+                         aria-describedby="feature-8-description">
+                        <div class="feature-icon" aria-hidden="true">
+                            <i class="fas fa-tags"></i>
                         </div>
                         <h3 id="feature-8-heading" data-translate="features.smart_categorization.title">Smart Categorization</h3>
-                        <p data-translate="features.smart_categorization.description">Organize transactions with unlimited custom categories and tags for detailed financial insights.</p>
+                        <p id="feature-8-description" data-translate="features.smart_categorization.description">Organize transactions with unlimited custom categories and tags for detailed financial insights.</p>
                     </div>
-                    <div class="feature-card tertiary" tabindex="0" role="region" aria-labelledby="feature-9-heading">
-                        <div class="feature-icon">
-                            <i class="fas fa-shield-alt" aria-hidden="true"></i>
+                    <div class="feature-card tertiary" 
+                         tabindex="0" 
+                         role="article" 
+                         aria-labelledby="feature-9-heading"
+                         aria-describedby="feature-9-description">
+                        <div class="feature-icon" aria-hidden="true">
+                            <i class="fas fa-shield-alt"></i>
                         </div>
                         <h3 id="feature-9-heading" data-translate="features.secure_cloud.title">Secure Cloud Sync</h3>
-                        <p data-translate="features.secure_cloud.description">Your financial data is encrypted and safely synced across all your devices with enterprise-grade security.</p>
+                        <p id="feature-9-description" data-translate="features.secure_cloud.description">Your financial data is encrypted and safely synced across all your devices with enterprise-grade security.</p>
                     </div>
                 </div>
             </div>
@@ -198,28 +249,68 @@
         <section id="download" class="download" aria-labelledby="download-heading">
             <div class="container">
                 <div class="logo-container">
-                    <img src="assets/images/logo-light.png" alt="Polban" loading="eager" class="logo-light">
-                    <img src="assets/images/logo-dark.png" alt="Polban" loading="eager" class="logo-dark">
+                    <img src="assets/images/logo-light.png" 
+     alt="Polban" 
+     loading="eager" 
+     decoding="async"
+     width="200" 
+     height="60"
+     class="logo-light">
+                    <img src="assets/images/logo-dark.png" 
+     alt="Polban" 
+     loading="eager" 
+     decoding="async"
+     width="200" 
+     height="60"
+     class="logo-dark">
                 </div>
                 <h2 id="download-heading" data-translate="download.title">Download Polban Now</h2>
                 <p data-translate="download.description">Get started with Polban today and take control of your finances. Currently available exclusively on Cafe Bazaar for Android devices.</p>
                 <div class="download-buttons">
-                    <a href="https://cafebazaar.ir/app/app.r2devlab.polban" class="btn-download" aria-label="Download Polban from Cafe Bazaar" target="_blank" rel="noopener noreferrer">
+                    <a href="https://cafebazaar.ir/app/app.r2devlab.polban" 
+                       class="btn-download" 
+                       aria-label="Download Polban from Cafe Bazaar for Android devices. Available now." 
+                       target="_blank" 
+                       rel="noopener noreferrer">
                         <i class="fas fa-shopping-basket" aria-hidden="true"></i>
                         <span data-translate="download.cafe_bazaar">Download on <br> Cafe Bazaar</span>
                     </a>
-                    <a href="#" class="btn-download disabled" aria-label="Download Polban from Google Play - Coming Soon">
-                        <i class="fab fa-google-play" aria-hidden="true"></i>
+                    <button class="btn-download"
+                            disabled
+                            aria-disabled="true"
+                            aria-label="Download Polban from Google Play - Coming soon. Expected release: Q2 2025"
+                            type="button">
+                      <i class="fab fa-google-play" aria-hidden="true"></i>
+                      <span>
                         <span data-translate="download.google_play">Get it on <br> Google Play</span>
-                    </a>
-                    <a href="#" class="btn-download disabled" aria-label="Download Polban for Windows - Coming Soon">
-                        <i class="fab fa-windows" aria-hidden="true"></i>
+                        <span class="badge coming-soon" data-translate="download.coming_soon">Coming Soon</span>
+                      </span>
+                      <span class="tooltip" data-translate="download.google_play_tooltip">Expected release: Q2 2025</span>
+                    </button>
+                    <button class="btn-download"
+                            disabled
+                            aria-disabled="true"
+                            aria-label="Download Polban for Windows - Coming soon. Expected release: Q3 2025"
+                            type="button">
+                      <i class="fab fa-windows" aria-hidden="true"></i>
+                      <span>
                         <span data-translate="download.windows">Download for <br> Windows</span>
-                    </a>
-                    <a href="#" class="btn-download disabled" aria-label="Download Polban from App Store - Coming Soon">
-                        <i class="fab fa-apple" aria-hidden="true"></i>
+                        <span class="badge coming-soon" data-translate="download.coming_soon">Coming Soon</span>
+                      </span>
+                      <span class="tooltip" data-translate="download.windows_tooltip">Expected release: Q3 2025</span>
+                    </button>
+                    <button class="btn-download"
+                            disabled
+                            aria-disabled="true"
+                            aria-label="Download Polban from App Store - Coming soon. Expected release: Q4 2025"
+                            type="button">
+                      <i class="fab fa-apple" aria-hidden="true"></i>
+                      <span>
                         <span data-translate="download.app_store">Download on the <br> App Store</span>
-                    </a>
+                        <span class="badge coming-soon" data-translate="download.coming_soon">Coming Soon</span>
+                      </span>
+                      <span class="tooltip" data-translate="download.app_store_tooltip">Expected release: Q4 2025</span>
+                    </button>
                 </div>
                 <p class="platform-notice" data-translate="download.platform_notice">Currently available only on Cafe Bazaar for Android. Windows and iOS versions are in development and will be released soon.</p>
             </div>
@@ -271,44 +362,62 @@
                                         <ul class="carousel-track" id="carousel-track" role="list" aria-live="polite">
                                             <li class="carousel-slide active" data-slide="0" data-category="dashboard" role="listitem">
                                                 <picture>
-                                                    <source srcset="assets/images/gallery-1_thumb.webp" media="(max-width: 768px)">
-                                                    <source srcset="assets/images/gallery-1_medium.webp" media="(max-width: 1024px)">
-                                                    <img src="assets/images/gallery-1.webp" alt="Dashboard Overview" loading="lazy" decoding="async">
+                                                    <source srcset="assets/images/gallery-1_thumb.webp" media="(max-width: 768px)" type="image/webp">
+                                                    <source srcset="assets/images/gallery-1_medium.webp" media="(max-width: 1024px)" type="image/webp">
+                                                    <source srcset="assets/images/gallery-1.webp" type="image/webp">
+                                                    <source srcset="assets/images/gallery-1_thumb.jpg" media="(max-width: 768px)" type="image/jpeg">
+                                                    <source srcset="assets/images/gallery-1_medium.jpg" media="(max-width: 1024px)" type="image/jpeg">
+                                                    <img src="assets/images/gallery-1.jpg" alt="Dashboard Overview" loading="lazy" decoding="async" width="1080" height="2340">
                                                 </picture>
                                             </li>
                                             <li class="carousel-slide" data-slide="1" data-category="analytics" role="listitem">
                                                 <picture>
-                                                    <source srcset="assets/images/gallery-2_thumb.webp" media="(max-width: 768px)">
-                                                    <source srcset="assets/images/gallery-2_medium.webp" media="(max-width: 1024px)">
-                                                    <img src="assets/images/gallery-2.webp" alt="Financial Analytics" loading="lazy" decoding="async">
+                                                    <source srcset="assets/images/gallery-2_thumb.webp" media="(max-width: 768px)" type="image/webp">
+                                                    <source srcset="assets/images/gallery-2_medium.webp" media="(max-width: 1024px)" type="image/webp">
+                                                    <source srcset="assets/images/gallery-2.webp" type="image/webp">
+                                                    <source srcset="assets/images/gallery-2_thumb.jpg" media="(max-width: 768px)" type="image/jpeg">
+                                                    <source srcset="assets/images/gallery-2_medium.jpg" media="(max-width: 1024px)" type="image/jpeg">
+                                                    <img src="assets/images/gallery-2.jpg" alt="Financial Analytics" loading="lazy" decoding="async" width="1080" height="2340">
                                                 </picture>
                                             </li>
                                             <li class="carousel-slide" data-slide="2" data-category="accounts" role="listitem">
                                                 <picture>
-                                                    <source srcset="assets/images/gallery-3_thumb.webp" media="(max-width: 768px)">
-                                                    <source srcset="assets/images/gallery-3_medium.webp" media="(max-width: 1024px)">
-                                                    <img src="assets/images/gallery-3.webp" alt="Multi-Currency Management" loading="lazy" decoding="async">
+                                                    <source srcset="assets/images/gallery-3_thumb.webp" media="(max-width: 768px)" type="image/webp">
+                                                    <source srcset="assets/images/gallery-3_medium.webp" media="(max-width: 1024px)" type="image/webp">
+                                                    <source srcset="assets/images/gallery-3.webp" type="image/webp">
+                                                    <source srcset="assets/images/gallery-3_thumb.jpg" media="(max-width: 768px)" type="image/jpeg">
+                                                    <source srcset="assets/images/gallery-3_medium.jpg" media="(max-width: 1024px)" type="image/jpeg">
+                                                    <img src="assets/images/gallery-3.jpg" alt="Multi-Currency Management" loading="lazy" decoding="async" width="1080" height="2340">
                                                 </picture>
                                             </li>
                                             <li class="carousel-slide" data-slide="3" data-category="transactions" role="listitem">
                                                 <picture>
-                                                    <source srcset="assets/images/gallery-4_thumb.webp" media="(max-width: 768px)">
-                                                    <source srcset="assets/images/gallery-4_medium.webp" media="(max-width: 1024px)">
-                                                    <img src="assets/images/gallery-4.webp" alt="Transaction Management" loading="lazy" decoding="async">
+                                                    <source srcset="assets/images/gallery-4_thumb.webp" media="(max-width: 768px)" type="image/webp">
+                                                    <source srcset="assets/images/gallery-4_medium.webp" media="(max-width: 1024px)" type="image/webp">
+                                                    <source srcset="assets/images/gallery-4.webp" type="image/webp">
+                                                    <source srcset="assets/images/gallery-4_thumb.jpg" media="(max-width: 768px)" type="image/jpeg">
+                                                    <source srcset="assets/images/gallery-4_medium.jpg" media="(max-width: 1024px)" type="image/jpeg">
+                                                    <img src="assets/images/gallery-4.jpg" alt="Transaction Management" loading="lazy" decoding="async" width="1080" height="2340">
                                                 </picture>
                                             </li>
                                             <li class="carousel-slide" data-slide="4" data-category="settings" role="listitem">
                                                 <picture>
-                                                    <source srcset="assets/images/gallery-5_thumb.webp" media="(max-width: 768px)">
-                                                    <source srcset="assets/images/gallery-5_medium.webp" media="(max-width: 1024px)">
-                                                    <img src="assets/images/gallery-5.webp" alt="Dual Calendar Support" loading="lazy" decoding="async">
+                                                    <source srcset="assets/images/gallery-5_thumb.webp" media="(max-width: 768px)" type="image/webp">
+                                                    <source srcset="assets/images/gallery-5_medium.webp" media="(max-width: 1024px)" type="image/webp">
+                                                    <source srcset="assets/images/gallery-5.webp" type="image/webp">
+                                                    <source srcset="assets/images/gallery-5_thumb.jpg" media="(max-width: 768px)" type="image/jpeg">
+                                                    <source srcset="assets/images/gallery-5_medium.jpg" media="(max-width: 1024px)" type="image/jpeg">
+                                                    <img src="assets/images/gallery-5.jpg" alt="Dual Calendar Support" loading="lazy" decoding="async" width="1080" height="2340">
                                                 </picture>
                                             </li>
                                             <li class="carousel-slide" data-slide="5" data-category="reports" role="listitem">
                                                 <picture>
-                                                    <source srcset="assets/images/gallery-6_thumb.webp" media="(max-width: 768px)">
-                                                    <source srcset="assets/images/gallery-6_medium.webp" media="(max-width: 1024px)">
-                                                    <img src="assets/images/gallery-6.webp" alt="Export & Reporting" loading="lazy" decoding="async">
+                                                    <source srcset="assets/images/gallery-6_thumb.webp" media="(max-width: 768px)" type="image/webp">
+                                                    <source srcset="assets/images/gallery-6_medium.webp" media="(max-width: 1024px)" type="image/webp">
+                                                    <source srcset="assets/images/gallery-6.webp" type="image/webp">
+                                                    <source srcset="assets/images/gallery-6_thumb.jpg" media="(max-width: 768px)" type="image/jpeg">
+                                                    <source srcset="assets/images/gallery-6_medium.jpg" media="(max-width: 1024px)" type="image/jpeg">
+                                                    <img src="assets/images/gallery-6.jpg" alt="Export & Reporting" loading="lazy" decoding="async" width="1080" height="2340">
                                                 </picture>
                                             </li>
                                         </ul>
@@ -324,12 +433,42 @@
                                     
                                     <!-- Carousel Dots -->
                                     <div class="carousel-dots" role="tablist" aria-label="Screenshot navigation">
-                                        <button class="carousel-dot active" role="tab" data-slide="0" aria-label="Go to slide 1"></button>
-                                        <button class="carousel-dot" role="tab" data-slide="1" aria-label="Go to slide 2"></button>
-                                        <button class="carousel-dot" role="tab" data-slide="2" aria-label="Go to slide 3"></button>
-                                        <button class="carousel-dot" role="tab" data-slide="3" aria-label="Go to slide 4"></button>
-                                        <button class="carousel-dot" role="tab" data-slide="4" aria-label="Go to slide 5"></button>
-                                        <button class="carousel-dot" role="tab" data-slide="5" aria-label="Go to slide 6"></button>
+                                        <button class="carousel-dot active" 
+                                                role="tab" 
+                                                data-slide="0" 
+                                                aria-label="Dashboard Overview - Slide 1 of 6"
+                                                aria-selected="true"
+                                                aria-controls="carousel-track"></button>
+                                        <button class="carousel-dot" 
+                                                role="tab" 
+                                                data-slide="1" 
+                                                aria-label="Financial Analytics - Slide 2 of 6"
+                                                aria-selected="false"
+                                                aria-controls="carousel-track"></button>
+                                        <button class="carousel-dot" 
+                                                role="tab" 
+                                                data-slide="2" 
+                                                aria-label="Multi-Currency Management - Slide 3 of 6"
+                                                aria-selected="false"
+                                                aria-controls="carousel-track"></button>
+                                        <button class="carousel-dot" 
+                                                role="tab" 
+                                                data-slide="3" 
+                                                aria-label="Transaction Management - Slide 4 of 6"
+                                                aria-selected="false"
+                                                aria-controls="carousel-track"></button>
+                                        <button class="carousel-dot" 
+                                                role="tab" 
+                                                data-slide="4" 
+                                                aria-label="Dual Calendar Support - Slide 5 of 6"
+                                                aria-selected="false"
+                                                aria-controls="carousel-track"></button>
+                                        <button class="carousel-dot" 
+                                                role="tab" 
+                                                data-slide="5" 
+                                                aria-label="Export & Reporting - Slide 6 of 6"
+                                                aria-selected="false"
+                                                aria-controls="carousel-track"></button>
                                     </div>
                                 </div>
 
@@ -343,25 +482,50 @@
                 <div id="grid-view" class="gallery-view" role="tabpanel" aria-labelledby="grid-tab" aria-hidden="true">
                     <!-- Filter Controls -->
                     <div class="grid-filters" role="toolbar" aria-label="Screenshot filters">
-                        <button class="filter-btn active" data-filter="all">All Features</button>
-                        <button class="filter-btn" data-filter="dashboard">Dashboard</button>
-                        <button class="filter-btn" data-filter="analytics">Analytics</button>
-                        <button class="filter-btn" data-filter="accounts">Accounts</button>
-                        <button class="filter-btn" data-filter="transactions">Transactions</button>
-                        <button class="filter-btn" data-filter="reports">Reports</button>
-                        <button class="filter-btn" data-filter="settings">Settings</button>
+                        <button class="filter-btn active" 
+                                data-filter="all" 
+                                aria-label="Show all screenshots"
+                                aria-pressed="true">All Features</button>
+                        <button class="filter-btn" 
+                                data-filter="dashboard" 
+                                aria-label="Show dashboard screenshots"
+                                aria-pressed="false">Dashboard</button>
+                        <button class="filter-btn" 
+                                data-filter="analytics" 
+                                aria-label="Show analytics screenshots"
+                                aria-pressed="false">Analytics</button>
+                        <button class="filter-btn" 
+                                data-filter="accounts" 
+                                aria-label="Show accounts screenshots"
+                                aria-pressed="false">Accounts</button>
+                        <button class="filter-btn" 
+                                data-filter="transactions" 
+                                aria-label="Show transactions screenshots"
+                                aria-pressed="false">Transactions</button>
+                        <button class="filter-btn" 
+                                data-filter="reports" 
+                                aria-label="Show reports screenshots"
+                                aria-pressed="false">Reports</button>
+                        <button class="filter-btn" 
+                                data-filter="settings" 
+                                aria-label="Show settings screenshots"
+                                aria-pressed="false">Settings</button>
                     </div>
 
                     <!-- Grid Container -->
                     <div class="gallery-grid" role="list">
-                        <article class="gallery-item" data-category="dashboard" role="listitem" tabindex="0">
+                        <article class="gallery-item" 
+                                 data-category="dashboard" 
+                                 role="listitem" 
+                                 tabindex="0"
+                                 aria-label="Dashboard Overview screenshot. Click to view full size.">
                             <div class="gallery-item-inner">
                                 <div class="gallery-placeholder">
                                     <i class="fas fa-tachometer-alt" aria-hidden="true"></i>
                                 </div>
                                 <picture>
                                     <source srcset="assets/images/gallery-1_thumb.webp" type="image/webp">
-                                    <img src="assets/images/gallery-1_thumb.jpg" alt="Dashboard Overview" class="gallery-image" loading="lazy" decoding="async">
+                                    <img src="assets/images/gallery-1_thumb.jpg" alt="Dashboard Overview" class="gallery-image" loading="lazy" decoding="async" width="360" height="780">
                                 </picture>
                                 <div class="gallery-overlay">
                                     <h4>Dashboard Overview</h4>
@@ -371,14 +535,18 @@
                             </div>
                         </article>
 
-                        <article class="gallery-item" data-category="analytics" role="listitem" tabindex="0">
+                        <article class="gallery-item" 
+                                 data-category="analytics" 
+                                 role="listitem" 
+                                 tabindex="0"
+                                 aria-label="Financial Analytics screenshot. Click to view full size.">
                             <div class="gallery-item-inner">
                                 <div class="gallery-placeholder">
                                     <i class="fas fa-chart-line" aria-hidden="true"></i>
                                 </div>
                                 <picture>
                                     <source srcset="assets/images/gallery-2_thumb.webp" type="image/webp">
-                                    <img src="assets/images/gallery-2_thumb.jpg" alt="Financial Analytics" class="gallery-image" loading="lazy" decoding="async">
+                                    <img src="assets/images/gallery-2_thumb.jpg" alt="Financial Analytics" class="gallery-image" loading="lazy" decoding="async" width="360" height="780">
                                 </picture>
                                 <div class="gallery-overlay">
                                     <h4>Financial Analytics</h4>
@@ -388,14 +556,18 @@
                             </div>
                         </article>
 
-                        <article class="gallery-item" data-category="accounts" role="listitem" tabindex="0">
+                        <article class="gallery-item" 
+                                 data-category="accounts" 
+                                 role="listitem" 
+                                 tabindex="0"
+                                 aria-label="Multi-Currency Management screenshot. Click to view full size.">
                             <div class="gallery-item-inner">
                                 <div class="gallery-placeholder">
                                     <i class="fas fa-wallet" aria-hidden="true"></i>
                                 </div>
                                 <picture>
                                     <source srcset="assets/images/gallery-3_thumb.webp" type="image/webp">
-                                    <img src="assets/images/gallery-3_thumb.jpg" alt="Multi-Currency Management" class="gallery-image" loading="lazy" decoding="async">
+                                    <img src="assets/images/gallery-3_thumb.jpg" alt="Multi-Currency Management" class="gallery-image" loading="lazy" decoding="async" width="360" height="780">
                                 </picture>
                                 <div class="gallery-overlay">
                                     <h4>Multi-Currency Management</h4>
@@ -405,14 +577,18 @@
                             </div>
                         </article>
 
-                        <article class="gallery-item" data-category="transactions" role="listitem" tabindex="0">
+                        <article class="gallery-item" 
+                                 data-category="transactions" 
+                                 role="listitem" 
+                                 tabindex="0"
+                                 aria-label="Transaction Management screenshot. Click to view full size.">
                             <div class="gallery-item-inner">
                                 <div class="gallery-placeholder">
                                     <i class="fas fa-exchange-alt" aria-hidden="true"></i>
                                 </div>
                                 <picture>
                                     <source srcset="assets/images/gallery-4_thumb.webp" type="image/webp">
-                                    <img src="assets/images/gallery-4_thumb.jpg" alt="Transaction Management" class="gallery-image" loading="lazy" decoding="async">
+                                    <img src="assets/images/gallery-4_thumb.jpg" alt="Transaction Management" class="gallery-image" loading="lazy" decoding="async" width="360" height="780">
                                 </picture>
                                 <div class="gallery-overlay">
                                     <h4>Transaction Management</h4>
@@ -422,14 +598,18 @@
                             </div>
                         </article>
 
-                        <article class="gallery-item" data-category="settings" role="listitem" tabindex="0">
+                        <article class="gallery-item" 
+                                 data-category="settings" 
+                                 role="listitem" 
+                                 tabindex="0"
+                                 aria-label="Dual Calendar Support screenshot. Click to view full size.">
                             <div class="gallery-item-inner">
                                 <div class="gallery-placeholder">
                                     <i class="fas fa-calendar-alt" aria-hidden="true"></i>
                                 </div>
                                 <picture>
                                     <source srcset="assets/images/gallery-5_thumb.webp" type="image/webp">
-                                    <img src="assets/images/gallery-5_thumb.jpg" alt="Dual Calendar Support" class="gallery-image" loading="lazy" decoding="async">
+                                    <img src="assets/images/gallery-5_thumb.jpg" alt="Dual Calendar Support" class="gallery-image" loading="lazy" decoding="async" width="360" height="780">
                                 </picture>
                                 <div class="gallery-overlay">
                                     <h4>Dual Calendar Support</h4>
@@ -439,14 +619,18 @@
                             </div>
                         </article>
 
-                        <article class="gallery-item" data-category="reports" role="listitem" tabindex="0">
+                        <article class="gallery-item" 
+                                 data-category="reports" 
+                                 role="listitem" 
+                                 tabindex="0"
+                                 aria-label="Export & Reporting screenshot. Click to view full size.">
                             <div class="gallery-item-inner">
                                 <div class="gallery-placeholder">
                                     <i class="fas fa-file-export" aria-hidden="true"></i>
                                 </div>
                                 <picture>
                                     <source srcset="assets/images/gallery-6_thumb.webp" type="image/webp">
-                                    <img src="assets/images/gallery-6_thumb.jpg" alt="Export & Reporting" class="gallery-image" loading="lazy" decoding="async">
+                                    <img src="assets/images/gallery-6_thumb.jpg" alt="Export & Reporting" class="gallery-image" loading="lazy" decoding="async" width="360" height="780">
                                 </picture>
                                 <div class="gallery-overlay">
                                     <h4>Export & Reporting</h4>
@@ -462,8 +646,17 @@
             </div>
 
             <!-- Enhanced Lightbox -->
-            <div id="gallery-lightbox" class="lightbox" role="dialog" aria-modal="true" aria-labelledby="lightbox-title" aria-hidden="true">
-                <div class="lightbox-overlay" aria-label="Close lightbox"></div>
+            <div id="gallery-lightbox" 
+                 class="lightbox" 
+                 role="dialog" 
+                 aria-modal="true" 
+                 aria-labelledby="lightbox-title" 
+                 aria-describedby="lightbox-description"
+                 aria-hidden="true">
+                <div class="lightbox-overlay" 
+                     aria-label="Click to close lightbox"
+                     role="button"
+                     tabindex="0"></div>
                 <div class="lightbox-container">
                     <div class="lightbox-header">
                         <h3 id="lightbox-title" class="lightbox-title">Image Title</h3>
@@ -493,7 +686,7 @@
                                 <i class="fas fa-spinner fa-spin" aria-hidden="true"></i>
                                 <span>Loading image...</span>
                             </div>
-                            <img id="lightbox-image" class="lightbox-image" alt="" loading="lazy" decoding="async">
+                            <img id="lightbox-image" class="lightbox-image" alt="" loading="lazy" decoding="async" width="1080" height="2340">
                         </div>
                         
                         <button class="lightbox-nav next" id="lightbox-next" aria-label="Next image">
@@ -548,7 +741,13 @@
         <section id="about" class="about" aria-labelledby="about-heading">
              <div class="container">
 
-                  <img id="animated-image" src="assets/images/d_2.png" alt="Animated Image">
+                  <img id="animated-image" 
+     src="assets/images/d_2.png" 
+     alt="Polban financial management illustration" 
+     loading="lazy"
+     decoding="async"
+     width="500" 
+     height="500">
                   <h2 id="about-heading" data-translate="about.title">Why Polban?</h2>
 
                 <p data-translate="about.description">Polban simplifies personal accounting with support for Persian, English, Turkish, and Arabic, multi-currency management, Persian and Gregorian calendars, and advanced financial charts. Incomes are always positive, expenses negative, and reports are unified in your base currency (USD). Automate recurring payments with scheduled transactions and speed up entry with smart suggestions. Use transaction filters for quick searches and balance sheets for liquidity analysis. Share reports easily with PDF exports and saved charts. Polban is your go-to app for smart asset and transaction management!</p>
@@ -596,7 +795,12 @@
 
     </main>
 
-    <a href="#" class="back-to-top" aria-label="Back to top"><i class="fas fa-arrow-up" aria-hidden="true"></i></a>
+    <a href="#" 
+       class="back-to-top" 
+       aria-label="Scroll back to top of page"
+       role="button">
+        <i class="fas fa-arrow-up" aria-hidden="true"></i>
+    </a>
 
     <footer>
         <div class="container">

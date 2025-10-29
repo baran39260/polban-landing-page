@@ -4,22 +4,32 @@ const sharp = require('sharp');
 
 // Function to get image dimensions
 async function getImageDimensions() {
-  const imagesDir = path.join(__dirname, 'images');
+  const imagesDir = path.join(__dirname, 'assets', 'images');
   
-  // Gallery images
-  const galleryImages = [
+  // All images
+  const allImages = [
+    'screen.png',
+    'logo-light.png',
+    'logo-dark.png',
+    'd_2.png',
     'gallery-1.webp',
     'gallery-2.webp',
     'gallery-3.webp',
     'gallery-4.webp',
     'gallery-5.webp',
-    'gallery-6.webp'
+    'gallery-6.webp',
+    'gallery-1_thumb.webp',
+    'gallery-2_thumb.webp',
+    'gallery-3_thumb.webp',
+    'gallery-4_thumb.webp',
+    'gallery-5_thumb.webp',
+    'gallery-6_thumb.webp'
   ];
   
-  console.log('Gallery Image Dimensions:');
+  console.log('Image Dimensions:');
   console.log('========================');
   
-  for (const file of galleryImages) {
+  for (const file of allImages) {
     const imagePath = path.join(imagesDir, file);
     
     try {

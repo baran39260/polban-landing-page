@@ -50,6 +50,9 @@ class LocalizationManager {
                 this.createLanguageSwitcher();
             }
 
+            // Setup ARIA updates
+            this.setupARIAUpdates();
+
             const initTime = performance.now() - this.initStartTime;
             console.log(`✅ Localization system initialized with language: ${this.currentLanguage} (${initTime.toFixed(2)}ms)`);
 
@@ -212,6 +215,12 @@ class LocalizationManager {
         // Update language switcher display
         this.updateLanguageSwitcher();
 
+        // Update language switcher ARIA
+        this.updateLanguageSwitcherARIA(lang);
+
+        // Update ARIA labels
+        this.updateAllARIALabels(lang);
+
         // Trigger custom event for other scripts
         document.dispatchEvent(new CustomEvent('languageChanged', {
             detail: { language: lang, isRTL: this.isRTL(lang) }
@@ -219,6 +228,28 @@ class LocalizationManager {
 
         const applyTime = performance.now() - startTime;
         console.log(`✅ Language ${lang} applied successfully (${applyTime.toFixed(2)}ms)`);
+    }
+
+    // Event listener for languageChanged to update ARIA labels
+    setupARIAUpdates() {
+        document.addEventListener('languageChanged', (event) => {
+            const { language, isRTL } = event.detail;
+
+            // Update animations for RTL
+            if (isRTL) {
+                document.body.classList.add('rtl-animations');
+            } else {
+                document.body.classList.remove('rtl-animations');
+            }
+
+            // Update ARIA labels
+            this.updateAllARIALabels(language);
+
+            // Update RTL features if function exists
+            if (typeof updateRTLFeatures === 'function') {
+                updateRTLFeatures(isRTL);
+            }
+        });
     }
 
     updateMetaTags() {
@@ -370,6 +401,89 @@ class LocalizationManager {
         if (switcher) {
             switcher.textContent = this.currentLanguage.toUpperCase();
         }
+    }
+
+    updateLanguageSwitcherARIA(currentLang) {
+        // Use class selector for consistency with setupLanguageSwitcher()
+        const languageSwitcher = document.querySelector('.language-switcher');
+        
+        // Gracefully handle absence (e.g., on pages without switcher)
+        if (!languageSwitcher) {
+            console.log('ℹ️  Language switcher not found, skipping ARIA update');
+            return;
+        }
+
+        const langNames = {
+            'en': 'English',
+            'fa': 'Persian (فارسی)'
+        };
+
+        // Get only supported languages from translations
+        const availableLangs = this.getAvailableLanguages();
+        const currentLangName = langNames[currentLang] || currentLang.toUpperCase();
+
+        // Determine next language (cycle through supported languages only)
+        const currentIndex = availableLangs.indexOf(currentLang);
+        const nextIndex = (currentIndex + 1) % availableLangs.length;
+        const nextLang = availableLangs[nextIndex];
+        const nextLangName = langNames[nextLang] || nextLang.toUpperCase();
+
+        languageSwitcher.setAttribute(
+            'aria-label',
+            `Switch language to ${nextLangName}. Current language: ${currentLangName}`
+        );
+    }
+
+    getARIALabel(key, params = {}) {
+        const translation = this.getTranslation(`aria.${key}`);
+        if (!translation) return '';
+
+        // Replace placeholders
+        let result = translation;
+        Object.keys(params).forEach(param => {
+            result = result.replace(`{${param}}`, params[param]);
+        });
+
+        return result;
+    }
+
+    updateAllARIALabels(lang) {
+        // Update filter buttons
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        filterBtns.forEach(btn => {
+            const filter = btn.dataset.filter;
+            const label = this.getARIALabel(
+                filter === 'all' ? 'filter_show_all' : 'filter_show_category',
+                { category: btn.textContent.trim() }
+            );
+            if (label) btn.setAttribute('aria-label', label);
+        });
+
+        // Update carousel dots
+        const carouselDots = document.querySelectorAll('.carousel-dot');
+        carouselDots.forEach((dot, index) => {
+            const slideData = window.galleryData ? window.galleryData[index] : null;
+            if (slideData) {
+                const label = this.getARIALabel('carousel_dot', {
+                    title: slideData.title,
+                    current: index + 1,
+                    total: window.galleryData.length
+                });
+                if (label) dot.setAttribute('aria-label', label);
+            }
+        });
+
+        // Update gallery items
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        galleryItems.forEach((item, index) => {
+            const slideData = window.galleryData ? window.galleryData[index] : null;
+            if (slideData) {
+                const label = this.getARIALabel('gallery_item', {
+                    title: slideData.title
+                });
+                if (label) item.setAttribute('aria-label', label);
+            }
+        });
     }
 
     getTranslation(key) {

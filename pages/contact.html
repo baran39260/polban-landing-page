@@ -10,7 +10,20 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&family=IRANSansX:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!--
+      Font Awesome 6.4.0 from Cloudflare CDN
+      SRI hash verified on 2025-10-29
+
+      Security: Subresource Integrity (SRI) protects against CDN compromise
+      If hash verification fails, the resource will not load
+
+      To update Font Awesome:
+      1. Change version in URL
+      2. Get new SRI hash from https://cdnjs.com/libraries/font-awesome
+      3. Update integrity attribute
+      4. Test thoroughly
+    -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
     <link rel="stylesheet" href="../src/css/styles.css">
     <link rel="stylesheet" href="../src/css/rtl.css" media="screen and (dir: rtl)">
     
@@ -69,11 +82,13 @@
                         <form id="contactForm" aria-label="Contact form">
                             <div class="form-group">
                                 <label for="name"><span data-translate="contact.form.name_label">Name</span> <span class="required">*</span></label>
-                                <input type="text" id="name" name="name" required aria-required="true" data-translate="contact.form.name_placeholder" data-translate-attr="placeholder" placeholder="Your name">
+                                <input type="text" id="name" name="name" required aria-required="true" aria-describedby="name-hint" data-translate="contact.form.name_placeholder" data-translate-attr="placeholder" placeholder="Your name">
+                                <small id="name-hint" class="form-hint">Enter your full name</small>
                             </div>
                             <div class="form-group">
                                 <label for="email"><span data-translate="contact.form.email_label">Email</span> <span class="required">*</span></label>
-                                <input type="email" id="email" name="email" required aria-required="true" data-translate="contact.form.email_placeholder" data-translate-attr="placeholder" placeholder="your.email@example.com">
+                                <input type="email" id="email" name="email" required aria-required="true" aria-describedby="email-hint" data-translate="contact.form.email_placeholder" data-translate-attr="placeholder" placeholder="your.email@example.com">
+                                <small id="email-hint" class="form-hint">Enter a valid email address</small>
                             </div>
                             <div class="form-group">
                                 <label for="subject" data-translate="contact.form.subject_label">Subject</label>
@@ -81,9 +96,10 @@
                             </div>
                             <div class="form-group">
                                 <label for="message"><span data-translate="contact.form.message_label">Message</span> <span class="required">*</span></label>
-                                <textarea id="message" name="message" rows="6" required aria-required="true" data-translate="contact.form.message_placeholder" data-translate-attr="placeholder" placeholder="How can we help you?"></textarea>
+                                <textarea id="message" name="message" rows="6" required aria-required="true" aria-describedby="message-hint" data-translate="contact.form.message_placeholder" data-translate-attr="placeholder" placeholder="How can we help you?"></textarea>
+                                <small id="message-hint" class="form-hint">Describe your question or feedback</small>
                             </div>
-                            <button type="submit" class="btn primary" data-translate="contact.form.submit_button">Send Message</button>
+                            <button type="submit" class="btn primary" aria-label="Submit contact form" data-translate="contact.form.submit_button">Send Message</button>
                         </form>
                     </div>
                     
@@ -94,7 +110,7 @@
                             <h3><i class="fas fa-paper-plane" aria-hidden="true"></i> <span data-translate="contact.other_methods.telegram.title">Telegram</span></h3>
                             <p data-translate="contact.other_methods.telegram.description">For quick responses and support, you can reach us on Telegram:</p>
                             <div class="telegram-contact">
-                                <a href="https://t.me/your_polban_support" target="_blank" rel="noopener noreferrer" class="btn secondary telegram-btn">
+                                <a href="https://t.me/your_polban_support" target="_blank" rel="noopener noreferrer" class="btn secondary telegram-btn" aria-label="Contact Polban support on Telegram. Opens in new window.">
                                     <i class="fab fa-telegram" aria-hidden="true"></i> <span data-translate="contact.other_methods.telegram.button_text">Contact on Telegram</span>
                                 </a>
                                 <p class="small">Username: <span data-translate="contact.other_methods.telegram.username">@polban_support</span></p>
@@ -104,13 +120,13 @@
                         <div class="contact-method">
                             <h3><i class="fas fa-envelope" aria-hidden="true"></i> <span data-translate="contact.other_methods.email.title">Email</span></h3>
                             <p data-translate="contact.other_methods.email.description">For general inquiries, you can email us at:</p>
-                            <p><a href="mailto:support@polban.app" data-translate="contact.other_methods.email.address">support@polban.app</a></p>
+                            <p><a href="mailto:support@polban.app" aria-label="Send email to Polban support at support@polban.app" data-translate="contact.other_methods.email.address">support@polban.app</a></p>
                         </div>
 
                         <div class="contact-method">
                             <h3><i class="fas fa-comment-dots" aria-hidden="true"></i> <span data-translate="contact.other_methods.in_app.title">In-App Support</span></h3>
                             <p data-translate="contact.other_methods.in_app.description">You can also reach our support team directly from within the Polban app:</p>
-                            <ol id="in-app-steps">
+                            <ol id="in-app-steps" aria-label="Steps to contact support in Polban app">
                                 <li>Open the Polban app</li>
                                 <li>Go to Settings</li>
                                 <li>Select "Help & Support"</li>

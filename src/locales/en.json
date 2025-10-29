@@ -79,7 +79,11 @@
     "windows": "Download for Windows",
     "app_store": "Download on the App Store",
     "coming_soon": "Coming Soon",
-    "platform_notice": "Currently available only on Cafe Bazaar for Android. Windows and iOS versions are in development and will be released soon."
+    "platform_notice": "Currently available only on Cafe Bazaar for Android. Windows and iOS versions are in development and will be released soon.",
+    "google_play_tooltip": "Expected release: Q2 2025 (April-June)",
+    "windows_tooltip": "Expected release: Q3 2025 (July-September)",
+    "app_store_tooltip": "Expected release: Q4 2025 (October-December)",
+    "available_now": "Available Now"
   },
   "gallery": {
     "title": "App Screenshots",
@@ -399,5 +403,24 @@
         "content": "These terms shall be governed by and construed in accordance with the laws of [Jurisdiction], without regard to its conflict of law provisions. Any disputes arising from these terms shall be subject to the exclusive jurisdiction of the courts in [Jurisdiction]."
       }
     }
+  },
+  "aria": {
+    "language_switcher": "Switch language to {nextLang}. Current language: {currentLang}",
+    "theme_toggle_dark": "Switch to dark mode. Current theme: light mode",
+    "theme_toggle_light": "Switch to light mode. Current theme: dark mode",
+    "hamburger_open": "Open navigation menu",
+    "hamburger_close": "Close navigation menu",
+    "filter_show_all": "Show all screenshots",
+    "filter_show_category": "Show {category} screenshots",
+    "carousel_dot": "{title} - Slide {current} of {total}",
+    "gallery_item": "{title} screenshot. Click to view full size.",
+    "lightbox_close": "Close lightbox and return to gallery",
+    "lightbox_prev": "Previous image: {title}",
+    "lightbox_next": "Next image: {title}",
+    "back_to_top": "Scroll back to top of page",
+    "form_name_hint": "Enter your full name",
+    "form_email_hint": "Enter a valid email address",
+    "form_message_hint": "Describe your question or feedback",
+    "form_submit": "Submit contact form"
   }
 }

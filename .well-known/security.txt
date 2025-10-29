@@ -1,0 +1,29 @@
+Contact: mailto:security@polban.app
+Contact: https://github.com/[username]/polban-landing-page/security/advisories/new
+Expires: 2026-12-31T23:59:59.000Z
+Preferred-Languages: en, fa
+Canonical: https://polban.app/.well-known/security.txt
+
+Policy: https://polban.app/security-policy
+
+Acknowledgments: https://polban.app/security-acknowledgments
+
+# Security Policy for Polban Landing Page
+# 
+# Scope: This security policy covers the Polban landing page and related web assets.
+# 
+# Out of Scope: Mobile applications, backend APIs, and third-party services.
+# 
+# Reporting Guidelines:
+# - Please report security vulnerabilities responsibly
+# - Do not publicly disclose until we've had a chance to address
+# - We aim to respond within 48 hours
+# - We appreciate detailed reports with reproduction steps
+# 
+# Known Security Measures:
+# - Content Security Policy (CSP) implemented
+# - Subresource Integrity (SRI) for CDN resources
+# - HTTPS-only resources
+# - Regular dependency updates
+# 
+# Thank you for helping keep Polban secure!

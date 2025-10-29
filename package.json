@@ -4,12 +4,62 @@
   "description": "Convert images to WebP format for Polban landing page",
   "main": "convert_to_webp.js",
   "scripts": {
+    "check-sizes": "node check_image_sizes.js",
     "convert": "node convert_to_webp.js",
-    "start": "http-server"
+    "start": "http-server",
+    
+    "clean": "rimraf dist",
+    "mkdir": "node -e \"require('fs').mkdirSync('dist/css', {recursive: true}); require('fs').mkdirSync('dist/js', {recursive: true});\"",
+    
+    "minify:css:fonts": "postcss src/css/fonts.css --use cssnano --output dist/css/fonts.min.css --no-map",
+    "minify:css:styles": "postcss src/css/styles.css --use cssnano --output dist/css/styles.min.css --no-map",
+    "minify:css:rtl": "postcss src/css/rtl.css --use cssnano --output dist/css/rtl.min.css --no-map",
+    "minify:css": "npm-run-all minify:css:*",
+    
+    "minify:js:script": "terser src/js/script.js -o dist/js/script.min.js -c -m",
+    "minify:js:localization": "terser src/js/localization.js -o dist/js/localization.min.js -c -m",
+    "minify:js:init": "terser src/js/init-localization.js -o dist/js/init-localization.min.js -c -m",
+    "minify:js": "npm-run-all minify:js:*",
+    
+    "minify": "npm-run-all minify:css minify:js",
+    "build": "npm-run-all clean mkdir minify",
+    
+    "build:prod": "npm run build && node build-prod-html.js",
+    "watch:css:fonts": "postcss src/css/fonts.css --use cssnano -o dist/css/fonts.min.css --no-map --watch",
+    "watch:css:styles": "postcss src/css/styles.css --use cssnano -o dist/css/styles.min.css --no-map --watch",
+    "watch:css:rtl": "postcss src/css/rtl.css --use cssnano -o dist/css/rtl.min.css --no-map --watch",
+    "watch:css": "npm-run-all --parallel watch:css:*",
+    "watch:js:script": "terser src/js/script.js -o dist/js/script.min.js -c -m --watch",
+    "watch:js:localization": "terser src/js/localization.js -o dist/js/localization.min.js -c -m --watch",
+    "watch:js:init": "terser src/js/init-localization.js -o dist/js/init-localization.min.js -c -m --watch",
+    "watch:js": "npm-run-all --parallel watch:js:*",
+    "watch": "npm-run-all --parallel watch:css watch:js",
+    
+    "test:lighthouse": "lhci autorun",
+    "test:html": "html-validate index.html pages/*.html",
+    "test:css": "stylelint src/css/*.css",
+    "test:links": "blc http://localhost:8080 -r --exclude-external",
+    "test:a11y": "pa11y http://localhost:8080",
+    "test:all": "npm-run-all test:html test:css test:links test:a11y",
+    "test:watch": "npm-run-all --parallel test:html test:css"
   },
   "dependencies": {
     "http-server": "^14.1.1",
     "sharp": "^0.32.5"
+  },
+  "devDependencies": {
+    "cssnano": "^6.0.1",
+    "postcss": "^8.4.31",
+    "postcss-cli": "^11.0.0",
+    "terser": "^5.24.0",
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^5.0.5",
+    "@lhci/cli": "^0.12.0",
+    "html-validate": "^8.7.4",
+    "stylelint": "^16.0.2",
+    "stylelint-config-standard": "^36.0.0",
+    "broken-link-checker": "^0.7.8",
+    "pa11y": "^7.0.0"
   },
   "keywords": [
     "webp",

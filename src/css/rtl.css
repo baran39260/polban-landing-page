@@ -415,6 +415,16 @@
     [dir="rtl"] .footer-links a {
         margin: 0;
     }
+
+    [dir="rtl"] .badge.coming-soon {
+      margin-right: 0.3rem;
+      font-size: 0.65rem;
+    }
+    
+    [dir="rtl"] .btn-download .tooltip {
+      max-width: 200px;
+      text-align: center;
+    }
 }
 
 /* RTL Focus and Accessibility */
@@ -443,4 +453,15 @@
 [dir="rtl"] .success-message {
     text-align: right;
     margin-top: 0.25rem;
+}
+
+[dir="rtl"] .badge.coming-soon {
+  margin-left: 0;
+  margin-right: 0.5rem;
+  direction: rtl;
+}
+
+[dir="rtl"] .btn-download .tooltip {
+  direction: rtl;
+  text-align: center;
 }
