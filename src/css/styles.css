@@ -8,31 +8,68 @@
 /* 1. Root and Theme Variables
 -------------------------------------------------- */
 :root {
-  /* Light Theme Colors from FlutterFlow - Enhanced for accessibility */
-  --primary: #7E4BB8; /* Increased contrast from #9759C4 */
-  --secondary: #4A5A6A; /* Increased contrast from #50606F */
-  --tertiary: #255A7D; /* Increased contrast from #29638A */
-  --primary-text: #000000;
-  --secondary-text: #3D4A59; /* Darker for better contrast */
-  --primary-background: #F1F4F8;
-  --secondary-background: #ededed;
-  --accent1: #4B39EF;
-  --accent2: #EE8B60;
-  --accent3: #39D2C0;
-  --success: #249689;
-  --error: #D32F2F; /* Increased contrast from #FF5963 */
-  --warning: #F9CF58;
-  --info: #1C4494;
-  --on-primary: #FFFFFF;
-  --on-secondary: #FFFFFF;
-  --on-tertiary: #FFFFFF;
-
-  /* Additional variables for consistency */
+  /* Material Design 3 Theme Colors */
+  --md-sys-color-primary: #7E4BB8;
+  --md-sys-color-on-primary: #FFFFFF;
+  --md-sys-color-primary-container: #F1E3FF;
+  --md-sys-color-on-primary-container: #2A0053;
+  
+  --md-sys-color-secondary: #4A5A6A;
+  --md-sys-color-on-secondary: #FFFFFF;
+  --md-sys-color-secondary-container: #D3E4FF;
+  --md-sys-color-on-secondary-container: #001C39;
+  
+  --md-sys-color-surface: #FDF8FD;
+  --md-sys-color-surface-dim: #DCD8DB;
+  --md-sys-color-surface-bright: #FDF8FD;
+  --md-sys-color-surface-container-lowest: #FFFFFF;
+  --md-sys-color-surface-container-low: #F7F2F7;
+  --md-sys-color-surface-container: #F2EDF2;
+  --md-sys-color-surface-container-high: #ECE7EC;
+  --md-sys-color-surface-container-highest: #E7E2E6;
+  
+  --md-sys-color-on-surface: #1C1B1E;
+  --md-sys-color-on-surface-variant: #48454E;
+  
+  /* Material Design 3 Elevation Values */
+  --md-sys-elevation-level0: 0px 0px 0px 0px rgba(0, 0, 0, 0);
+  --md-sys-elevation-level1: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+  --md-sys-elevation-level2: 0px 2px 6px 2px rgba(0, 0, 0, 0.15);
+  --md-sys-elevation-level3: 0px 4px 8px 3px rgba(0, 0, 0, 0.15);
+  
+  /* Material Design 3 State Layer Opacities */
+  --md-sys-state-hover-opacity: 0.08;
+  --md-sys-state-focus-opacity: 0.12;
+  --md-sys-state-pressed-opacity: 0.12;
+  --md-sys-state-dragged-opacity: 0.16;
+  
+  /* Material Design 3 Typography */
+  --md-sys-typescale-title-large-size: 1.375rem;
+  --md-sys-typescale-title-large-weight: 500;
+  --md-sys-typescale-label-large-size: 0.875rem;
+  --md-sys-typescale-label-large-weight: 500;
+  
+  /* Legacy vars maintained for compatibility */
+  --primary: var(--md-sys-color-primary);
+  --on-primary: var(--md-sys-color-on-primary);
+  --secondary: var(--md-sys-color-secondary);
+  --on-secondary: var(--md-sys-color-on-secondary);
+  --primary-text: var(--md-sys-color-on-surface);
+  --secondary-text: var(--md-sys-color-on-surface-variant);
+  --primary-background: var(--md-sys-color-surface);
+  --secondary-background: var(--md-sys-color-surface-container);
+  
+  /* Animation Tokens */
+  --md-sys-motion-duration-small: 100ms;
+  --md-sys-motion-duration-medium: 200ms;
+  --md-sys-motion-duration-large: 500ms;
+  --md-sys-motion-easing-emphasized: cubic-bezier(0.2, 0, 0, 1);
+  
+  /* Additional variables */
   --max-width: 1200px;
   --border-radius: 8px;
-  --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  --transition-speed: 0.3s;
-  --animation-duration: 0.6s;
+  --transition-speed: var(--md-sys-motion-duration-medium);
+  --animation-duration: var(--md-sys-motion-duration-large);
 }
 
 [data-theme="dark"] {
@@ -257,33 +294,59 @@ header img {
   padding: 0 1rem;
 }
 
-/* 4. Header and Navigation
+/* 4. Header and Navigation - Material Design 3
 -------------------------------------------------- */
 header {
-  background-color: var(--secondary-background);
-  box-shadow: var(--box-shadow);
+  background-color: var(--md-sys-color-surface-container);
+  box-shadow: var(--md-sys-elevation-level1);
   position: fixed;
   width: 100%;
   top: 0;
   z-index: 1000;
-  padding: 1rem 0;
+  height: 64px; /* MD3 top app bar height */
+  display: flex;
+  align-items: center;
+  transition: background-color var(--md-sys-motion-duration-medium) var(--md-sys-motion-easing-emphasized),
+              box-shadow var(--md-sys-motion-duration-medium) var(--md-sys-motion-easing-emphasized);
 }
 
 nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  height: 100%;
 }
 
 .logo-container {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 12px; /* MD3 standard spacing */
+  padding: 8px 4px;
+  border-radius: var(--border-radius);
+  position: relative;
+  isolation: isolate;
+}
+
+/* MD3 State Layer for Logo Container */
+.logo-container::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  opacity: 0;
+  background-color: var(--md-sys-color-on-surface);
+  transition: opacity var(--md-sys-motion-duration-medium) var(--md-sys-motion-easing-emphasized);
+  z-index: -1;
+}
+
+.logo-container:hover::before {
+  opacity: var(--md-sys-state-hover-opacity);
 }
 
 .logo-container img {
   width: 40px;
   height: 40px;
+  object-fit: contain;
 }
 
 .logo-container .logo-dark {
@@ -298,83 +361,128 @@ nav {
   display: block;
 }
 
-.logo-svg {
-  width: 40px;
-  height: 40px;
-}
-
 .logo-text {
-  font-size: 1.8rem;
-  font-weight: bold;
-  color: var(--primary);
+  font-size: var(--md-sys-typescale-title-large-size);
+  font-weight: var(--md-sys-typescale-title-large-weight);
+  color: var(--md-sys-color-primary);
+  letter-spacing: 0.15px;
+  line-height: 1.2;
 }
 
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: 8px; /* MD3 standard spacing */
+  height: 100%;
 }
 
 .nav-links a {
-  font-weight: 500;
-  font-size: 1rem;
-  color: var(--primary-text);
-  padding: 0.5rem 1rem;
-  border-radius: var(--border-radius);
-  transition: background-color var(--transition-speed);
+  position: relative;
+  isolation: isolate;
+  height: 40px; /* MD3 standard touch target */
+  padding: 0 16px; /* MD3 horizontal padding */
+  border-radius: 20px; /* MD3 pill shape */
+  color: var(--md-sys-color-on-surface);
+  font-size: var(--md-sys-typescale-label-large-size);
+  font-weight: var(--md-sys-typescale-label-large-weight);
+  letter-spacing: 0.1px;
+  display: inline-flex;
+  align-items: center;
+  transition: color var(--md-sys-motion-duration-medium) var(--md-sys-motion-easing-emphasized);
 }
 
-.nav-links a:hover {
-  background-color: rgba(151, 89, 196, 0.1);
-  color: var(--primary);
+/* MD3 State Layer for Nav Links */
+.nav-links a::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  opacity: 0;
+  background-color: var(--md-sys-color-on-surface);
+  transition: opacity var(--md-sys-motion-duration-medium) var(--md-sys-motion-easing-emphasized);
+  z-index: -1;
 }
 
-.nav-links a:focus-visible {
-  background-color: rgba(151, 89, 196, 0.1);
-  color: var(--primary);
-  outline: 3px solid var(--primary);
-  outline-offset: 2px;
-  box-shadow: 0 0 0 1px var(--primary-background),
-              0 0 0 5px color-mix(in srgb, var(--primary) 30%, transparent);
+.nav-links a:hover::before {
+  opacity: var(--md-sys-state-hover-opacity);
+}
+
+.nav-links a:active::before {
+  opacity: var(--md-sys-state-pressed-opacity);
 }
 
 .nav-links a.active {
-  font-weight: 700;
-  background-color: rgba(151, 89, 196, 0.15);
+  color: var(--md-sys-color-primary);
+  font-weight: 600;
+}
+
+.nav-links a.active::before {
+  background-color: var(--md-sys-color-primary);
+  opacity: var(--md-sys-state-hover-opacity);
+}
+
+.nav-links a:focus-visible {
+  outline: 2px solid var(--md-sys-color-primary);
+  outline-offset: 2px;
 }
 
 .header-actions {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 8px; /* MD3 standard spacing */
 }
 
-.theme-toggle, .hamburger {
-  background: none;
+/* MD3 Icon Buttons */
+.theme-toggle,
+.hamburger,
+.language-switcher {
+  position: relative;
+  isolation: isolate;
+  width: 40px; /* MD3 standard touch target */
+  height: 40px;
+  padding: 8px;
   border: none;
+  border-radius: 20px; /* MD3 circular shape */
+  background: none;
+  color: var(--md-sys-color-on-surface);
   cursor: pointer;
-  font-size: 1.25rem;
-  color: var(--primary-text);
-  padding: 0.5rem;
-  border-radius: var(--border-radius);
-  transition: background-color var(--transition-speed);
-  min-width: 40px;
-  min-height: 40px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  transition: color var(--md-sys-motion-duration-medium) var(--md-sys-motion-easing-emphasized);
 }
 
-.theme-toggle:hover, .theme-toggle:focus, .hamburger:hover, .hamburger:focus {
-  background-color: rgba(151, 89, 196, 0.1);
+/* MD3 State Layer for Icon Buttons */
+.theme-toggle::before,
+.hamburger::before,
+.language-switcher::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  opacity: 0;
+  background-color: var(--md-sys-color-on-surface);
+  transition: opacity var(--md-sys-motion-duration-medium) var(--md-sys-motion-easing-emphasized);
+  z-index: -1;
 }
 
-/* Keyboard-only focus indicators for header controls */
-.theme-toggle:focus-visible, .hamburger:focus-visible {
-  outline: 3px solid var(--primary);
-  outline-offset: 4px;
-  box-shadow: 0 0 0 1px white,
-              0 0 0 6px color-mix(in srgb, var(--primary) 30%, transparent);
+.theme-toggle:hover::before,
+.hamburger:hover::before,
+.language-switcher:hover::before {
+  opacity: var(--md-sys-state-hover-opacity);
+}
+
+.theme-toggle:active::before,
+.hamburger:active::before,
+.language-switcher:active::before {
+  opacity: var(--md-sys-state-pressed-opacity);
+}
+
+.theme-toggle:focus-visible,
+.hamburger:focus-visible,
+.language-switcher:focus-visible {
+  outline: 2px solid var(--md-sys-color-primary);
+  outline-offset: 2px;
 }
 
 /* Hamburger menu for mobile */
@@ -394,31 +502,41 @@ nav {
 
 
 @media (max-width: 768px) {
+  header {
+    height: 56px; /* MD3 top app bar height for mobile */
+  }
+
   .hamburger {
     display: inline-flex;
   }
   
   .nav-links {
     position: fixed;
-    top: 70px;
-    right: 1rem;
-    background-color: var(--secondary-background);
+    top: 56px; /* Match header height */
+    right: 16px; /* MD3 standard edge margin */
+    background-color: var(--md-sys-color-surface-container);
     flex-direction: column;
-    align-items: flex-start;
-    gap: 0;
-    padding: 1rem;
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
+    align-items: stretch;
+    gap: 2px;
+    padding: 8px 0; /* MD3 menu padding */
+    border-radius: 4px; /* MD3 menu radius */
+    box-shadow: var(--md-sys-elevation-level2);
     opacity: 0;
-    transform: translateY(-10px);
-    transition: opacity 0.3s, transform 0.3s;
-    display: none;
+    transform: scale(0.8);
+    transform-origin: top right;
+    transition: 
+      opacity var(--md-sys-motion-duration-medium) var(--md-sys-motion-easing-emphasized),
+      transform var(--md-sys-motion-duration-medium) var(--md-sys-motion-easing-emphasized);
+    pointer-events: none;
     z-index: 1000;
-    min-width: 200px;
+    min-width: 280px; /* MD3 menu min width */
+    overflow: hidden;
   }
   
   .nav-links.active {
-    display: flex;
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: auto;
   }
   
   .nav-links li {
@@ -426,13 +544,51 @@ nav {
   }
   
   .nav-links a {
-    padding: 0.75rem 1rem;
-    width: 100%;
+    height: 48px; /* MD3 list item height */
+    padding: 0 24px; /* MD3 list item padding */
     border-radius: 0;
+    width: 100%;
+    justify-content: flex-start;
   }
   
-  .nav-links a:hover, .nav-links a:focus {
-    border-radius: var(--border-radius);
+  /* MD3 State Layer for Mobile Menu Items */
+  .nav-links a::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    background-color: var(--md-sys-color-on-surface);
+    transition: opacity var(--md-sys-motion-duration-medium) var(--md-sys-motion-easing-emphasized);
+    z-index: -1;
+  }
+  
+  .nav-links a:hover::before {
+    opacity: var(--md-sys-state-hover-opacity);
+  }
+  
+  .nav-links a:active::before {
+    opacity: var(--md-sys-state-pressed-opacity);
+  }
+  
+  .nav-links a.active::before {
+    background-color: var(--md-sys-color-primary);
+    opacity: var(--md-sys-state-hover-opacity);
+  }
+  
+  /* Scrim behind mobile menu */
+  .nav-links::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.32); /* MD3 scrim opacity */
+    opacity: 0;
+    transition: opacity var(--md-sys-motion-duration-medium) var(--md-sys-motion-easing-emphasized);
+    pointer-events: none;
+    z-index: -1;
+  }
+  
+  .nav-links.active::after {
+    opacity: 1;
   }
 }
 
