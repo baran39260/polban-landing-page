@@ -1,0 +1,182 @@
+/* Download Section UI Enhancements
+=================================== 
+ Enhanced typography, button design, and special Cafe Bazaar styling
+*/
+
+/* Enhanced Typography */
+.download h2 {
+    font-size: 3rem !important;
+    font-weight: 900 !important;
+    letter-spacing: -0.5px !important;
+}
+
+.download p {
+    font-size: 1.25rem !important;
+    font-weight: 500 !important;
+    max-width: 650px !important;
+    line-height: 1.8 !important;
+}
+
+/* Enhanced Button Design */
+.btn-download {
+    gap: 1.2rem !important;
+    padding: 1.5rem 2.5rem !important;
+    border-radius: 16px !important;
+    border: 2px solid rgba(255, 255, 255, 0.1) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+    min-width: 260px !important;
+    min-height: 80px !important;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.btn-download:hover,
+.btn-download:focus {
+    transform: translateY(-8px) scale(1.02) !important;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Larger Icons */
+.btn-download i {
+    font-size: 2.5rem !important;
+    transition: transform 0.3s ease;
+}
+
+.btn-download:hover i {
+    transform: scale(1.1);
+}
+
+/* Cafe Bazaar Button - Active and Prominent */
+.cafe-bazaar-btn,
+a.btn-download[href*="cafebazaar"] {
+    background: linear-gradient(135deg, #00C853 0%, #00E676 100%) !important;
+    border-color: #00E676 !important;
+    box-shadow: 0 8px 24px rgba(0, 200, 83, 0.4) !important;
+    animation: fadeInUp 1s ease-out forwards, cafeBazaarPulse 2s ease-in-out 1s infinite !important;
+}
+
+.cafe-bazaar-btn i,
+a.btn-download[href*="cafebazaar"] i {
+    color: white !important;
+}
+
+.cafe-bazaar-btn span,
+a.btn-download[href*="cafebazaar"] span {
+    color: white !important;
+    font-weight: 600 !important;
+}
+
+.cafe-bazaar-btn:hover,
+a.btn-download[href*="cafebazaar"]:hover {
+    transform: translateY(-10px) scale(1.05) !important;
+    box-shadow: 0 16px 40px rgba(0, 200, 83, 0.5) !important;
+    animation: fadeInUp 1s ease-out forwards !important;
+    /* Stop pulse on hover */
+    border-color: white !important;
+}
+
+/* Pulse Animation for Cafe Bazaar */
+@keyframes cafeBazaarPulse {
+
+    0%,
+    100% {
+        box-shadow: 0 8px 24px rgba(0, 200, 83, 0.4),
+            0 0 0 0 rgba(0, 200, 83, 0.7);
+    }
+
+    50% {
+        box-shadow: 0 8px 24px rgba(0, 200, 83, 0.4),
+            0 0 0 15px rgba(0, 200, 83, 0);
+    }
+}
+
+/* More Obvious Disabled State */
+.btn-download[disabled],
+.btn-download.disabled {
+    opacity: 0.4 !important;
+    filter: grayscale(80%) !important;
+    border-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+.btn-download[disabled]:hover,
+.btn-download.disabled:hover {
+    transform: translateY(0) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+    border-color: rgba(0, 0, 0, 0.1) !important;
+    outline: none !important;
+}
+
+/* ==================================
+   PREMIUM FIXED DOWNLOAD BAR
+   Glassmorphism + Blur + Light Particles
+   ================================== */
+
+.fixed-download-bar {
+    background: linear-gradient(135deg,
+            rgba(106, 61, 232, 0.98) 0%,
+            rgba(118, 75, 162, 0.98) 50%,
+            rgba(126, 75, 184, 0.98) 100%) !important;
+    inset: 0;
+    background:
+        radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.12) 0%, transparent 50%),
+        linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.05) 50%, transparent 100%);
+    pointer-events: none;
+    border-radius: inherit;
+}
+
+/* Dark mode styles */
+[data-theme="dark"] .fixed-download-bar {
+    background: linear-gradient(135deg,
+            rgba(30, 15, 70, 0.98) 0%,
+            rgba(50, 25, 100, 0.98) 50%,
+            rgba(70, 35, 130, 0.98) 100%) !important;
+    box-shadow:
+        0 -8px 32px rgba(0, 0, 0, 0.5),
+        0 -1px 0 rgba(255, 255, 255, 0.1) inset !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.15) !important;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Official Google Play Button in Sticky Bar */
+.google-play-official-btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    background: #000 !important;
+    color: white !important;
+    padding: 10px 20px !important;
+    border-radius: 12px !important;
+    text-decoration: none !important;
+    font-weight: 600 !important;
+    font-size: 14px !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.google-play-official-btn:hover {
+    transform: translateY(-3px) !important;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3) !important;
+    background: #1a1a1a !important;
+}
+
+[data-theme="dark"] .google-play-official-btn {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+[data-theme="dark"] .google-play-official-btn:hover {
+    background: rgba(255, 255, 255, 0.2) !important;
+}

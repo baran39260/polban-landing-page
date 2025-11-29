@@ -1663,16 +1663,32 @@ document.addEventListener('DOMContentLoaded', function () {
             heroImage.style.transform = 'perspective(1000px) rotateY(-5deg) rotateX(5deg)';
         }
     }
-});
 
-window.addEventListener('scroll', () => {
-  const bar = document.getElementById('fixedDownloadBar');
-  if (bar) {
-    if (window.scrollY > 800) {
-      bar.classList.add('visible');
-    } else {
-      bar.classList.remove('visible');
+    // Fixed Download Bar Visibility Logic
+    const fixedDownloadBar = document.getElementById('fixedDownloadBar');
+
+
+    if (fixedDownloadBar && heroSection) {
+        const observerOptions = {
+            root: null,
+            threshold: 0,
+            rootMargin: "-100px 0px 0px 0px" // Trigger slightly before the hero leaves viewport
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                // If hero is NOT intersecting (scrolled past), show the bar
+                if (!entry.isIntersecting) {
+                    fixedDownloadBar.style.transform = 'translateY(0)';
+                    fixedDownloadBar.style.opacity = '1';
+                } else {
+                    // If hero IS intersecting (visible), hide the bar
+                    fixedDownloadBar.style.transform = 'translateY(100%)';
+                    fixedDownloadBar.style.opacity = '0';
+                }
+            });
+        }, observerOptions);
+
+        observer.observe(heroSection);
     }
-  }
 });
-
