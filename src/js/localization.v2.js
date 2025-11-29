@@ -69,12 +69,12 @@ class LocalizationManager {
             console.log('📥 Loading translation files...');
 
             const [enTranslations, faTranslations] = await Promise.all([
-                fetch(this.config.basePath + 'en.json').then(response => {
-                    if (!response.ok) throw new Error(`Failed to load en.json: ${response.status}`);
+                fetch(this.config.basePath + 'en.v2.json').then(response => {
+                    if (!response.ok) throw new Error(`Failed to load en.v2.json: ${response.status}`);
                     return response.json();
                 }),
-                fetch(this.config.basePath + 'fa.json').then(response => {
-                    if (!response.ok) throw new Error(`Failed to load fa.json: ${response.status}`);
+                fetch(this.config.basePath + 'fa.v2.json').then(response => {
+                    if (!response.ok) throw new Error(`Failed to load fa.v2.json: ${response.status}`);
                     return response.json();
                 })
             ]);
@@ -133,6 +133,38 @@ class LocalizationManager {
                     "download": "دانلود",
                     "blog": "وبلاگ"
                 },
+                "features": {
+                    "title": "پول‌بان دقیقاً همون چیزیه که تو ایران کم داشتی",
+                    "subtitle": "۴ دلیل که چرا هزاران ایرانی دیگه بدون پول‌بان نمی‌تونن مالی‌شون رو مدیریت کنن",
+                    "purchasing_power": {
+                        "title": "الان با پول و طلاهات دقیقاً چی می‌تونی بخری؟",
+                        "description": "پول‌بان با قیمت لحظه‌ای طلا، سکه و دلار بهت می‌گه همین امروز چند گرم طلا یا چند متر خونه می‌تونی بخری"
+                    },
+                    "inflation_impact": {
+                        "title": "با این تورم، ماه پیش چقدر از دارایی‌هات آب رفت؟",
+                        "description": "ارزش واقعی دارایی‌هات رو با تورم ایران محاسبه می‌کنه – می‌فهمی واقعاً چقدر ضرر کردی یا سود کردی"
+                    },
+                    "debt_management": {
+                        "title": "بدهی و طلب به فامیل دیگه فراموشت نمی‌شه",
+                        "description": "زمان‌بندی هوشمند یادآوری می‌کنه کی به کی بدهکاری، کی از کی طلبکاری – با نوتیفیکیشن و جزئیات کامل"
+                    },
+                    "unified_assets": {
+                        "title": "همه ارزها و حساب‌ها رو همزمان مدیریت کن",
+                        "description": "ریال، دلار، یورو، تتر، حساب بانکی، کیف پول دیجیتال – همه رو یک‌جا ببین و انتقال بده، با پشتیبانی تقویم شمسی و میلادی"
+                    }
+                },
+                "video_demo": {
+                    "title": "تجربه واقعی پولبان را در ۳۰ ثانیه ببینید"
+                },
+                "sticky_bar": {
+                    "main_text": "همین حالا پولبان را رایگان دانلود کنید",
+                    "meta_line_1": "نسخه ۲.۴.۱ • آخرین به‌روزرسانی: ۲۸ فروردین ۱۴۰۵",
+                    "install_count": "بیش از ۱۰۰٬۰۰۰ نصب",
+                    "rating_info": "۴.۸ (۲۳٬۴۰۰ نظر)",
+                    "download_apk": "دانلود مستقیم APK",
+                    "google_play_alt": "دریافت از گوگل پلی",
+                    "google_play_badge": "assets/images/google-play-badge-fa.svg"
+                },
                 "common": {
                     "loading": "در حال بارگذاری...",
                     "error": "خطا در بارگذاری"
@@ -153,6 +185,38 @@ class LocalizationManager {
                 "contact": "Contact",
                 "download": "Download",
                 "blog": "Blog"
+            },
+            "features": {
+                "title": "Polban is Exactly What You've Been Missing in Iran",
+                "subtitle": "4 reasons why thousands of Iranians can't manage their finances without Polban anymore",
+                "purchasing_power": {
+                    "title": "What Exactly Can You Buy with Your Assets Now?",
+                    "description": "With real-time gold, coin, and dollar prices, Polban tells you exactly how many grams of gold or square meters of property you can afford today."
+                },
+                "inflation_impact": {
+                    "title": "How Much Value Did You Lose to Inflation Last Month?",
+                    "description": "Calculates the real value of your assets adjusted for Iran's inflation – understand your true profit or loss."
+                },
+                "debt_management": {
+                    "title": "Never Forget Family Debts and Loans Again",
+                    "description": "Smart scheduling reminds you who you owe and who owes you – with notifications and full details."
+                },
+                "unified_assets": {
+                    "title": "Manage All Currencies and Accounts Simultaneously",
+                    "description": "Rial, Dollar, Euro, Tether, bank accounts, digital wallets – view and transfer everything in one place, with Solar and Gregorian calendar support."
+                }
+            },
+            "video_demo": {
+                "title": "See the real experience of Polban in 30 seconds"
+            },
+            "sticky_bar": {
+                "main_text": "Download Polban for Free Now",
+                "meta_line_1": "Version 2.4.1 • Last Update: April 17, 2026",
+                "install_count": "Over 100,000 Installs",
+                "rating_info": "4.8 (23,400 Reviews)",
+                "download_apk": "Direct APK Download",
+                "google_play_alt": "Get it on Google Play",
+                "google_play_badge": "assets/images/google-play-badge-en.svg"
             },
             "common": {
                 "loading": "Loading...",
@@ -401,12 +465,18 @@ class LocalizationManager {
         if (switcher) {
             switcher.textContent = this.currentLanguage.toUpperCase();
         }
+
+        const flag = document.getElementById('current-flag');
+        if (flag) {
+            flag.src = `assets/images/flags/${this.currentLanguage}.svg`;
+            flag.alt = this.currentLanguage === 'en' ? 'English' : 'فارسی';
+        }
     }
 
     updateLanguageSwitcherARIA(currentLang) {
         // Use class selector for consistency with setupLanguageSwitcher()
         const languageSwitcher = document.querySelector('.language-switcher');
-        
+
         // Gracefully handle absence (e.g., on pages without switcher)
         if (!languageSwitcher) {
             console.log('ℹ️  Language switcher not found, skipping ARIA update');
@@ -573,7 +643,7 @@ window.LocalizationManager = LocalizationManager;
 window.initPolbanLocalization = initPolbanLocalization;
 
 // Debug function to manually test language switching
-window.testLanguageSwitch = function(lang) {
+window.testLanguageSwitch = function (lang) {
     if (window.localizationManager) {
         console.log(`🧪 Testing language switch to: ${lang}`);
         window.localizationManager.applyLanguage(lang);
@@ -583,7 +653,7 @@ window.testLanguageSwitch = function(lang) {
 };
 
 // Debug function to check current state
-window.debugLocalization = function() {
+window.debugLocalization = function () {
     if (window.localizationManager) {
         const stats = window.localizationManager.getStats();
         console.log('📊 Localization Debug Info:');
@@ -605,7 +675,7 @@ window.debugLocalization = function() {
 };
 
 // Helper function to get translation from anywhere
-window.t = function(key, fallback = null) {
+window.t = function (key, fallback = null) {
     if (window.localizationManager) {
         return window.localizationManager.t(key, fallback);
     }

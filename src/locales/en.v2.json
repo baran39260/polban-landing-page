@@ -4,7 +4,14 @@
     "description": "Polban is a powerful financial management application with full RTL support for Persian, Arabic, English, and Turkish. Track transactions, manage multi-currency accounts, generate financial reports, and automate recurring payments.",
     "keywords": "financial management, multilingual, RTL, Persian, Arabic, English, Turkish, Flutter, Supabase, multi-currency, financial tracking, budgeting app"
   },
+  "header": {
+    "site_name": "Polban",
+    "free_download": "Free Download",
+    "language_fa": "فارسی",
+    "language_en": "English"
+  },
   "navigation": {
+    "home": "Home",
     "features": "Features",
     "about": "About",
     "gallery": "Gallery",
@@ -28,43 +35,36 @@
     "cta_download": "Download Now"
   },
   "features": {
-    "title": "Key Features of Polban",
-    "multilingual": {
-      "title": "Multilingual Support",
-      "description": "Full support for Persian, English, Turkish, and Arabic with proper RTL layout for a truly global experience."
+    "title": "Polban is Exactly What You've Been Missing in Iran",
+    "subtitle": "4 reasons why thousands of Iranians can't manage their finances without Polban anymore",
+    "purchasing_power": {
+      "title": "What Exactly Can You Buy with Your Assets Now?",
+      "description": "With real-time gold, coin, and dollar prices, Polban tells you exactly how many grams of gold or square meters of property you can afford today."
     },
-    "multi_currency": {
-      "title": "Multi-Currency Management",
-      "description": "Track transactions in multiple currencies with automatic conversion to your base currency for unified reporting."
+    "inflation_impact": {
+      "title": "How Much Value Did You Lose to Inflation Last Month?",
+      "description": "Calculates the real value of your assets adjusted for Iran's inflation – understand your true profit or loss."
     },
-    "financial_analytics": {
-      "title": "Financial Analytics",
-      "description": "Visualize your finances with advanced charts, pie graphs, and balance sheets for deep insights."
+    "debt_management": {
+      "title": "Never Forget Family Debts and Loans Again",
+      "description": "Smart scheduling reminds you who you owe and who owes you – with notifications and full details."
     },
-    "smart_automation": {
-      "title": "Smart Automation",
-      "description": "Automate recurring transactions and get intelligent suggestions based on your financial patterns."
-    },
-    "unlimited_accounts": {
-      "title": "Unlimited Accounts",
-      "description": "Create unlimited bank accounts, wallets, credit cards, and categories for complete financial tracking."
-    },
-    "advanced_reporting": {
-      "title": "Advanced Reporting",
-      "description": "Export comprehensive financial reports in PDF, Excel, or CSV formats for analysis and sharing."
-    },
-    "dual_calendars": {
-      "title": "Dual Calendar System",
-      "description": "Support for both Persian and Gregorian calendars to track transactions in your preferred date system."
-    },
-    "smart_categorization": {
-      "title": "Smart Categorization",
-      "description": "Organize transactions with unlimited custom categories and tags for detailed financial insights."
-    },
-    "secure_cloud": {
-      "title": "Secure Cloud Sync",
-      "description": "Your financial data is encrypted and safely synced across all your devices with enterprise-grade security."
+    "unified_assets": {
+      "title": "Manage All Currencies and Accounts Simultaneously",
+      "description": "Rial, Dollar, Euro, Tether, bank accounts, digital wallets – view and transfer everything in one place, with Solar and Gregorian calendar support."
     }
+  },
+  "video_demo": {
+    "title": "See the real experience of Polban in 30 seconds"
+  },
+  "sticky_bar": {
+    "main_text": "Download Polban for Free Now",
+    "meta_line_1": "Version 2.4.1 • Last Update: April 17, 2026",
+    "install_count": "Over 100,000 Installs",
+    "rating_info": "4.8 (23,400 Reviews)",
+    "download_apk": "Direct APK Download",
+    "google_play_alt": "Get it on Google Play",
+    "google_play_badge": "assets/images/google-play-badge-en.svg"
   },
   "cta": {
     "title": "Ready to Take Control of Your Finances?",
@@ -74,7 +74,8 @@
   "download": {
     "title": "Download Polban Now",
     "description": "Get started with Polban today and take control of your finances. Currently available exclusively on Cafe Bazaar for Android devices.",
-    "cafe_bazaar": "Download on Cafe Bazaar",
+    "free_download": "Free Download",
+    "cafe_bazaar": "Download from Cafe Bazaar",
     "google_play": "Get it on Google Play",
     "windows": "Download for Windows",
     "app_store": "Download on the App Store",
@@ -156,6 +157,7 @@
   },
   "faq": {
     "title": "Frequently Asked Questions",
+    "description": "Find answers to common questions about Polban",
     "questions": {
       "free_use": {
         "question": "Is Polban free to use?",

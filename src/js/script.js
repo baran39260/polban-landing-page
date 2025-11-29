@@ -1,9 +1,9 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const themeToggle = document.getElementById('themeToggle');
     const themeIcon = themeToggle.querySelector('i');
     const hamburger = document.getElementById('hamburger');
-    const navLinks = document.getElementById('navLinks');
-    
+    const navLinksContainer = document.getElementById('navLinks');
+
     // Typing animation elements
     const typingText = document.getElementById('typing-text');
     let phrases = [
@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Typing animation function
     function loop() {
         isEnd = false;
-        
+
         if (i < phrases.length) {
             // Typing forward
             if (!isDeleting && j <= phrases[i].length) {
@@ -51,24 +51,24 @@ document.addEventListener('DOMContentLoaded', function() {
                 currentPhrase = [];
                 isDeleting = false;
                 i++;
-                
+
                 // Reset to first phrase after last phrase
                 if (i === phrases.length) {
                     i = 0;
                 }
-                
+
                 typingSpeed = 200;
             }
         }
-        
+
         // Adjust typing speed based on action
         const speed = isEnd ? 2000 : isDeleting ? 50 : typingSpeed;
-        
+
         setTimeout(loop, speed);
     }
 
     // Function to update typing phrases (called by localization system)
-    window.updateTypingPhrases = function(newPhrases) {
+    window.updateTypingPhrases = function (newPhrases) {
         phrases = newPhrases;
         // Reset animation if it's running
         i = 0;
@@ -91,7 +91,7 @@ document.addEventListener('DOMContentLoaded', function() {
         typingText.style.webkitBackgroundClip = "text";
         typingText.style.backgroundClip = "text";
         typingText.style.color = "transparent";
-        
+
         // Add a slight delay before starting the animation to ensure elements are loaded
         setTimeout(() => {
             loop();
@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // ==============================================
     // ENHANCED GALLERY FUNCTIONALITY
     // ==============================================
-    
+
     // Gallery data with screenshot information
     const galleryData = [
         {
@@ -195,7 +195,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const viewToggleBtns = document.querySelectorAll('.view-toggle-btn');
     const carouselView = document.getElementById('carousel-view');
     const gridView = document.getElementById('grid-view');
-    
+
     // Carousel Elements
     const carouselTrack = document.getElementById('carousel-track');
     const carouselPrevBtn = document.getElementById('carousel-prev');
@@ -205,11 +205,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const featureDescription = document.getElementById('current-feature-description');
     const currentSlideSpan = document.getElementById('current-slide');
     const totalSlidesSpan = document.getElementById('total-slides');
-    
+
     // Grid Elements
     const filterBtns = document.querySelectorAll('.filter-btn');
     const galleryItems = document.querySelectorAll('.gallery-item');
-    
+
     // Lightbox Elements
     const enhancedLightbox = document.getElementById('gallery-lightbox');
     const lightboxImage = document.getElementById('lightbox-image');
@@ -225,7 +225,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const lightboxZoomOut = document.getElementById('lightbox-zoom-out');
     const lightboxOverlay = enhancedLightbox ? enhancedLightbox.querySelector('.lightbox-overlay') : null;
     const lightboxLoading = document.getElementById('lightbox-loading');
-    
+
     // Gallery State
     let currentView = 'carousel';
     let currentCarouselSlide = 0;
@@ -238,7 +238,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize Gallery
     function initGallery() {
         if (!gallerySection) return;
-        
+
         // Set total slides
         if (totalSlidesSpan) {
             totalSlidesSpan.textContent = galleryData.length;
@@ -246,23 +246,23 @@ document.addEventListener('DOMContentLoaded', function() {
         if (lightboxTotal) {
             lightboxTotal.textContent = galleryData.length;
         }
-        
+
         // Initialize carousel
         updateCarouselSlide(0);
-        
+
         // Initialize grid filter with default 'all' state
         // This sets initial aria-pressed attributes
         filterGalleryItems('all');
-        
+
         // Initialize image lazy loading
         initImageLazyLoading();
-        
+
         // Set up event listeners
         setupGalleryEventListeners();
-        
+
         // Update localized text
         updateGalleryLocalizedText();
-        
+
         console.log('Enhanced gallery initialized');
     }
 
@@ -410,7 +410,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Initialize focus trap
         addLightboxFocusTrap();
-        
+
         // Focus management - move focus to first focusable element
         // Use setTimeout to ensure DOM is updated and focus trap is initialized
         setTimeout(() => {
@@ -487,41 +487,41 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function updateLightboxContent(slideData, index) {
         if (!lightboxImage || !lightboxTitle || !lightboxDescription) return;
-        
+
         // Show loading
         if (lightboxLoading) {
             lightboxLoading.classList.remove('hidden');
         }
-        
+
         // Update image with progressive loading
         const img = new Image();
-        img.onload = function() {
+        img.onload = function () {
             lightboxImage.src = this.src;
             if (lightboxLoading) {
                 lightboxLoading.classList.add('hidden');
             }
         };
-        
+
         // Try WebP first, fallback to JPG
-        img.onerror = function() {
+        img.onerror = function () {
             if (this.src.includes('.webp')) {
                 this.src = slideData.images.fullJpg;
             }
         };
         img.src = slideData.images.full;
-        
+
         // Update text content
         lightboxTitle.textContent = slideData.title;
         lightboxDescription.textContent = slideData.description;
         if (lightboxCategory) {
             lightboxCategory.textContent = slideData.category.charAt(0).toUpperCase() + slideData.category.slice(1);
         }
-        
+
         // Update counter
         if (lightboxCurrent) {
             lightboxCurrent.textContent = index + 1;
         }
-        
+
         // Update alt text
         lightboxImage.alt = slideData.title;
     }
@@ -540,7 +540,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function toggleLightboxZoom() {
         if (!lightboxImage) return;
-        
+
         lightboxZoomed = !lightboxZoomed;
         lightboxImage.classList.toggle('zoomed', lightboxZoomed);
     }
@@ -548,36 +548,36 @@ document.addEventListener('DOMContentLoaded', function() {
     // Image Lazy Loading
     function initImageLazyLoading() {
         const images = document.querySelectorAll('.gallery-image');
-        
+
         const imageObserver = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const img = entry.target;
-                    
+
                     // Load the image
-                    img.onload = function() {
+                    img.onload = function () {
                         this.classList.add('loaded');
                     };
-                    
+
                     // Progressive enhancement: WebP with JPG fallback
-                    img.onerror = function() {
+                    img.onerror = function () {
                         if (this.src.includes('.webp')) {
                             this.src = this.src.replace('.webp', '.jpg');
                         }
                     };
-                    
+
                     // Start loading
                     if (img.dataset.src) {
                         img.src = img.dataset.src;
                     }
-                    
+
                     observer.unobserve(img);
                 }
             });
         }, {
             rootMargin: '50px'
         });
-        
+
         images.forEach(img => {
             imageObserver.observe(img);
         });
@@ -591,7 +591,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 switchView(btn.dataset.view);
             });
         });
-        
+
         // Carousel Controls
         if (carouselPrevBtn) {
             carouselPrevBtn.addEventListener('click', prevCarouselSlide);
@@ -599,7 +599,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (carouselNextBtn) {
             carouselNextBtn.addEventListener('click', nextCarouselSlide);
         }
-        
+
         // Carousel Dots
         carouselDots.forEach((dot, index) => {
             dot.addEventListener('click', () => {
@@ -614,7 +614,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
         });
-        
+
         // Grid Filters
         filterBtns.forEach(btn => {
             btn.addEventListener('click', () => {
@@ -629,13 +629,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
         });
-        
+
         // Gallery Items Click
         galleryItems.forEach((item, index) => {
             item.addEventListener('click', () => {
                 openLightbox(index);
             });
-            
+
             // Keyboard accessibility
             item.addEventListener('keydown', (e) => {
                 if (e.key === 'Enter' || e.key === ' ') {
@@ -644,7 +644,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
         });
-        
+
         // Carousel slides click for lightbox
         const carouselSlides = document.querySelectorAll('.carousel-slide');
         carouselSlides.forEach((slide, index) => {
@@ -652,14 +652,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 openLightbox(index);
             });
         });
-        
+
         // Lightbox Controls
         if (enhancedLightboxClose) {
             enhancedLightboxClose.addEventListener('click', closeLightbox);
         }
         if (lightboxOverlay) {
             lightboxOverlay.addEventListener('click', closeLightbox);
-            
+
             // Add keyboard activation for overlay
             lightboxOverlay.addEventListener('keydown', (e) => {
                 if (e.key === 'Enter' || e.key === ' ') {
@@ -680,10 +680,10 @@ document.addEventListener('DOMContentLoaded', function() {
         if (lightboxZoomOut) {
             lightboxZoomOut.addEventListener('click', toggleLightboxZoom);
         }
-        
+
         // Touch/Swipe Support
         setupTouchEvents();
-        
+
         // Keyboard Navigation
         setupKeyboardNavigation();
     }
@@ -695,7 +695,7 @@ document.addEventListener('DOMContentLoaded', function() {
             carouselTrack.addEventListener('touchstart', handleTouchStart, { passive: true });
             carouselTrack.addEventListener('touchend', handleTouchEnd, { passive: true });
         }
-        
+
         // Lightbox swipe
         if (lightboxImage) {
             lightboxImage.addEventListener('touchstart', handleTouchStart, { passive: true });
@@ -715,13 +715,13 @@ document.addEventListener('DOMContentLoaded', function() {
     function handleSwipeGesture() {
         const swipeThreshold = 50;
         const swipeDistance = touchEndX - touchStartX;
-        
+
         if (Math.abs(swipeDistance) < swipeThreshold) return;
-        
+
         const isRTL = document.documentElement.dir === 'rtl';
         const swipeLeft = swipeDistance < 0;
         const swipeRight = swipeDistance > 0;
-        
+
         if (enhancedLightbox && enhancedLightbox.classList.contains('active')) {
             // Lightbox navigation
             if ((swipeLeft && !isRTL) || (swipeRight && isRTL)) {
@@ -744,9 +744,9 @@ document.addEventListener('DOMContentLoaded', function() {
         document.addEventListener('keydown', (e) => {
             // Skip if user is typing in an input
             if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
-            
+
             const isRTL = document.documentElement.dir === 'rtl';
-            
+
             if (currentView === 'carousel' && carouselView.classList.contains('active')) {
                 if (e.key === 'ArrowLeft') {
                     e.preventDefault();
@@ -761,7 +761,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function handleLightboxKeydown(e) {
         const isRTL = document.documentElement.dir === 'rtl';
-        
+
         switch (e.key) {
             case 'Escape':
                 e.preventDefault();
@@ -794,19 +794,19 @@ document.addEventListener('DOMContentLoaded', function() {
         try {
             const currentLang = window.LocalizationManager ? window.LocalizationManager.currentLanguage : 'en';
             const translations = window.LocalizationManager ? window.LocalizationManager.translations[currentLang] : null;
-            
+
             if (translations && translations.gallery) {
                 // Update view toggle buttons
                 const carouselBtn = document.querySelector('[data-view="carousel"] span');
                 const gridBtn = document.querySelector('[data-view="grid"] span');
-                
+
                 if (carouselBtn && translations.gallery.view_toggle) {
                     carouselBtn.textContent = translations.gallery.view_toggle.carousel;
                 }
                 if (gridBtn && translations.gallery.view_toggle) {
                     gridBtn.textContent = translations.gallery.view_toggle.grid;
                 }
-                
+
                 // Update filter buttons
                 filterBtns.forEach(btn => {
                     const filter = btn.dataset.filter;
@@ -814,19 +814,19 @@ document.addEventListener('DOMContentLoaded', function() {
                         btn.textContent = translations.gallery.filters[filter];
                     }
                 });
-                
+
                 // Update carousel hint
                 const carouselHint = document.querySelector('.carousel-hint');
                 if (carouselHint && translations.gallery.carousel) {
                     carouselHint.textContent = translations.gallery.carousel.swipe_hint;
                 }
-                
+
                 // Update gallery hint
                 const galleryHint = document.querySelector('#grid-view .gallery-hint');
                 if (galleryHint) {
                     galleryHint.textContent = translations.gallery.click_to_view;
                 }
-                
+
                 // Update feature spotlight label
                 const featureLabel = document.querySelector('.feature-label');
                 if (featureLabel && translations.gallery.carousel) {
@@ -847,7 +847,7 @@ document.addEventListener('DOMContentLoaded', function() {
     } else {
         initGallery();
     }
-    
+
     // Lightbox elements
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
@@ -868,36 +868,36 @@ document.addEventListener('DOMContentLoaded', function() {
     // Add floating animation to hero image
     function addFloatingAnimation() {
         if (!heroImage) return;
-        
+
         let floatInterval;
-        
+
         function floatElement() {
             const floatY = Math.sin(Date.now() / 1200) * 5;
             heroImage.style.transform = `perspective(1000px) rotateY(-5deg) rotateX(5deg) translateY(${floatY}px)`;
         }
-        
+
         // Start floating animation
         floatInterval = setInterval(floatElement, 50);
-        
+
         // Pause animation on hover
         heroImage.addEventListener('mouseenter', () => {
             clearInterval(floatInterval);
         });
-        
+
         // Resume animation on mouse leave
         heroImage.addEventListener('mouseleave', () => {
             floatInterval = setInterval(floatElement, 50);
         });
     }
-    
+
     // Mouse move interaction for parallax effect in hero section
     if (heroSection) {
         heroSection.addEventListener('mousemove', (e) => {
             const xAxis = (window.innerWidth / 2 - e.pageX) / 50;
             const yAxis = (window.innerHeight / 2 - e.pageY) / 50;
-            
+
             if (heroImage) {
-                heroImage.style.transform = `perspective(1000px) rotateY(${-5 + xAxis/2}deg) rotateX(${5 - yAxis/2}deg) scale(1.02)`;
+                heroImage.style.transform = `perspective(1000px) rotateY(${-5 + xAxis / 2}deg) rotateX(${5 - yAxis / 2}deg) scale(1.02)`;
             }
         });
 
@@ -910,17 +910,17 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-    
+
     // Mouse move interaction for parallax effect
     if (splashScreen) {
         splashScreen.addEventListener('mousemove', (e) => {
             const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
             const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
-            
+
             if (splashContainer) {
                 splashContainer.style.transform = `translate(${xAxis}px, ${yAxis}px)`;
             }
-            
+
             if (splashLogo) {
                 const logoXAxis = (window.innerWidth / 2 - e.pageX) / 50;
                 const logoYAxis = (window.innerHeight / 2 - e.pageY) / 50;
@@ -933,7 +933,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (splashContainer) {
                 splashContainer.style.transform = 'translate(0px, 0px)';
             }
-            
+
             if (splashLogo) {
                 splashLogo.style.transform = 'translate(0px, 0px) rotate(0deg)';
             }
@@ -974,25 +974,41 @@ document.addEventListener('DOMContentLoaded', function() {
         localStorage.setItem('theme', newTheme);
     });
 
-    // Update language switcher ARIA
-    function updateLanguageSwitcherARIA(currentLang) {
-        const languageSwitcher = document.getElementById('languageSwitcher');
-        if (!languageSwitcher) return;
+    // Sticky Header with Glassmorphism on Scroll
+    const header = document.querySelector('header');
+    let lastScrollTop = 0;
+    const scrollThreshold = 50; // پیکسل
 
-        const langNames = {
-            'en': 'English',
-            'fa': 'Persian (فارسی)'
-        };
+    function handleHeaderScroll() {
+        if (!header) return;
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
-        const currentLangName = langNames[currentLang] || currentLang.toUpperCase();
-        const nextLang = currentLang === 'en' ? 'fa' : 'en';
-        const nextLangName = langNames[nextLang];
+        if (scrollTop > scrollThreshold) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
 
-        languageSwitcher.setAttribute(
-            'aria-label',
-            `Switch language to ${nextLangName}. Current language: ${currentLangName}`
-        );
+        lastScrollTop = scrollTop;
     }
+
+    // Throttle scroll event for performance
+    let scrollTimeout;
+    if (header) {
+        window.addEventListener('scroll', () => {
+            if (scrollTimeout) {
+                window.cancelAnimationFrame(scrollTimeout);
+            }
+            scrollTimeout = window.requestAnimationFrame(() => {
+                handleHeaderScroll();
+            });
+        }, { passive: true });
+    }
+
+    // Initial check
+    handleHeaderScroll();
+
+
 
     // Hamburger menu event listener with enhanced animation
     hamburger.addEventListener('click', () => {
@@ -1008,23 +1024,23 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         // Add animation classes
-        navLinks.classList.toggle('active');
+        navLinksContainer.classList.toggle('active');
 
-        if (navLinks.classList.contains('active')) {
+        if (navLinksContainer.classList.contains('active')) {
             // When opening
-            navLinks.style.display = 'flex';
+            navLinksContainer.style.display = 'flex';
             setTimeout(() => {
-                navLinks.style.transform = 'translateY(0)';
-                navLinks.style.opacity = '1';
+                navLinksContainer.style.transform = 'translateY(0)';
+                navLinksContainer.style.opacity = '1';
             }, 10);
             addFocusTrap();
         } else {
             // When closing
-            navLinks.style.transform = 'translateY(-10px)';
-            navLinks.style.opacity = '0';
+            navLinksContainer.style.transform = 'translateY(-10px)';
+            navLinksContainer.style.opacity = '0';
             setTimeout(() => {
-                if (!navLinks.classList.contains('active')) {
-                    navLinks.style.display = 'none';
+                if (!navLinksContainer.classList.contains('active')) {
+                    navLinksContainer.style.display = 'none';
                 }
             }, 300);
             removeFocusTrap();
@@ -1036,12 +1052,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const focusTrapHandler = (e) => {
         if (e.key === 'Escape') {
             // Close mobile menu
-            navLinks.classList.remove('active');
-            navLinks.style.transform = 'translateY(-10px)';
-            navLinks.style.opacity = '0';
+            navLinksContainer.classList.remove('active');
+            navLinksContainer.style.transform = 'translateY(-10px)';
+            navLinksContainer.style.opacity = '0';
             setTimeout(() => {
-                if (!navLinks.classList.contains('active')) {
-                    navLinks.style.display = 'none';
+                if (!navLinksContainer.classList.contains('active')) {
+                    navLinksContainer.style.display = 'none';
                 }
             }, 300);
             hamburger.setAttribute('aria-expanded', 'false');
@@ -1066,28 +1082,28 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     function addFocusTrap() {
-        focusableElements = Array.from(navLinks.querySelectorAll('a[href], button, input, textarea, select, [tabindex]:not([tabindex="-1"])'));
+        focusableElements = Array.from(navLinksContainer.querySelectorAll('a[href], button, input, textarea, select, [tabindex]:not([tabindex="-1"])'));
         if (focusableElements.length > 0) {
             focusableElements[0].focus();
-            navLinks.addEventListener('keydown', focusTrapHandler);
+            navLinksContainer.addEventListener('keydown', focusTrapHandler);
         }
     }
 
     function removeFocusTrap() {
-        navLinks.removeEventListener('keydown', focusTrapHandler);
+        navLinksContainer.removeEventListener('keydown', focusTrapHandler);
     }
 
     // Close mobile menu when clicking outside
     document.addEventListener('click', (e) => {
-        if (navLinks.classList.contains('active') && 
-            !navLinks.contains(e.target) && 
+        if (navLinksContainer.classList.contains('active') &&
+            !navLinksContainer.contains(e.target) &&
             !hamburger.contains(e.target)) {
-            navLinks.classList.remove('active');
-            navLinks.style.transform = 'translateY(-10px)';
-            navLinks.style.opacity = '0';
+            navLinksContainer.classList.remove('active');
+            navLinksContainer.style.transform = 'translateY(-10px)';
+            navLinksContainer.style.opacity = '0';
             setTimeout(() => {
-                if (!navLinks.classList.contains('active')) {
-                    navLinks.style.display = 'none';
+                if (!navLinksContainer.classList.contains('active')) {
+                    navLinksContainer.style.display = 'none';
                 }
             }, 300);
             hamburger.setAttribute('aria-expanded', 'false');
@@ -1098,39 +1114,39 @@ document.addEventListener('DOMContentLoaded', function() {
     // Handle contact form submission if on contact page
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
+        contactForm.addEventListener('submit', function (e) {
             e.preventDefault();
-            
+
             // Get form values
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
             const subject = document.getElementById('subject').value;
             const message = document.getElementById('message').value;
-            
+
             // Get validation messages from localization
             const messages = window.formValidationMessages || {
                 fill_required: 'Please fill in all required fields.',
                 email_invalid: 'Please enter a valid email address.',
                 thank_you: 'Thank you for your message! We will get back to you soon.'
             };
-            
+
             // Simple validation
             if (!name || !email || !message) {
                 alert(messages.fill_required);
                 return;
             }
-            
+
             // Email validation
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(email)) {
                 alert(messages.email_invalid);
                 return;
             }
-            
+
             // In a real implementation, you would send this data to your server
             // For now, we'll just show a success message
             alert(messages.thank_you);
-            
+
             // Reset form
             this.reset();
         });
@@ -1148,28 +1164,30 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Smooth scrolling for navigation links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                window.scrollTo({
-                    top: target.offsetTop - 70, // Adjust for fixed header
-                    behavior: 'smooth'
-                });
-                // Close mobile menu if open
-                if (navLinks.classList.contains('active')) {
-                    navLinks.classList.remove('active');
-                    navLinks.style.transform = 'translateY(-10px)';
-                    navLinks.style.opacity = '0';
-                    setTimeout(() => {
-                        if (!navLinks.classList.contains('active')) {
-                            navLinks.style.display = 'none';
-                        }
-                    }, 300);
-                    hamburger.setAttribute('aria-expanded', 'false');
-                    removeFocusTrap();
+    // Smooth Scroll for Navigation Links
+    const navLinkItems = document.querySelectorAll('.nav-links a');
+    navLinkItems.forEach(link => {
+        link.addEventListener('click', (e) => {
+            const href = link.getAttribute('href');
+            if (href.startsWith('#')) {
+                e.preventDefault();
+                const targetId = href.substring(1);
+                const targetSection = document.getElementById(targetId);
+
+                if (targetSection) {
+                    const headerHeight = header ? header.offsetHeight : 0;
+                    const targetPosition = targetSection.offsetTop - headerHeight;
+
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+
+                    // Close mobile menu if open
+                    const navLinksContainer = document.querySelector('.nav-links');
+                    if (navLinksContainer.classList.contains('active')) {
+                        navLinksContainer.classList.remove('active');
+                    }
                 }
             }
         });
@@ -1177,9 +1195,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Contact form validation
     if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
+        contactForm.addEventListener('submit', function (e) {
             e.preventDefault();
-            
+
             const name = document.getElementById('name');
             const email = document.getElementById('email');
             const message = document.getElementById('message');
@@ -1288,7 +1306,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function animateGallery() {
         const gallerySection = document.querySelector('.gallery');
         if (!gallerySection) return;
-        
+
         // Animate gallery section
         const gallerySectionObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -1300,11 +1318,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
         }, { threshold: 0.1 });
-        
+
         gallerySection.style.opacity = 0;
         gallerySection.style.transform = 'translateY(30px)';
         gallerySectionObserver.observe(gallerySection);
-        
+
         // Animate gallery items
         const galleryItems = document.querySelectorAll('.gallery-item');
         const galleryItemObserver = new IntersectionObserver((entries) => {
@@ -1320,7 +1338,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
         }, { threshold: 0.1 });
-        
+
         galleryItems.forEach(item => {
             item.style.opacity = 0;
             item.style.transform = 'translateY(20px)';
@@ -1413,11 +1431,11 @@ document.addEventListener('DOMContentLoaded', function() {
             section.style.transform = 'translateY(30px)';
             sectionObserver.observe(section);
         });
-        
+
         // Animate download section elements
         const downloadHeading = document.querySelector('.download h2');
         const downloadParagraph = document.querySelector('.download p');
-        
+
         if (downloadHeading) {
             const headingObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -1428,11 +1446,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 });
             }, { threshold: 0.1 });
-            
+
             downloadHeading.style.opacity = 0;
             headingObserver.observe(downloadHeading);
         }
-        
+
         if (downloadParagraph) {
             const paragraphObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -1443,14 +1461,14 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 });
             }, { threshold: 0.1 });
-            
+
             downloadParagraph.style.opacity = 0;
             paragraphObserver.observe(downloadParagraph);
         }
-        
+
         // Animate gallery
         animateGallery();
-        
+
         // Animate download section logo
         const downloadLogo = document.querySelector('.download .logo-container');
         if (downloadLogo) {
@@ -1463,7 +1481,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 });
             }, { threshold: 0.1 });
-            
+
             downloadLogo.style.opacity = 0;
             logoObserver.observe(downloadLogo);
         }
@@ -1471,10 +1489,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Initialize animations
     animateOnScroll();
-    
+
     // Initialize lazy loading
     lazyLoadImages();
-    
+
     // Add floating animation to hero image
     addFloatingAnimation();
 
@@ -1498,27 +1516,29 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Active nav link highlighting on scroll
-    const sections = document.querySelectorAll('main section[id]');
-    const navLi = document.querySelectorAll('.nav-links li a');
+    // Active Navigation Link Highlighting
+    const sections = document.querySelectorAll('section[id]');
 
-    const sectionObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const id = entry.target.getAttribute('id');
-                navLi.forEach(link => {
+    function highlightActiveSection() {
+        const scrollY = window.pageYOffset;
+
+        sections.forEach(section => {
+            const sectionHeight = section.offsetHeight;
+            const sectionTop = section.offsetTop - 100; // offset برای header
+            const sectionId = section.getAttribute('id');
+
+            if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+                navLinkItems.forEach(link => {
                     link.classList.remove('active');
-                    if (link.getAttribute('href') === `#${id}`) {
+                    if (link.getAttribute('href') === `#${sectionId}`) {
                         link.classList.add('active');
                     }
                 });
             }
         });
-    }, { rootMargin: '-50% 0px -50% 0px' });
+    }
 
-    sections.forEach(section => {
-        sectionObserver.observe(section);
-    });
+    window.addEventListener('scroll', highlightActiveSection, { passive: true });
 
     // Enhanced keyboard navigation for accordion
     const accordionItems = document.querySelectorAll('.faq-accordion summary');
@@ -1530,32 +1550,32 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
-    
+
     // Lightbox functionality
     function initLightbox() {
         // Get all gallery images
         galleryImages = document.querySelectorAll('.gallery-item img');
-        
+
         // Add click event to each gallery image
         galleryImages.forEach((img, index) => {
-            img.addEventListener('click', function(e) {
+            img.addEventListener('click', function (e) {
                 e.preventDefault();
                 openLightbox(index);
             });
         });
-        
+
         // Close lightbox when clicking on close button
         lightboxClose.addEventListener('click', closeLightbox);
-        
+
         // Close lightbox when clicking outside the image
-        lightbox.addEventListener('click', function(e) {
+        lightbox.addEventListener('click', function (e) {
             if (e.target === lightbox) {
                 closeLightbox();
             }
         });
-        
+
         // Navigate with arrow keys
-        document.addEventListener('keydown', function(e) {
+        document.addEventListener('keydown', function (e) {
             if (lightbox.style.display === 'block') {
                 if (e.key === 'Escape') {
                     closeLightbox();
@@ -1566,12 +1586,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
         });
-        
+
         // Navigate with prev/next buttons
         lightboxPrev.addEventListener('click', showPrevImage);
         lightboxNext.addEventListener('click', showNextImage);
     }
-    
+
     function openLightbox(index) {
         currentImageIndex = index;
         const img = galleryImages[index];
@@ -1579,47 +1599,47 @@ document.addEventListener('DOMContentLoaded', function() {
         lightboxCaption.textContent = img.alt;
         lightbox.style.display = 'block';
         document.body.style.overflow = 'hidden'; // Prevent scrolling when lightbox is open
-        
+
         // Update navigation button visibility
         updateNavigationButtons();
     }
-    
+
     function closeLightbox() {
         lightbox.style.display = 'none';
         document.body.style.overflow = 'auto'; // Re-enable scrolling
     }
-    
+
     function showPrevImage() {
         currentImageIndex = (currentImageIndex - 1 + galleryImages.length) % galleryImages.length;
         updateLightbox();
     }
-    
+
     function showNextImage() {
         currentImageIndex = (currentImageIndex + 1) % galleryImages.length;
         updateLightbox();
     }
-    
+
     function updateLightbox() {
         const img = galleryImages[currentImageIndex];
         lightboxImg.src = img.src;
         lightboxCaption.textContent = img.alt;
         updateNavigationButtons();
     }
-    
+
     function updateNavigationButtons() {
         // Hide prev button if at first image
         lightboxPrev.style.display = currentImageIndex === 0 ? 'none' : 'flex';
         // Hide next button if at last image
         lightboxNext.style.display = currentImageIndex === galleryImages.length - 1 ? 'none' : 'flex';
     }
-    
+
     // Initialize lightbox
     initLightbox();
-    
+
     // Listen for language changes
-    document.addEventListener('languageChanged', function(event) {
+    document.addEventListener('languageChanged', function (event) {
         const { language, isRTL } = event.detail;
-        
+
         // Update animations for RTL
         if (isRTL) {
             // Add RTL-specific animation classes
@@ -1627,11 +1647,11 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             document.body.classList.remove('rtl-animations');
         }
-        
+
         // Update any other RTL-specific functionality
         updateRTLFeatures(isRTL);
     });
-    
+
     function updateRTLFeatures(isRTL) {
         // Update any elements that need special RTL handling
         const heroImage = document.querySelector('.hero-image-container');
@@ -1644,3 +1664,15 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 });
+
+window.addEventListener('scroll', () => {
+  const bar = document.getElementById('fixedDownloadBar');
+  if (bar) {
+    if (window.scrollY > 800) {
+      bar.classList.add('visible');
+    } else {
+      bar.classList.remove('visible');
+    }
+  }
+});
+
