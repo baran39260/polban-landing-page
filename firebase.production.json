@@ -1,0 +1,104 @@
+{
+  "hosting": {
+    "public": ".",
+    "ignore": [
+      "firebase.json",
+      "firebase.production.json",
+      "**/.*",
+      "**/node_modules/**",
+      "src/**",
+      "test-results/**",
+      "package-lock.json",
+      "README.md",
+      "SECURITY.md",
+      "CLAUDE.md",
+      "COMMON_ISSUES_SOLUTIONS.md",
+      "CSP_MIGRATION_GUIDE.md",
+      "GITHUB_DEPLOYMENT_GUIDE.md",
+      "LOCALIZATION_GUIDE.md",
+      "LOCALIZATION_IMPLEMENTATION.md",
+      "MANUAL_TESTING_GUIDE.md",
+      "TESTING_CHECKLIST.md",
+      "TESTING_TOOLS_SETUP.md",
+      "TEST_REPORT_TEMPLATE.md",
+      "AUTOMATED_TESTING_GUIDE.md"
+    ],
+    "redirects": [
+      {
+        "source": "/pages/blog.html",
+        "destination": "/pages/blog.prod.html",
+        "type": 301
+      },
+      {
+        "source": "/pages/contact.html",
+        "destination": "/pages/contact.prod.html",
+        "type": 301
+      },
+      {
+        "source": "/pages/post1.html",
+        "destination": "/pages/post1.prod.html",
+        "type": 301
+      },
+      {
+        "source": "/pages/privacy.html",
+        "destination": "/pages/privacy.prod.html",
+        "type": 301
+      },
+      {
+        "source": "/pages/terms.html",
+        "destination": "/pages/terms.prod.html",
+        "type": 301
+      },
+      {
+        "source": "/pages/blog/budgeting-tips.html",
+        "destination": "/pages/blog/budgeting-tips.prod.html",
+        "type": 301
+      },
+      {
+        "source": "/pages/blog/categorization-best-practices.html",
+        "destination": "/pages/blog/categorization-best-practices.prod.html",
+        "type": 301
+      },
+      {
+        "source": "/pages/blog/multi-currency-guide.html",
+        "destination": "/pages/blog/multi-currency-guide.prod.html",
+        "type": 301
+      },
+      {
+        "source": "/pages/blog/travel-expenses.html",
+        "destination": "/pages/blog/travel-expenses.prod.html",
+        "type": 301
+      }
+    ],
+    "rewrites": [
+      {
+        "source": "/",
+        "destination": "/index.prod.html"
+      },
+      {
+        "source": "/pages/**",
+        "destination": "/index.prod.html"
+      }
+    ],
+    "headers": [
+      {
+        "source": "**/*.@(jpg|jpeg|gif|png|svg|webp|ico)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "max-age=86400"
+          }
+        ]
+      },
+      {
+        "source": "**/*.@(css|js)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "max-age=31536000"
+          }
+        ]
+      }
+    ]
+  }
+}

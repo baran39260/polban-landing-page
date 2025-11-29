@@ -1,0 +1,57 @@
+{
+  "hosting": {
+    "public": ".",
+    "ignore": [
+      "firebase.json",
+      "firebase.production.json",
+      "**/.*",
+      "**/node_modules/**",
+      "src/**",
+      "test-results/**",
+      "package-lock.json",
+      "README.md",
+      "SECURITY.md",
+      "CLAUDE.md",
+      "COMMON_ISSUES_SOLUTIONS.md",
+      "CSP_MIGRATION_GUIDE.md",
+      "GITHUB_DEPLOYMENT_GUIDE.md",
+      "LOCALIZATION_GUIDE.md",
+      "LOCALIZATION_IMPLEMENTATION.md",
+      "MANUAL_TESTING_GUIDE.md",
+      "TESTING_CHECKLIST.md",
+      "TESTING_TOOLS_SETUP.md",
+      "TEST_REPORT_TEMPLATE.md",
+      "AUTOMATED_TESTING_GUIDE.md"
+    ],
+    "rewrites": [
+      {
+        "source": "/",
+        "destination": "/index.html"
+      },
+      {
+        "source": "/pages/**",
+        "destination": "/index.html"
+      }
+    ],
+    "headers": [
+      {
+        "source": "**/*.@(jpg|jpeg|gif|png|svg|webp|ico)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "max-age=86400"
+          }
+        ]
+      },
+      {
+        "source": "**/*.@(css|js)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "max-age=31536000"
+          }
+        ]
+      }
+    ]
+  }
+}

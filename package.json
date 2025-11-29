@@ -24,7 +24,7 @@
     "minify": "npm-run-all minify:css minify:js",
     "build": "npm-run-all clean mkdir minify",
     
-    "build:prod": "npm run build && node build-prod-html.js",
+    "build:prod": "npm run build && node build-prod-html.js && node build-all-pages.js",
     "watch:css:fonts": "postcss src/css/fonts.css --use cssnano -o dist/css/fonts.min.css --no-map --watch",
     "watch:css:styles": "postcss src/css/styles.css --use cssnano -o dist/css/styles.min.css --no-map --watch",
     "watch:css:rtl": "postcss src/css/rtl.css --use cssnano -o dist/css/rtl.min.css --no-map --watch",
