@@ -10,7 +10,9 @@
       "Bash(node:*)",
       "Bash(for file in contact.html post1.html privacy.html terms.html)",
       "Bash(do sed -i 's/<div class=\"\"logo-container\"\">/<a href=\"\"..\\/index.html\"\" class=\"\"logo-container\"\">/g' \"$file\")",
-      "Bash(done)"
+      "Bash(done)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
     ],
     "deny": [],
     "ask": []

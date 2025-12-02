@@ -4074,9 +4074,12 @@ footer {
 }
 
 @keyframes bounce {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(-5px);
   }
@@ -4124,6 +4127,7 @@ footer {
 
 /* Disable parallax on mobile for better performance */
 @media (max-width: 768px) {
+
   .hero-section,
   .hero {
     background-attachment: scroll !important;
